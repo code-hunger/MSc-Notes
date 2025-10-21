@@ -264,10 +264,10 @@ This section follows the first chapter of the book "Introduction to Stochastic C
 #import "@preview/ctheorems:1.1.3": *
 #show: thmrules
 
-#let definition = thmbox("definition", "Definition", inset: (x: 0pt, top: 0em))
-#let notation = thmbox("definition", "Notation", inset: (x: 0pt, top: 0em))
-#let remark = thmbox("definition", "Remark", inset: (x: 0pt, top: 0em))
-#let prop = thmbox("theorem", "Proposition", inset: (x: 0pt, top: 0em))
+#let definition = thmbox("definition", "Definition", inset: 1em, fill: aqua.transparentize(70%))
+#let notation = thmbox("definition", "Notation", inset: 1em, fill: aqua.transparentize(70%))
+#let remark = thmbox("definition", "Remark", inset: (x: 1em, y: 1em), fill: teal.transparentize(80%))
+#let prop = thmbox("theorem", "Proposition", inset: 1em, fill: silver)
 #let proof = thmproof("proof", "Proof", inset: (x: 0pt))
 #show: thmrules.with(qed-symbol: a => math.square)
 
@@ -294,11 +294,6 @@ This section follows the first chapter of the book "Introduction to Stochastic C
     evolution is described by a sequence of pairs $(phi.alt_i,S_i)$. While not false, this may be
     deceiving when we define _self-financing_ strategies. Consider the diagram on the right. Thus we put (non-standard notation)
 
-    #definition[
-    The _adjusted value of the portfolio_ at time $i$ after the new strategy $phi.alt_(i+1)$ is applied is 
-    $ V'_i (phi.alt) := phi.alt_(i+1) dot S_i $
-  ]
-    It is still $cal(F)_i$-measurable.
   ],
   diagram(
     edge-stroke: .9pt,
@@ -375,6 +370,12 @@ timebox ($V_i = V'_i$), but only responds to stock price changes $S_i -> S_(i+1)
 Diagonal dotted arrows indicate the causal relationship between the time-evolution of the strategy and the stock prices in the process $(phi.alt_0, S_0), (phi.alt_1, S_1), ...$.
 ])
 
+#definition[
+  The _adjusted value of the portfolio_ at time $i$ after the new strategy $phi.alt_(i+1)$ is applied is 
+  $ V'_i (phi.alt) := phi.alt_(i+1) dot S_i $
+]
+It is still $cal(F)_i$-measurable.
+
 #notation[
 Denote the _portfolio adjustment_ (again, non-standard terminology) performed at time $i$ by $ Delta phi.alt_i := phi.alt_(i+1) - phi.alt_i. $
 (consider the diagram above to convince yourself that $Delta phi.alt_i$ is $calF_i$-measurable)]
@@ -395,6 +396,12 @@ is the amount of stock $j$ that is sold (if $Delta phi.alt_i < 0$) or bought (if
   both $Delta phi.alt_n$ and $Delta S_n$ are $calF_n$-measurable.
 ]
 
+#remark[
+  The two increments let us express the portfolio value with a recursive formula:
+  $ V_(n+1) (phi.alt) = V_n (phi.alt) + Delta phi.alt_n dot S_n + phi.alt_(n+1) dot Delta S_n. $
+  That is, the next value is the previous value plus the changes from the strategy and the changes in the prices.
+]
+
 == Self-financing strategies
 
 #definition[
@@ -407,18 +414,21 @@ for all $i$.]
 #remark[
 The self-financing condition $V_i = V'_i$ is equivalent to $ Delta phi.alt_i dot S_i = 0, $
 i.e. all buys and sells cancel each other in value, i.e. no money is lost or needs to be brought in for the adjustment.
+That is, a self-financing strategy is one where the recursive formula above for the portfolio value has a vanishing second term, and then
+  $ V_(n+1) (phi.alt) = V_n (phi.alt) + phi.alt_(n+1) dot Delta S_n. $
+]
 
 It should be close to mind that even for a strategy that is not self-financing,
 if we were to put the quantity $Delta phi.alt_n dot S_n$ into $phi.alt_n^0$,
 i.e. if we invest (borrow) the surplus (shortage) of sells-buys into (from) the riskless asset, we'd get a self-financing strategy.
-]
 
 #prop[
   Any $RR^d$-valued predictable sequence (a "strategy" only on the risky assets)
   $ (phi.alt_n^1, ..., phi.alt_n^d) wide "for " n=0,1,... $
   is a restriction of a unique self-financing strategy ($RR^(1+d)$-valued) 
   $ (bold(phi.alt_n^0), phi.alt_n^1, ..., phi.alt_n^d) wide "for " n=0,1,... $
-  for any choice of an initial value $V_0(phi.alt) in RR$.
+  for any choice of an initial value $V_0(phi.alt) in RR$ (or a choice of any of $phi.alt_n^0$ for
+  $n>=0$).
 ]
 
 In other words, the self-financing strategies restricting to a given $(phi.alt_n^1, ..., phi.alt_n^d)_n$ are a one-parameter family indexed by $V_0$.
@@ -442,6 +452,39 @@ In other words, the self-financing strategies restricting to a given $(phi.alt_n
   we can also consider this parameter to be $V_0$.
 ]
 
-#prop[
+== Attainable claims
 
+#show sym.emptyset: set text(font: "") // makes emptyset appear the proper way, and not squished
+
+We fix an $N in NN$, called the _horizon_.
+
+#definition[
+  A self-financing strategy is called *admissible* if $V_n (phi.alt) >= 0$ for all $n$.
+
+  An $RR$-valued random variable $h$ is called *attainable* if there exists an admissible strategy $phi.alt$ with
+  $ V_N (phi.alt)=h. $
+]
+
+#remark[
+  If $h$ is a constant $h(omega) = M in RR$, it is trivially attainable by the strategy 
+  with $phi.alt_N^0 = M$ that is the constant zero on the risky assets 
+  (exists uniquely by the proposition above, and is obviously admissible).
+
+  Even if $h$ is only _bounded_ by a constant, $h<=M$, we could attain the (higher) value $M$ by the same approach.
+  Thus attainability is _not_ essentially about reaching _at least_ some value --- we are allowed to
+  start with as much cash in advance as we need.
+
+  In the case of a finite $Omega$ (which is assumed in the book), $h$ is bounded anyway. 
+  Attaining $h$, and not just $M$, is more difficult. 
+  If $h$ is not $calF_0$-measurable, we cannot just prepare the cash in advance, because we are not
+  allowed (by $calF_0$) to know exactly how much we will need (even if know it won't exceed $M$).
+
+  For example, if $calF_0 = {emptyset, Omega}$, the initial cash $phi.alt_0^0$ is only allowed to be
+  constant (by $calF_0$-measurability). Thus even in the bounded case we have to make use of the
+  risky assets to achieve the precise target $h$, and we have to abide by $calF_n$-measurability all
+  the way $n=0,...,N$.
+]
+
+#definition[
+  The market is called _complete_ if every non-negative $h$ is attainable.
 ]
