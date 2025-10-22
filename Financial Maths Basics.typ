@@ -452,16 +452,59 @@ In other words, the self-financing strategies restricting to a given $(phi.alt_n
   we can also consider this parameter to be $V_0$.
 ]
 
-== Attainable claims
+== Arbitrage
 
-#show sym.emptyset: set text(font: "") // makes emptyset appear the proper way, and not squished
+#definition[
+  A _self-financing_ strategy is called *admissible* if $V_n (phi.alt) >= 0$ for all $n$ (and all
+  $omega in Omega$).
+]
 
 We fix an $N in NN$, called the _horizon_.
 
-#definition[
-  A self-financing strategy is called *admissible* if $V_n (phi.alt) >= 0$ for all $n$.
+#let cbox(c) = box(align(center, c))
+#let small(c) = text(size: 9pt, c)
 
-  An $RR$-valued random variable $h$ is called *attainable* if there exists an admissible strategy $phi.alt$ with
+The market is said to have an *arbitrage opportunity* if some admissible strategy with zero initial value delivers a strictly positive value on a non-null set. \
+That is, an arbitrage opportunity is a
+#align(center)[
+  #cbox[*zero-investment*\ #small[($V_0=0$)\ $wide$]]
+  #cbox[*risk-free*\ #small[($V_n >= 0$\ for _every_ $omega$ and $n$)]]
+  #cbox[*profit*.\ #small[($V_N gt.nequiv 0$\ on a non-null set)]]
+]
+
+A market without arbitrage opportunities is called viable.
+
+#definition[
+  The market is called *viable* if every admissible strategy with $V_0 (phi.alt) = 0$ satisfies
+  $V_N (phi.alt) = 0$.
+]
+
+As a silly example, if 
+$ 
+"at " n=0, quad &S^1_0 = S^0_0 \
+"at " n>0, quad &S^1_n = 2 dot S^0_n,
+$
+ i.e. the price of risky asset 1 is the same at first but then becomes
+twice as much as the riskless one, then the constant strategy $phi.alt_n = (-1,1)$ has zero initial value and $V_n = - S^0_n + S^1_n = S_n^0>0$. Thus the market defined by those $S_bullet^bullet$ is not viable.
+
+== Perfect hedging (attainable claims)
+
+#show sym.emptyset: set text(font: "") // makes emptyset appear the proper way, and not squished
+
+A *contingent claim* is a promise to pay some amount $h$ at a _maturity time_ $T$, the amount depending on the market state.
+We model it by a non-negative real random variable $h$ that is only $calF_T$-measurable, so the
+amount might not be known in advance.
+
+#remark[
+  Consider a contingent claim $h$ at a maturity time $T$.
+
+  If all admissible strategies $phi.alt$ induce a portfolio value at $T$ that is 
+  - _less_ than $h$, the contingent claim is essentially "free money" for the receiver;
+  - _greater_ than $h$, 
+]
+
+#definition[
+  An $RR$-valued random variable $h$ is called *attainable* if there exists an admissible strategy $phi.alt$ that results in the end in a portfolio of value exactly $h$:
   $ V_N (phi.alt)=h. $
 ]
 
