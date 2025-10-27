@@ -244,8 +244,23 @@ Both $X_1$ and $X_2$ are $calF_2$-measurable, though neither of the two on its o
 
 = Stopping times
 
-A _stopping time_ for a filtration $calF_(bullet)$ is a $bb(N)$-valued random variable, equivalently a random boolean sequence,
-equivalently a sequence of events.
+Here we consider a property that is present up to some time point (potentially infinite) in the observed process
+(or equivalently, a property present only from some time point onward in the observed process).
+
+Again, we model the time layout of the process by a filtration $calF_bullet$.
+Then the presence of a property like above is modelled by a monotonic $calF_bullet$-adapted boolean sequence $P_bullet$ (with values in $2={0,1}$ with the $cal(P)(2)$ $sigma$-algebra).
+
+It is natural to ask now, what is the turning point? It is given by
+$ T_X = inf_(P_n = 1) n = inf med { n in NN : P_n = 1 } $
+
+At any time $n in NN$, $P_n$ tells us whether $P$ has happened up to now.
+In terms of $T_X$, this is the event $T_X <= n$, so it is $calF_n$ measurable.
+
+Conversely, for every $NN$-valued random variable $T$ with $calF_n$-measurable $T<=n$ for every $n$, we can consider a monotone boolean sequence $ X_n = bb(1)_({T<=n}) $ and then $T$ is given from $X_bullet$ as the infimum above.
+
+A _stopping time_ for a filtration $calF_(bullet)$ is any $bb(N)$-valued random variable for which 
+$ forall n: wide { T<=n } " is " calF_n"-measurable" , $
+i.e. it is the time at which an observed property (in the sense of a monotonic boolean sequence) "stops" holding.
 
 = Conditional expectation
 
