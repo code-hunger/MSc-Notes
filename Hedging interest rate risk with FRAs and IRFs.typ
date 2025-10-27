@@ -198,11 +198,13 @@ table.header(table.cell(colspan: 2, [*FRA Dealer*\ Offers sample])),
 #let good = (c) => text(fill: green.darken(40%), c)
 #let bad = (c) => text(fill: red.darken(60%), c)
 
-Combined, though, (FRA + borrow) is *a hedge*: the #good[gain]/#bad[loss] of the borrowing is offset by the #bad[loss]/#good[gain] of the FRA. See in the diagram is how that works in our case with a FRA rate of 0.6% in two scenarios: rates falling to 0.5% and rising to 1% at point of payment.
+Combined, though, (FRA + borrow) is *a hedge*: the #good[gain]/#bad[loss] of the borrowing is offset by the #bad[loss]/#good[gain] of the FRA. See @fra-simple for how that works in our case with a FRA rate of 0.6% in two scenarios: rates falling to 0.5% and rising to 1% at point of payment.
 
 #let transparent = white.transparentize(100%)
 
-#place(auto, float: true, { // simple FRA pic
+#figure(placement: auto,
+caption: [FRA as a hedge mechanism],
+{ // simple FRA pic
   let loan = 5cm
   let agreed = 3cm
   let loss = 0.5cm
@@ -281,7 +283,7 @@ Combined, though, (FRA + borrow) is *a hedge*: the #good[gain]/#bad[loss] of the
       edge(<win.center>, "*->", <win-text>, stroke: 1pt, layer: 2),
     )
   )
-})
+})<fra-simple>
 
 In both cases, the UK company pays the loan back at the market rate --- 0.5% or 1% (plus risk premium), blued out, the net cash flow is 0.6% fixed in the FRA.
 
@@ -297,9 +299,10 @@ The setup of the hedge is spelled out fully as
   [ Time period ], [ *3 versus 6* #linebreak() #small[_start month_ v _end month_] ],
 ))
 
-Here are the cash flows spelled explicitly in the two cases: when the actual rate falls to 0.5% and rises to 1%, the agreed one being 0.6%:
+See @fra-borrower for the cash flows spelled explicitly in the two cases: when the actual rate falls to 0.5% and rises to 1%, the agreed one being 0.6%:
 
-#align(center,
+#figure(caption: [FRA cash flows from (UK company) borrower's point of view],
+placement: auto,
 diagram(spacing:(1em, 1em), 
   node((1,0), strong[Case $arrow.b$ #linebreak() rates fall]),
   node((3,0), strong[Case $arrow.t$ #linebreak() rates rise]),
@@ -389,7 +392,7 @@ diagram(spacing:(1em, 1em),
     #good[*won*] the FRA bet#linebreak()#small[gets compensation]
   ],
 )
-)
+)<fra-borrower>
 
 #align(
   center,
@@ -401,7 +404,9 @@ diagram(spacing:(1em, 1em),
   ]
 )
 
-#place(auto, float: true, { // 4-player pic
+#figure(placement: auto, 
+  caption: [FRA all players and cash flows],
+{ // 4-player pic
   let playerColor = olive.transparentize(60%)
   let strokeThickness = .8pt
   let extrudeRadius = 4
@@ -480,7 +485,7 @@ diagram(spacing:(1em, 1em),
     wedge("u", "<-"),
     wedge("d", "<-"),
   )
-})
+})<fra-full-diagram>
 
 === Interest Rate Futures 
 #place(right,
