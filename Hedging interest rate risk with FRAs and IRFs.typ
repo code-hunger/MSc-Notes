@@ -202,7 +202,7 @@ Combined, though, (FRA + borrow) is *a hedge*: the #good[gain]/#bad[loss] of the
 
 #let transparent = white.transparentize(100%)
 
-#figure(placement: auto,
+#figure(//placement: auto,
 caption: [FRA as a hedge mechanism],
 { // simple FRA pic
   let loan = 5cm
@@ -302,7 +302,7 @@ The setup of the hedge is spelled out fully as
 See @fra-borrower for the cash flows spelled explicitly in the two cases: when the actual rate falls to 0.5% and rises to 1%, the agreed one being 0.6%:
 
 #figure(caption: [FRA cash flows from (UK company) borrower's point of view],
-placement: auto,
+// placement: auto,
 diagram(spacing:(1em, 1em), 
   node((1,0), strong[Case $arrow.b$ #linebreak() rates fall]),
   node((3,0), strong[Case $arrow.t$ #linebreak() rates rise]),
@@ -404,7 +404,7 @@ diagram(spacing:(1em, 1em),
   ]
 )
 
-#figure(placement: auto, 
+#figure(placement: bottom, 
   caption: [FRA all players and cash flows],
 { // 4-player pic
   let playerColor = olive.transparentize(60%)
