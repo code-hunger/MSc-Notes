@@ -1,7 +1,5 @@
 #import "@preview/cetz:0.4.2"
 
-#set page("a4")
-
 #let c = 30
 #let rots = range(c).map(i =>(y: i * 360 / c * 1deg ))
 // #let rots = ((y: -132deg), (y: 180deg), (y: 84deg), (y: 156deg))
@@ -13,10 +11,11 @@ A basis ${e_1...e_n}$ in the domain of $A$ now gives many ways to express $b$ as
 basis ${ A e_i }_i$: $ b = sum_(i in B) lambda_i A e_i $ for many choices of $m$-sized $B subset {1...n}$ and $lambda_i,
 i in B$.
 
-For each such choice of $B$, we can rewrite $ b = A sum_(i in B) lambda_i e_i $ and denote 
-$ x_B := sum_(i in B) lambda_i e_i. $
+For each such choice of $B$, we can rewrite $b = A sum_(i in B) lambda_i e_i$ and denote 
+$ x_B := sum_(i in B) lambda_i e_i $
+so that $b = A x_B$.
 
-$x_B$ is now well-defined for any choice of (a subset of) basis vectors in the domain of $A$ whose images form a
+$x_B$ is now well-defined for any choice $B$ of (a subset of) basis vectors in the domain of $A$ whose images form a
 basis of $A$'s range. Such $x_B$ are _special_ solutions to the system $A x=b$ and are called
 _basic_ solutions.
 
@@ -24,6 +23,8 @@ A general solution $x$ can be decomposed as $ x = x_B + x_N $ which defines $x_N
 Put $N = {1...n}\\B$. 
 Since $x$ is a combination of ${e_1...e_n}$ and $x_B$ is a (unique) combination of the $B$
 subset of the basis vectors, $x_N$ is then a (unique) combination of the rest of the basis vectors.
+
+Those $e_i$ that form $x_B$ are called _basic_, and those forming $x_N$ are called _non-basic_.
 
 #grid(
   columns: 2, 
