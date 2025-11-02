@@ -1,15 +1,14 @@
 #import "@preview/cetz:0.4.2"
 
-#let c = 30
-#let rots = range(c).map(i =>(y: i * 360 / c * 1deg ))
-#let rots = ((y: -132deg), (y: 180deg), (y: 84deg), (y: 156deg))
+== Basic solutions
 
 Given a linear map $A: RR^n -> RR^m $ and a vector in its range $b in RR^m$,
 form the linear system $A x = b$.
 
 A basis ${e_1...e_n}$ in the domain of $A$ now gives many ways to express $b$ as a combination of the image of the
-basis ${ A e_i }_i$: $ b = sum_(i in B) lambda_i A e_i $ for many choices of $m$-sized $B subset {1...n}$ and $lambda_i,
-i in B$.
+basis ${ A e_i }_i$: $ b = sum_(i in B) lambda_i A e_i $ for many choices of $m$-sized $B subset {1...n}$ and $lambda_i, i in B$.\
+Not every choice for $B$ makes $b$ expressible as a combination of ${A e_i}_(i in B)$, but at least
+one does.
 
 For each such choice of $B$, we can rewrite $b = A sum_(i in B) lambda_i e_i$ and denote 
 $ x_B := sum_(i in B) lambda_i e_i $
@@ -19,12 +18,12 @@ $x_B$ is now well-defined for any choice $B$ of (a subset of) basis vectors in t
 basis of $A$'s range. Such $x_B$ are _special_ solutions to the system $A x=b$ and are called
 _basic_ solutions.
 
-A general solution $x$ can be decomposed as $ x = x_B + x_N $ which defines $x_N$ given $B$. 
-Put $N = {1...n}\\B$. 
-Since $x$ is a combination of ${e_1...e_n}$ and $x_B$ is a (unique) combination of the $B$
-subset of the basis vectors, $x_N$ is then a (unique) combination of the rest of the basis vectors.
+Given $B$, those basis vectors $e_i$ that form $x_B$ are called _basic_, and the rest are called _non-basic_.
+In the sketches below, we see copies of the non-basic $e_i$ attached to each basic solution $e_i$:
 
-Those $e_i$ that form $x_B$ are called _basic_, and those forming $x_N$ are called _non-basic_.
+#let c = 30
+#let rots = range(c).map(i =>(y: i * 360 / c * 1deg ))
+#let rots = ((y: 180deg), (y: 84deg), (y: -132deg), (y: 156deg))
 
 #grid(
   columns: 2, 
