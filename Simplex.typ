@@ -2,7 +2,7 @@
 
 #let c = 30
 #let rots = range(c).map(i =>(y: i * 360 / c * 1deg ))
-// #let rots = ((y: -132deg), (y: 180deg), (y: 84deg), (y: 156deg))
+#let rots = ((y: -132deg), (y: 180deg), (y: 84deg), (y: 156deg))
 
 Given a linear map $A: RR^n -> RR^m $ and a vector in its range $b in RR^m$,
 form the linear system $A x = b$.
@@ -19,7 +19,7 @@ $x_B$ is now well-defined for any choice $B$ of (a subset of) basis vectors in t
 basis of $A$'s range. Such $x_B$ are _special_ solutions to the system $A x=b$ and are called
 _basic_ solutions.
 
-A general solution $x$ can be decomposed as $ x = x_B + x_N $ which defines $x_N$. 
+A general solution $x$ can be decomposed as $ x = x_B + x_N $ which defines $x_N$ given $B$. 
 Put $N = {1...n}\\B$. 
 Since $x$ is a combination of ${e_1...e_n}$ and $x_B$ is a (unique) combination of the $B$
 subset of the basis vectors, $x_N$ is then a (unique) combination of the rest of the basis vectors.
@@ -36,9 +36,9 @@ Those $e_i$ that form $x_B$ are called _basic_, and those forming $x_N$ are call
 
       rotate(..rot)
 
-      line((-1,0,0), (2,0,0), stroke: .5pt)
-      line((0,-1,0), (0,.7,0), stroke: .5pt)
-      line((0,0,-1), (0,0,2), stroke: .5pt)
+      line((-.8,0,0), (2,0,0), stroke: .5pt)
+      line((0,-1.1,0), (0,.7,0), stroke: .5pt)
+      line((0,0,-.8), (0,0,2), stroke: .5pt)
 
       line((1.8,.8,0), (1,0,0), (0,0,1), (0,.8,1.8), 
         fill: aqua.transparentize(60%), stroke: 1pt)
@@ -47,14 +47,18 @@ Those $e_i$ that form $x_B$ are called _basic_, and those forming $x_N$ are call
         stroke: (thickness: .5pt, dash: "densely-dotted"),
         fill: aqua.transparentize(90%))
 
-      line((1,0,0), (1,.7,0), mark: (end: ">"), stroke: .5pt)
-      line((1,0,0), (1,0, .7), mark: (end: ">"), stroke: .5pt)
+      let vec(from, to, ..rest) = line(from, to, mark: (end: ">>"), stroke: .5pt, ..rest)
+      vec((1,0,0), (1,.7,0))
+      vec((1,0,0), (1,0, .7))
+      content((rel: (0,0,-.3), to: (1,0,0)), $v_1$)
 
-      line((0,0,1), (0, .7,1), mark: (end: ">"), stroke: .5pt)
-      line((0,0,1), ( .7,0,1), mark: (end: ">"), stroke: .5pt)
+      vec((0,0,1), ( 0, .7, 1))
+      vec((0,0,1), (.7,  0, 1))
+      content((rel: (-.2,0,0), to: (0,0,1)), $v_2$)
 
-      line((0,-1,0), (0 ,-1,.7), mark: (end: ">"), stroke: (thickness: .5pt, dash: "densely-dashed"))
-      line((0,-1,0), (.7,-1, 0), mark: (end: ">"), stroke: (thickness: .5pt, dash: "densely-dashed"))
-    }) + [#rot]
+      line((0,-1,0), (0 ,-1,.7), mark: (end: ">>"), stroke: (thickness: .5pt, dash: "densely-dashed"))
+      line((0,-1,0), (.7,-1, 0), mark: (end: ">>"), stroke: (thickness: .5pt, dash: "densely-dashed"))
+      content((rel: (0,-.2,0), to: (0,-1,0)), $v_3$)
+    }) //+ [#rot]
   })
 )
