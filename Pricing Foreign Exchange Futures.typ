@@ -2,20 +2,23 @@
 // #set text( font: "New Computer Modern")
 #let defaultStroke = (x,y) => (bottom: .5pt + gray) + if x == 0 and y > 0 {(right: .5pt + gray)}
 
-= Foreign exchange futures
+= Foreign exchange futures: pricing and arbitrage
 
-Now we look at how foreign exchange futures can be priced, and thus how an arbitrage strategy can be
-applied if the price is inappropriate.
+Here we derive how foreign exchange futures can be priced based on interest rates, and thus how an
+arbitrage strategy can be applied if the price is inappropriate.
+
+Then we show how the same approach can be used to _recreate_ futures in markets where they are not
+readily available.
 
 == Setup
 
-For ease of notation we assume two currencies #sym.pound, and #sym.dollar, related by a (time-dependent) exchange rate $alpha$: $ pound &=
-alpha dollar \ dollar &= 1 / alpha pound $
+For ease of notation we assume two currencies #sym.pound, and #sym.dollar, related by a (time-dependent) exchange rate $alpha_t$: $ pound_t &=
+alpha_t dollar_t \ dollar_t &= 1 / alpha_t pound_t $
 
 We are given 
 - the interest rates in both currencies for a particular time period, $r_pound$ and $r_dollar$ 
 - the exchange rate now, $alpha_0$ (the rate at the end of the period, $alpha_1$, is unknown)
-- a dealing limit of $pound X$
+- a dealing limit of $pound_0 X$
 and we are interested in the potential profit of borrowing from the lower interest currency and
 investing into the higher interest currency.
 
@@ -134,3 +137,87 @@ threshold at which it changes sign.
 So for sufficiently large deviations of $alpha_1$ from the theoretical rate (when $Delta = 0$), we
 might end up borrowing from the high-interest currency (expensive) and invest in the low-interest
 currency (cheap), which is counter-intuitive.
+
+= Hedging foreign exchange with money market
+In currencies where foreign exchange futures are not as developed, we can use the same procedure
+above to recreate a future manually and hedge a foreign exchange with it.
+
+== Setup 
+We want to convert a future amount between two currencies at a known rate, where
+- the _foreign_ currency amount is specified,
+- while the _home_ currency amount is unknown, because the future exchange rate is unknown, and that is the risk. 
+so that the total amount spent or received in the home currency is known _now_.
+
+We could also consider the converse: a fixed _home_ currency amount and an unknown foreign one, but
+that is uninteresting because here we only care about _our_ currency and there would be nothing to
+hedge.
+
+Still, there are two possible scenarios, depending on the direction of the conversion:
+#align(center,grid(
+  columns: 3,
+  inset: (.5em, .5cm),
+  stroke: (x,y)=> (if y>0 {(top: .5pt,)} else {(:)}) + (if x>0 {(left: .5pt)} else {(:)}),
+  align: (x,y)=> horizon + if x==0 { right } else {center},
+  grid.header(
+    [Want to convert:], [home $|->$ foreign], [foreign $|->$ home]),
+
+  [Risk is:], 
+  [foreign is strong,\ home is weak], 
+  [foreign is weak,\ foreign is strong],
+
+  [...in which case\ we will:],
+  [have to use too much\ of the local currency\ to cover the foreign amount],
+  [receive too little\ in the local currency\ after the conversion],
+
+  [This role\ is played by], 
+  [an importer who\ has to pay for foreign goods],
+  [an exporter who\ will be payed for exported goods]
+))
+
+Say we want to convert the foreign future amount $dollar_1 A$ into local pounds (we play a British
+importer). Interest rates for the period til the exchange are $r_pound$ and $r_dollar$, and the
+current exchange rate is $alpha_0$. 
+
+== Strategy
+Again, we borrow in one currency and invest in the other, but now we also have the future amount
+$dollar_1 A$ that we want to turn into an $alpha_1$-independent pound value in the future.
+
+Copying directly the table from earlier:
+
+#align(center,table(columns: 3, 
+  stroke: defaultStroke,
+  align: center + horizon,
+  table.header(
+    [],
+    sym.pound,
+    sym.dollar,
+  ),
+  [ Trade\ now ],
+  $   pound epsilon X $,
+  $ - dollar alpha_0 epsilon X $,
+  [ Trade\ in 1 year ],
+  $ - pound epsilon X e^(r_pound) $,
+  $   dollar alpha_0 epsilon X e^(r_dollar) $,
+))
+
+In the previous section, the future total included gaining from the investment and repaying the
+loan; this time we also have the $dollar_1 A$ to convert, so the future total is 
+$
+  Delta = underbrace(- pound epsilon X e^(r_pound), "pounds result") +
+  underbrace(dollar alpha_0 epsilon X e^(r_dollar), "dollar result") +
+  underbrace(dollar A, "amount" #linebreak() "to convert").
+$
+
+Now we want the local currency value of $Delta$ to be independent of the future exchange rate. That
+means that we want the dollar parts to cancel out, i.e. we want that 
+$ dollar alpha_0 epsilon X e^(r_dollar) + dollar A = 0, $
+i.e. the dollar result of the borrow-invest strategy should completely compensate the amount $A$
+that is to be converted. So we want to _pay_ dollars, meaning _now_ we have to borrow them.
+
+The last equation immediately implies that $epsilon = -1$ and $X = 1/(alpha_0 e^(r_dollar)) A$.
+Looking back at the table, that means that 
++ _now_ we have to _borrow_ dollars having a future value of $dollar A$
++ convert the borrowed to pounds and invest the pounds, 
++ _then_, repay the dollar loan with the future amount $dollar A$ that will be available, thus
+  getting rid of all dollars,
++ and earn on the pounds investment at the known pounds interest rate. 
