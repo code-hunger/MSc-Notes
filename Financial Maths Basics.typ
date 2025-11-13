@@ -22,14 +22,46 @@ Imagine a probability experiment that can be "run" and on which "observations" c
   a probability measure $bb(P) : cal(F) -> [0,1]$.
 + In practice, we do not know exactly which run $omega in Omega$ occurred. Instead,
   + we can only know if the run is _among whole sets_ $A$ of runs;\
-  + we can usually only "look" at the experiment, and _observe_ values of projections $X: Omega -> E$ onto other sets $E$.\
+  + we can usually only "look" at the experiment, and _observe_ values of projections $X: Omega -> E$ onto other sets $E$.
 
 === Events
 Such a set of runs $A$, that we can know if $omega$ lies in, is called _an event_ and is only allowed to be in #calF. Thus it is in the domain of $PP$ and has a well-defined _probability_ $PP(A)$. The model does not really talk about whether a run is in a set not in $calF$.
 
 === Random variables
-If we observe a particular value $e = X(omega)$ through a projection $X:Omega -> E$, then we know that the run that happened lies in $X^(-1)({e}) subset Omega.$
-But we're only allowed to know if $omega$ is in $calF$-sets, so the only (sets of) values $A subset E$ (including the case $A={e}$) we are allowed to observe from $X$ must have measurable preimages $X^(-1)(A) in calF$. Thus to model observables we use _measurable_ functions $X: Omega -> E$ into measure spaces $E$, and we call $X$ a _random variable_.
+#import "@preview/cetz:0.4.2"
+#grid(
+  columns: 2, 
+  column-gutter: 1em,
+  [
+    If we observe a particular value $e = X(omega)$ through a projection $X:Omega -> E$, then we know that the run that happened lies in $X^(-1)({e}) subset Omega.$
+    But we're only allowed to know if $omega$ is in $calF$-sets, so the only (sets of) values $A subset E$ (including the case $A={e}$) we are allowed to observe from $X$ must have measurable preimages $X^(-1)(A) in calF$.
+  ],
+
+  cetz.canvas({
+    import cetz.draw: *
+    circle((0,2), radius: (1,.5))
+    content((-.5,2), $E$)
+    let xo = (0.3,1.75)
+    content((0.4,2), $X(omega)$)
+    circle(xo, radius: 1pt, fill: black)
+
+    content((5.3, 1.5), [
+      When we observe $e=X(omega) in E$,\
+      we know that $A=X^(-1)(e)$ happened,\
+      but not which $omega$ exactly.
+    ])
+    bezier-through((.8,.5), (1,1), xo, stroke: .5pt, mark: (end: (symbol: "stealth")))
+    content((1.3,1.2), $X$)
+
+    circle((0,0), radius: (1.7,1))
+    content((-1.2,0), $Omega$)
+    circle((.5,0), radius: (.7,.6), stroke: .5pt)
+    content((.7,-.2), $omega$)
+    circle((.4,-.2), radius: 1pt, fill: black)
+    content((.6,0.2), $A$)
+  })
+)
+Thus to model observables we use _measurable_ functions $X: Omega -> E$ into measure spaces $E$, and we call $X$ a _random variable_.
 
 In this sense, $calF$ is a restriction on the nature of all random variables, containing the information _that is allowed to be known_ and revealed by any observables.
 
@@ -187,7 +219,6 @@ A run $omega$ is a point in the rectangle. Each of the four rectangles represent
 
 == Example
 
-#import "@preview/cetz:0.4.2"
 #grid(columns: (4fr,3fr), gutter: 1.5em,
 [For an experiment with 3 consecutive coin flips we can put $ Omega = {"Heads", "Tails"}^3, $ a discrete cube in 3D. 
 
