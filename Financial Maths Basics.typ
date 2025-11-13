@@ -317,7 +317,7 @@ This section follows the first chapter of the book "Introduction to Stochastic C
     Predictable means that $phi.alt_(i+1)$ is $calF_i$-measurable, i.e. the information used (revealed) by the _next_ portfolio $phi.alt_(i+1)$ is restricted to the information provided by the current market state $cal(F)_i$, which is only guaranteed to contain the current stock prices (because $S_i$ is $cal(F)_i$-measurable) and past stock prices (because $cal(F)_i subset cal(F)_(i+1)$).
 
     #definition[
-    The _value of the portfolio_ defined by a strategy $phi.alt_i$ is $ V_i (phi.alt):= phi.alt_i dot S_i. $]
+    The _value of the portfolio_ defined by a strategy $phi.alt_bullet$ is $ V_i (phi.alt):= phi.alt_i dot S_i. $]
 
     Now a slight confusion may arise as to what is the time order of the quantities $S_i$ and
     $phi.alt_i$. They both use the same index $i$ so we might be under the impression that the time
@@ -411,10 +411,10 @@ Denote the _portfolio adjustment_ (again, non-standard terminology) performed at
 (consider the diagram above to convince yourself that $Delta phi.alt_i$ is $calF_i$-measurable)]
 It is a vector of the sells/buys of each stock performed at time $i$. That is,
 
-#align(center)[
+#align(center,box(stroke:.3pt, inset: 8pt)[
 $Delta phi.alt_i^j$
 is the amount of stock $j$ that is sold (if $Delta phi.alt_i < 0$) or bought (if $Delta phi.alt_i > 0$) at time $i$.
-]
+])
 
 #notation[
   Denote the _price changes_ that happened at time $n+1$ by $ Delta S_(n+1) := S_(n+1) - S_n. $
@@ -426,9 +426,22 @@ is the amount of stock $j$ that is sold (if $Delta phi.alt_i < 0$) or bought (if
   both $Delta phi.alt_n$ and $Delta S_n$ are $calF_n$-measurable.
 ]
 
+#import "@preview/mannot:0.3.0": mark, annot
+
+We also get a Leibniz rule for $V_bullet$ ($dif V = dif phi.alt dot S + dif S dot phi.alt$).
 #remark[
   The two increments let us express the portfolio value with a recursive formula:
-  $ V_(n+1) (phi.alt) = V_n (phi.alt) + Delta phi.alt_n dot S_n + phi.alt_(n+1) dot Delta S_n. $
+  $ mark(V_(n+1) (phi.alt), tag: #<next>) =
+  mark(V_n (phi.alt), tag: #<prev>) 
+  + mark(Delta phi.alt_n dot S_n, tag: #<strat>)
+  + mark(phi.alt_(n+1) dot Delta S_n, tag: #<price>).
+
+  #annot(<next>, align(center)[next\ value])
+  #annot(<prev>, align(center)[prev\ value])
+  #annot(<strat>, align(center)[changes in\ strategy])
+  #annot(<price>, align(center)[changes in\ prices])
+  $
+  #v(1em)
   That is, the next value is the previous value plus the changes from the strategy and the changes in the prices.
 ]
 
@@ -543,7 +556,7 @@ amount might not be known in advance.
 ]
 
 #remark[
-  If $h$ is a constant $h(omega) = M in RR$, it is trivially attainable by the strategy 
+  If $h$ is a constant $h(omega) = M in RR_+$, it is trivially attainable by the strategy 
   with $phi.alt_N^0 = M$ that is the constant zero on the risky assets 
   (exists uniquely by the proposition above, and is obviously admissible).
 
