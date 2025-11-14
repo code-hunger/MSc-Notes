@@ -76,7 +76,7 @@ As time evolves in the real world, though, we can only observe what is _currentl
 
 For any $n$, let $calF_n subset calF$ contain all maximal sets of events that share a common observable property up to time $n$ or earlier. That is, $calF_n$ contains only, and all, sets of runs that a particular run can be determined to lie in, by observing it up to time $n$. Then trivially $calF_n subset calF_m$ for all $n <= m$. 
 
-If two runs $omega$ and $omega'$ differ in no observable way up to time $n$, they are not $calF_n$-separable.
+If two runs $omega$ and $omega'$ differ in no observable way up to time $n$, they are not $calF_n$-separable#footnote[I borrow that term from topology. "Two points $x,y$ are _separated_ by $calF_n$" means that there are sets $A,B in calF_n$ that contain one but not the other: $x in A,y in.not B$ and $x in B, y in.not A$.].
 
 Thus in order to model slowly-appearing history over $Omega$ (recall, $Omega$ is a set of atoms $omega$ containing entire individual histories) we introduce a nested sequence of $sigma$-algebras in $calF$ 
 $ calF_0 subset calF_1 subset ... subset calF_n subset ... $ 
