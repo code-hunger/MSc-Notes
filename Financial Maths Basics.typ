@@ -353,8 +353,7 @@ This section follows the first chapter of the book "Introduction to Stochastic C
     Now a slight confusion may arise as to what is the time order of the quantities $S_i$ and
     $phi.alt_i$. They both use the same index $i$ so we might be under the impression that the time
     evolution is described by a sequence of pairs $(phi.alt_i,S_i)$. While not false, this may be
-    deceiving when we define _self-financing_ strategies. Consider the diagram on the right. Thus we put (non-standard notation)
-
+    deceiving when we define _self-financing_ strategies. Consider the diagram on the right.
   ],
   diagram(
     edge-stroke: .9pt,
@@ -431,12 +430,6 @@ timebox ($V_i = V'_i$), but only responds to stock price changes $S_i -> S_(i+1)
 Diagonal dotted arrows indicate the causal relationship between the time-evolution of the strategy and the stock prices in the process $(phi.alt_0, S_0), (phi.alt_1, S_1), ...$.
 ])
 
-#definition[
-  The _adjusted value of the portfolio_ at time $i$ after the new strategy $phi.alt_(i+1)$ is applied is 
-  $ V'_i (phi.alt) := phi.alt_(i+1) dot S_i $
-]
-It is still $cal(F)_i$-measurable.
-
 #notation[
 Denote the _portfolio adjustment_ (again, non-standard terminology) performed at time $i$ by $ Delta phi.alt_i := phi.alt_(i+1) - phi.alt_i. $
 (consider the diagram above to convince yourself that $Delta phi.alt_i$ is $calF_i$-measurable)]
@@ -478,12 +471,30 @@ We also get a Leibniz rule for $V_bullet$ ($dif V = dif phi.alt dot S + dif S do
 
 == Self-financing strategies
 
+#let phii = $phi.alt$
+When the second term in the sum on the right in the remark above, $Delta phi.alt_n dot S_n$, vanishes for all $n$, we get a very important type of
+strategies. Denote the first part of recursive formula by
+$ V'_n (phi.alt) = V_n (phi.alt) + Delta phi.alt_n dot S_n, $
+so that $ V_(n+1)(phi.alt)=V'_n (phi.alt) + phi.alt_(n+1) dot Delta S_n. $
+
+Those two mutually-recursive formulas reflect the structure of the alternating sequence $V_0, V'_0, V_1, V'_1, ...$ in the diagram above, so
+#remark[
+  $V'_n (phi.alt)$ is the _adjusted value_ of the portfolio *after* the next strategy choices
+  $phi.alt_(n+1)$ are applied but *before* the prices have been updated. 
+]
+
+Now the condition that the second term in the earlier recursive formula for $V(phii)$ vanishes for
+all $n$ can be phrased simply as the equality $V(phii)=V'(phii)$ (as processes). A direct expression for
+$V'$ is $ V'_n (phi.alt) := phi.alt_(n+1) dot S_n. $
+
 #definition[
-A strategy $phi.alt_i$ is _self-financing_ if the value of the portfolio stays the same after the adjustment:
+A strategy $phi.alt_i$ is _self-financing_ if the value of the portfolio stays the same after the strategy adjustment:
 $ V_i (phi.alt) = V'_i (phi.alt) wide "for all" i, $
 i.e.
-$phi.alt_(i+1) dot S_i = phi.alt_i dot S_i $
-for all $i$.]
+$ phi.alt_(i+1) dot S_i = phi.alt_i dot S_i wide "for all" i. $
+]
+
+Now we can get back to the condition on the vanishing second term in the recursive formula for $V$:
 
 #remark[
 The self-financing condition $V_i = V'_i$ is equivalent to $ Delta phi.alt_i dot S_i = 0, $
