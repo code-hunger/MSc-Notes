@@ -597,12 +597,12 @@ In other words, the self-financing strategies restricting to a given $(phi.alt_n
 
 == Arbitrage
 
-#definition[
+#definition("Admissible strategy")[
   A _self-financing_ strategy is called *admissible* if $V_n (phi.alt) >= 0$ for all $n$ (and all
   $omega in Omega$).
 ]
 
-We fix an $N in NN$, called the _horizon_.
+We fix an $N in NN$, called the _horizon_. All indices $n,i,j,k$ below vary between 0 and $N$.
 
 #let cbox(c) = box(align(center, c))
 #let small(c) = text(size: 9pt, c)
@@ -621,7 +621,7 @@ grid(columns: 3, row-gutter: .5em, column-gutter: 1em,
 
 A market without arbitrage opportunities is called viable.
 
-#definition[
+#definition("Viable market")[
   The market is called *viable* if every admissible strategy with $V_0 (phi.alt) = 0$ satisfies
   $V_N (phi.alt) = 0$.
 ]
@@ -633,6 +633,36 @@ $
 $
  i.e. the price of risky asset 1 is the same at first but then becomes
 twice as much as the riskless one, then the constant strategy $phi.alt_n = (-1,1)$ has zero initial value and $V_n = - S^0_n + S^1_n = S_n^0>0$. Thus the market defined by those $S_bullet^bullet$ is not viable.
+
+#prop("Fundamental theorem of asset pricing")[
+  #iff(
+    [A market is viable],
+    [under some equivalent measure, the discounted price processes $S_bullet^k, k=0,1,...$ are martingales.]
+  )
+]
+
+Expanding the definition of a viable market and applying the characterization of martingales stated
+earlier, the proposition reads
+
+#iff(
+  [
+    For any self-financing $phi.alt_bullet$,\
+    if #h(4pt) #box(baseline: 40%)[$forall n: V_n (phi.alt)>=0$\ and $V_0 (phi.alt)=0$],
+    then $V_N (phi.alt)=0$
+  ],
+  [There exists $PP^*$ equivalent to $PP$, s.t. for any predictable $H_bullet$, $ EE[sum_(i=1)^N H_i Delta S_i]=0 $]
+)
+
+/* I find this phrasing illuminating, because 
+
+#proof($(arrow.l.double)$)[
+  We assume a $PP^*$ equivalent to $PP$, take a self-financing $phi.alt$ such that $V_0 (phi.alt)=0$
+  and $V_n (phi.alt)>=0$ for all n, and now we have to show it has zero value at the end
+  $V_N (phi.alt)=0$.
+
+  We are also given that $EE[]$
+]
+*/
 
 == Perfect hedging (attainable claims)
 
