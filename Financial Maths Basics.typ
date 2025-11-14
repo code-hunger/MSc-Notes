@@ -366,8 +366,8 @@ transform of $X_bullet$ by $H_bullet$ is denoted by $(H martra X)_bullet$ and de
 Using this notion, a martingale can be characterized not only by having its _individual_ 
 increments-means vanish, but by having (only) the final expectation of of all of its increments-transforms vanish:
 
-#let iff(xinset: 1em, left, right) = grid(
-  columns: 3, inset: (x: xinset), align: horizon,
+#let iff(xinset: 1em, yinset: 0pt, stroke: none, left, right) = grid(
+  columns: 3, inset: (x: xinset, y: yinset), align: horizon, stroke: stroke,
   left,
   [if an only if], 
   right
@@ -382,7 +382,7 @@ increments-means vanish, but by having (only) the final expectation of of all of
       for any predictable $H_bullet$, $EE[(H martra X)_N]=0. $
     ]
   ))
-]
+]<martingale-characterization>
 
 #pagebreak()
 
@@ -542,12 +542,17 @@ Those two mutually-recursive formulas reflect the structure of the alternating s
 ]
 
 Now the condition that the second term in the earlier recursive formula for $V(phii)$ vanishes for
-all $n$ can be phrased simply as the equality $V(phii)=V'(phii)$ (as processes). A direct expression for
-$V'$ is $ V'_n (phi.alt) := phi.alt_(n+1) dot S_n. $
+all $n$ can be phrased simply as the equality $V(phii)=V'(phii)$ (as processes). It is instructive
+to derive a direct expression for $V'$:
+$
+V'_n (phi.alt) &equiv V_n (phi.alt) &&+ Delta phi.alt_n dot S_n, \
+               &= cancel(phii_n dot S_n) &&+ (phii_(n+1) dot S_n - cancel(phii_n dot S_n)) \
+               &= phi.alt_(n+1) dot S_n.
+$
 
 #definition[
 A strategy $phi.alt_i$ is _self-financing_ if the value of the portfolio stays the same after the strategy adjustment:
-$ V_i (phi.alt) = V'_i (phi.alt) wide "for all" i, $
+$ V'_i (phi.alt) = V_i (phi.alt) wide "for all" i, $
 i.e.
 $ phi.alt_(i+1) dot S_i = phi.alt_i dot S_i wide "for all" i. $
 ]
@@ -557,13 +562,16 @@ Now we can get back to the condition on the vanishing second term in the recursi
 #remark[
 The self-financing condition $V_i = V'_i$ is equivalent to $ Delta phi.alt_i dot S_i = 0, $
 i.e. all buys and sells cancel each other in value, i.e. no money is lost or needs to be brought in for the adjustment.
-That is, a self-financing strategy is one where the recursive formula above for the portfolio value has a vanishing second term, and then
-  $ V_(n+1) (phi.alt) = V_n (phi.alt) + phi.alt_(n+1) dot Delta S_n. $
+
+Then a self-financing strategy is one where the recursive formula for $V$ has a vanishing second term, i.e.
+  $ V_(n+1) (phi.alt) = V_n (phi.alt) + phi.alt_(n+1) dot Delta S_n $
+  and that allows us to write $ V_n= V_0 + sum_(i=1)^n phii_n dot Delta S_n $
 ]
 
-It should be close to mind that even for a strategy that is not self-financing,
-if we were to put the quantity $Delta phi.alt_n dot S_n$ into $phi.alt_n^0$,
-i.e. if we invest (borrow) the surplus (shortage) of sells-minus-buys into (from) the riskless asset, we'd get a self-financing strategy.
+It should be close to mind that even for a strategy that is not self-financing (i.e. some of the
+$Delta phi.alt_n dot S_n$ does not vanish), if we were to put the quantity $Delta phi.alt_n dot S_n$
+into $phi.alt_n^0$, i.e. if we invest (borrow) the surplus (shortage) of sells-minus-buys into
+(from) the riskless asset, we'd get a self-financing strategy.
 
 #prop[
   Any $RR^d$-valued predictable sequence (a "strategy" only on the risky assets)
@@ -631,8 +639,9 @@ $
 "at " n=0, quad &S^1_0 = S^0_0 \
 "at " n>0, quad &S^1_n = 2 dot S^0_n,
 $
- i.e. the price of risky asset 1 is the same at first but then becomes
-twice as much as the riskless one, then the constant strategy $phi.alt_n = (-1,1)$ has zero initial value and $V_n = - S^0_n + S^1_n = S_n^0>0$. Thus the market defined by those $S_bullet^bullet$ is not viable.
+i.e. the price of risky asset 1 equals the riskless at first but then becomes twice as much as the
+riskless one, then the constant strategy $phi.alt_n = (-1,1)$ has zero initial value and $V_n = -
+S^0_n + S^1_n = S_n^0>0$. Thus the market defined by those $S_bullet^bullet$ is not viable.
 
 #prop("Fundamental theorem of asset pricing")[
   #iff(
@@ -641,16 +650,14 @@ twice as much as the riskless one, then the constant strategy $phi.alt_n = (-1,1
   )
 ]
 
-Expanding the definition of a viable market and applying the characterization of martingales stated
-earlier, the proposition reads
-
-#iff(
+Writing out the definition of a viable market, and applying the characterization of martingales in @martingale-characterization, the proposition reads
+#iff(stroke: (x,y)=> if(x != 1) {.5pt}, yinset: .5em,
   [
     For any self-financing $phi.alt_bullet$,\
     if #h(4pt) #box(baseline: 40%)[$forall n: V_n (phi.alt)>=0$\ and $V_0 (phi.alt)=0$],
     then $V_N (phi.alt)=0$
   ],
-  [There exists $PP^*$ equivalent to $PP$, s.t. for any predictable $H_bullet$, $ EE[sum_(i=1)^N H_i Delta S_i]=0 $]
+  [#set par(justify: false); there exists $PP^*$ equivalent to $PP$, such that for any predictable $H_bullet$, $ EE[sum_(i=1)^N H_i Delta S_i]=0 $]
 )
 
 /* I find this phrasing illuminating, because 
