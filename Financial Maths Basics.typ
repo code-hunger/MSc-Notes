@@ -316,13 +316,7 @@ Thus an $calF$-measurable $X$ need not be $cal(G)$-measurable. //Take an $e in E
 
 TODO
 
-#pagebreak()
-
-= Discrete-time market model
-
-This section follows the first chapter of the book "Introduction to Stochastic Calculus Applied to Finance" (Lamberton & Lapeyre), whose explanations I found missing or unsatisfactory so I enhance the presentation with as much motivation as possible.
-
-#import "@preview/ctheorems:1.1.3": *
+#import "@preview/ctheorems:1.1.3": thmbox, thmproof, thmrules
 #show: thmrules
 
 #let definition = thmbox("definition", "Definition", inset: 1em, fill: aqua.transparentize(70%))
@@ -331,6 +325,70 @@ This section follows the first chapter of the book "Introduction to Stochastic C
 #let prop = thmbox("theorem", "Proposition", inset: 1em, fill: olive.lighten(80%))
 #let proof = thmproof("proof", "Proof", inset: (x: 0pt))
 #show: thmrules.with(qed-symbol: a => math.square)
+
+= Martingales
+
+Recall that an $calF_bullet$-*martingale* is an $calF_bullet$-adapted process $X_bullet$ with
+zero-$calF_n$-expectation increments $Delta X_(n+1) = X_(n+1) - X_n$:
+
+#definition("Martingale")[
+  An $calF_bullet$-adapted process $X_bullet$ is a called a *martingale* if  
+  $ forall n: EE[Delta X_(n+1)|calF_n]=0. $
+]
+
+I prefer that phrasing of the definition because I find it more natural than the standard one. By
+writing
+$ 0=EE[Delta X_(n+1)|calF_n]= EE[X_(n+1)|calF_n] - EE[X_n|calF_n] $
+as $EE[X_(n+1)|calF_n] = EE[X_n|calF_n]$
+and applying
+$calF_n$-measurability to $X_n$, one gets equivalently
+
+#definition("Martingale, standard")[
+  An $calF_bullet$-adapted process $X_bullet$ is a called a *martingale* if  
+  $ forall n: EE[X_(n+1)|calF_n]=X_n. $
+]
+
+Note that we can always decompose a process into the sum of its increments up a given time, i.e.
+$ forall n: X_n = X_0 + sum_(i=1)^n Delta X_i. $
+Here again $Delta X_i$ denotes the "backwards" increment, $Delta X_(i+1)=X_(i+1) - X_i$.
+
+Now it is natural to ask, what happens if we scale the increments of a martingale, i.e. multiply
+each term in the above sum by some factor.
+
+#let martra = $dot.circle$
+
+#definition("Martingale transform")[
+  For an $calF_bullet$-martingale $X_bullet$ and a predictable $H_bullet$, the martingale
+transform of $X_bullet$ by $H_bullet$ is denoted by $(H martra X)_bullet$ and defined by
+      $ (H martra X)_n := sum_(i=1)^n H_i Delta X_i. $
+]
+
+Using this notion, a martingale can be characterized not only by having its _individual_ 
+increments-means vanish, but by having (only) the final expectation of of all of its increments-transforms vanish:
+
+#let iff(xinset: 1em, left, right) = grid(
+  columns: 3, inset: (x: xinset), align: horizon,
+  left,
+  [if an only if], 
+  right
+)
+
+#prop[
+  Let $X_bullet$ be $calF_bullet$-adapted.
+
+  #align(center,iff(
+    [$X_bullet$ is a martingale],
+    [
+      for any predictable $H_bullet$, $EE[(H martra X)_N]=0. $
+    ]
+  ))
+]
+
+#pagebreak()
+
+= Discrete-time market model
+
+This section follows the first chapter of the book "Introduction to Stochastic Calculus Applied to Finance" (Lamberton & Lapeyre), whose explanations I found missing or unsatisfactory so I enhance the presentation with as much motivation as possible.
 
 #grid(
   columns: (3fr, 3fr),
