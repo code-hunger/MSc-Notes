@@ -663,7 +663,7 @@ S^0_n + S^1_n = S_n^0>0$. Thus the market defined by those $S_bullet^bullet$ is 
 #prop("Fundamental theorem of asset pricing")[
   #iff(
     [A market is viable],
-    [under some equivalent measure, the discounted price processes $S_bullet^k, k=0,1,...$ are martingales.]
+    [under some equivalent measure, the discounted price processes $tS_bullet^k, k=0,1,...$ are martingales.]
   )
 ]
 
@@ -674,7 +674,7 @@ Writing out the definition of a viable market, and applying the characterization
     if #h(4pt) #box(baseline: 40%)[$forall n: V_n (phi.alt)>=0$\ and $V_0 (phi.alt)=0$],
     then $V_N (phi.alt)=0$
   ],
-  [#set par(justify: false); there exists $PP^*$ equivalent to $PP$, such that for any predictable $H_bullet$, $ EE[sum_(i=1)^N H_i Delta S_i]=0 $]
+  [#set par(justify: false); there exists $PP^*$ equivalent to $PP$, such that for any predictable $H_bullet$, $ EE^*[sum_(i=1)^N H_i Delta tS_i]=0 $]
 )
 
 /* I find this phrasing illuminating, because 
