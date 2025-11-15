@@ -581,7 +581,7 @@ process $tS_bullet$ and the corresponding discounted portfolio value $tV_bullet$
   For a self-financing strategy with $tV_0 (phii)=0$, if each $tilde(S)^j_bullet,j=0,...,d$ were a martingale, then $tV_bullet
   (phii)$ would be a sum of the martingale transforms of the prices by the strategy,
   $ tV_bullet (phii) = scripts(sum)_j \(phii^j martra tS^j)_bullet. $
-]
+]<value-is-mart-transform>
 
 We'll get back to this observation in the next section.
 
@@ -674,19 +674,31 @@ Writing out the definition of a viable market, and applying the characterization
     if #h(4pt) #box(baseline: 40%)[$forall n: V_n (phi.alt)>=0$\ and $V_0 (phi.alt)=0$],
     then $V_N (phi.alt)=0$
   ],
-  [#set par(justify: false); there exists $PP^*$ equivalent to $PP$, such that for any predictable $H_bullet$, $ EE^*[sum_(i=1)^N H_i Delta tS_i]=0 $]
+  [#set par(justify: false); there exists $PP^*$ equivalent to $PP$, such that for any predictable $H_bullet$, $ EE^*[(H^j martra tS^j)_N]=0 quad "for all" j. $]
 )
 
-/* I find this phrasing illuminating, because 
+I find this phrasing illuminating, because by @value-is-mart-transform we know that self-financing
+strategies of zero initial value, when applied on martingale prices, act like martingale transforms.
+And here on the left side we have exactly such strategies, and on the right side - the mean of martingale
+transforms.
+
+This phrasing renders one direction of the proof nearly trivial (or rather, as a corollary of
+@martingale-characterization):
 
 #proof($(arrow.l.double)$)[
   We assume a $PP^*$ equivalent to $PP$, take a self-financing $phi.alt$ such that $V_0 (phi.alt)=0$
-  and $V_n (phi.alt)>=0$ for all n, and now we have to show it has zero value at the end
-  $V_N (phi.alt)=0$.
+  and $V_n (phi.alt)>=0$ for all n, and now we have to show it gives no profit at the end.
 
-  We are also given that $EE[]$
-]
-*/
+  $phii$ is surely predictable, so the assumption $EE^*[(phii^j martra tS^j)_N]=0$ applies.
+  But as discussed in @value-is-mart-transform, for a self-financing $phii$ with zero initial value,
+  $ tV_N (phii)=sum_(j=0)^d (H^j martra tS^j)_N, $ so $EE^*[tV_N]=0$. 
+  But since $tV_N>=0$, we get $tV_N = 0$, $PP^*$-almost surely, and 
+  so#footnote[the equivalence $PP ~ PP^*$ means that "$PP$-almost surely" is equivalent to "$PP^*$-almost surely"]
+  $tV_N=0$, $PP$-almost surely.
+
+  TODO why $tV_N=0$ implies $V_N=0$?
+
+ ]
 
 == Perfect hedging (attainable claims)
 
