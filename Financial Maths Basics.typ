@@ -328,11 +328,12 @@ TODO
 
 = Martingales
 
-Recall that an $calF_bullet$-*martingale* is an $calF_bullet$-adapted process $X_bullet$ with
-zero-$calF_n$-expectation increments $Delta X_(n+1) = X_(n+1) - X_n$:
+Recall that an $calF_bullet$-*martingale* is an $calF_bullet$-adapted process $X_bullet$ in $L_1$
+with zero-$calF_n$-expectation increments $Delta X_(n+1) = X_(n+1) - X_n$. By _integrable_ we mean
+that $EE[|X_n|]$ exists for all $n$.
 
 #definition("Martingale")[
-  An $calF_bullet$-adapted process $X_bullet$ is a called a *martingale* if  
+  An $calF_bullet$-adapted process $X_bullet$ in $L_1(Omega, calF, PP)$ is a called a *martingale* if  
   $ forall n: EE[Delta X_(n+1)|calF_n]=0. $
 ]
 
@@ -344,7 +345,7 @@ and applying
 $calF_n$-measurability to $X_n$, one gets equivalently
 
 #definition("Martingale, standard")[
-  An $calF_bullet$-adapted process $X_bullet$ is a called a *martingale* if  
+  An $calF_bullet$-adapted process $X_bullet$ in $L_1(Omega, calF, PP)$ is a called a *martingale* if  
   $ forall n: EE[X_(n+1)|calF_n]=X_n. $
 ]
 
@@ -364,7 +365,7 @@ transform of $X_bullet$ by $H_bullet$ is denoted by $(H martra X)_bullet$ and de
 ]<martingale-transform>
 
 Using this notion, a martingale can be characterized not only by having its _individual_ 
-increments-means vanish, but by having (only) the final expectation of of all of its increments-transforms vanish:
+increments-means vanish, but by having (only) the final expectation of all of its increments-transforms vanish:
 
 #let iff(xinset: 1em, yinset: 0pt, stroke: none, left, right) = grid(
   columns: 3, inset: (x: xinset, y: yinset), align: horizon, stroke: stroke,
