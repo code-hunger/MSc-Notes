@@ -698,7 +698,24 @@ This phrasing renders one direction of the proof nearly trivial (or rather, as a
 
   TODO why $tV_N=0$ implies $V_N=0$?
 
- ]
+]
+
+#proof($(arrow.r.double$)[
+  We are looking for a $PP^*$ equivalent to $PP$. Assuming that $calF=cal(P)(Omega)$ and
+  $PP(omega)>0$ for all outcomes $omega in Omega$, we want $forall omega: PP^*(omega) > 0$ as well.
+  So we're looking for a positive map $ PP^*: Omega -> RR_+,$ an element of the cone $ {f in RR^Omega: f > 0}. $
+
+  Notice that the terminal portfolio values $V_N (phii)$ induced by the self-financing strategies $phii$ from the
+  theorem's assumption live in the same ambient space: the value of a portfolio for a strategy is a
+  map $V_N (phii): Omega -> RR$. 
+
+  WIP still TODO, but the rest goes something like this:
+  The set of terminal values
+  $ { V_N (phii) : phii "is self-financing", V_0 (phii)<=0 } subset RR^Omega $
+  is clearly a vector subspace of $RR^Omega$. [[it has to use $tV$ instead of $V$ but I still have to see why. I am also not yet sure if the filter $V_0 (phii)<=$ is necessary or sufficient.]]
+  It does not intersect the open convex cone above, so there exist a separating functional, and then
+a vector, that when rescaled gives the wanted probability measure.
+]
 
 == Perfect hedging (attainable claims)
 
