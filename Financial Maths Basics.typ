@@ -361,7 +361,7 @@ each term in the above sum by some factor.
   For an $calF_bullet$-martingale $X_bullet$ and a predictable $H_bullet$, the martingale
 transform of $X_bullet$ by $H_bullet$ is denoted by $(H martra X)_bullet$ and defined by
       $ (H martra X)_n := sum_(i=1)^n H_i Delta X_i. $
-]
+]<martingale-transform>
 
 Using this notion, a martingale can be characterized not only by having its _individual_ 
 increments-means vanish, but by having (only) the final expectation of of all of its increments-transforms vanish:
@@ -559,14 +559,30 @@ $ phi.alt_(i+1) dot S_i = phi.alt_i dot S_i wide "for all" i. $
 
 Now we can get back to the condition on the vanishing second term in the recursive formula for $V$:
 
+#let tS = $tilde(S)$
+#let tV = $tilde(V)$
 #remark[
-The self-financing condition $V_i = V'_i$ is equivalent to $ Delta phi.alt_i dot S_i = 0, $
-i.e. all buys and sells cancel each other in value, i.e. no money is lost or needs to be brought in for the adjustment.
-
-Then a self-financing strategy is one where the recursive formula for $V$ has a vanishing second term, i.e.
-  $ V_(n+1) (phi.alt) = V_n (phi.alt) + phi.alt_(n+1) dot Delta S_n $
-  and that allows us to write $ V_n= V_0 + sum_(i=1)^n phii_n dot Delta S_n $
+  The self-financing condition $V_i = V'_i$ is equivalent to $ Delta phi.alt_i dot S_i = 0, $
+  i.e. all buys and sells cancel each other in value, i.e. no money is lost or needs to be brought in for the adjustment.\
+  Then a self-financing strategy is one where the recursive formula for $V$ has a vanishing second term, i.e.
+  $ V_(n+1) (phi.alt) = V_n (phi.alt) + phi.alt_(n+1) dot Delta S_n. $
 ]
+We can apply the last formula iteratively and write
+$ V_n (phii)= V_0 (phii) + sum_(i=1)^n phii_n dot Delta S_n $
+Note how close this expression is to @martingale-transform --- we could try to see it as a martingale
+transform under some conditions (though, the quantities $phii_n$ and $S_n$ are vectors, so it would
+rather be a _sum_ of the component-wise martingale transforms). However, even if $V_0 (phii)$ were
+to vanish, $Delta S_n$ would generally not be a martingale because the riskless asset price process
+$S^0_bullet$ increases (maybe even deterministically). Instead, we can consider the discounted price
+process $tS_bullet$ and the corresponding discounted portfolio value $tV_bullet$.
+
+#remark[
+  For a self-financing strategy with $tV_0 (phii)=0$, if each $tilde(S)^j_bullet,j=0,...,d$ were a martingale, then $tV_bullet
+  (phii)$ would be a sum of the martingale transforms of the prices by the strategy,
+  $ tV_bullet (phii) = scripts(sum)_j \(phii^j martra tS^j)_bullet. $
+]
+
+We'll get back to this observation in the next section.
 
 It should be close to mind that even for a strategy that is not self-financing (i.e. some of the
 $Delta phi.alt_n dot S_n$ does not vanish), if we were to put the quantity $Delta phi.alt_n dot S_n$
