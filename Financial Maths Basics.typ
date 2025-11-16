@@ -359,13 +359,14 @@ each term in the above sum by some factor.
 #let martra = $dot.circle$
 
 #definition("Martingale transform")[
-  For an $calF_bullet$-martingale $X_bullet$ and a predictable $H_bullet$, the martingale
+  For an $calF_bullet$-adapted $X_bullet$ and a predictable $H_bullet$, the martingale
 transform of $X_bullet$ by $H_bullet$ is denoted by $(H martra X)_bullet$ and defined by
       $ (H martra X)_n := sum_(i=1)^n H_i Delta X_i. $
 ]<martingale-transform>
 
-Using this notion, a martingale can be characterized not only by having its _individual_ 
-increments-means vanish, but by having (only) the final expectation of all of its increments-transforms vanish:
+Using this notion, a martingale can be characterized not only by having its _individual_
+increments-means vanish, but by having (only) the final expectation of all of its predictable
+increments-transforms vanishes:
 
 #let iff(xinset: 1em, yinset: 0pt, stroke: none, left, right) = grid(
   columns: 3, inset: (x: xinset, y: yinset), align: horizon, stroke: stroke,
@@ -375,12 +376,12 @@ increments-means vanish, but by having (only) the final expectation of all of it
 )
 
 #prop[
-  Let $X_bullet$ be $calF_bullet$-adapted.
+  Let $X_bullet$ be $calF_bullet$-adapted, with a time horizon $N$.
 
   #align(center,iff(
     [$X_bullet$ is a martingale],
     [
-      for any predictable $H_bullet$, $EE[(H martra X)_N]=0. $
+      for any predictable $H_bullet$,\ $EE[(H martra X)_N]=0. $
     ]
   ))
 ]<martingale-characterization>
@@ -670,11 +671,16 @@ S^0_n + S^1_n = S_n^0>0$. Thus the market defined by those $S_bullet^bullet$ is 
 Writing out the definition of a viable market, and applying the characterization of martingales in @martingale-characterization, the proposition reads
 #iff(stroke: (x,y)=> if(x != 1) {.5pt}, yinset: .5em,
   [
-    For any self-financing $phi.alt_bullet$,\
+    For any self-financing $phi.alt$,\
     if #h(4pt) #box(baseline: 40%)[$forall n: V_n (phi.alt)>=0$\ and $V_0 (phi.alt)=0$],
     then $V_N (phi.alt)=0$
   ],
-  [#set par(justify: false); there exists $PP^*$ equivalent to $PP$, such that for any predictable $H_bullet$, $ EE^*[(H^j martra tS^j)_N]=0 quad "for all" j. $]
+  [
+    #set par(justify: false)
+    there exists $PP^*$ equivalent to $PP$,
+    such that for any predictable $H_bullet$,
+    $ EE^*[(H^j martra tS^j)_N]=0 quad "for all" j. $
+  ]
 )
 
 I find this phrasing illuminating, because by @value-is-mart-transform we know that self-financing
@@ -682,25 +688,27 @@ strategies of zero initial value, when applied on martingale prices, act like ma
 And here on the left side we have exactly such strategies, and on the right side - the mean of martingale
 transforms.
 
-This phrasing renders one direction of the proof nearly trivial (or rather, as a corollary of
+This phrasing renders one direction of the proof nearly trivial (or rather, a corollary of
 @martingale-characterization):
 
 #proof($(arrow.l.double)$)[
   We assume a $PP^*$ equivalent to $PP$, take a self-financing $phi.alt$ such that $V_0 (phi.alt)=0$
   and $V_n (phi.alt)>=0$ for all n, and now we have to show it gives no profit at the end.
-
-  $phii$ is surely predictable, so the assumption $EE^*[(phii^j martra tS^j)_N]=0$ applies.
   But as discussed in @value-is-mart-transform, for a self-financing $phii$ with zero initial value,
-  $ tV_N (phii)=sum_(j=0)^d (H^j martra tS^j)_N, $ so $EE^*[tV_N]=0$. 
-  But since $tV_N>=0$, we get $tV_N = 0$, $PP^*$-almost surely, and 
+  the discounted portfolio value is a martingale transform of the market prices, and that was
+  assumed to vanish ($phii$ is surely predictable):
+  $ tV_N (phii)=sum_(j=0)^d (phii^j martra tS^j)_N, $
+  so under $PP^*$ the total gain expectation vanishes:
+  $ EE^*[tV_N] 
+    = EE^*[sum_j (phii^j martra tS^j)_N] 
+    = sum_j underbrace(EE^*[(phii^j martra tS^j)_N],0) = 0. $
+
+  But since $tV_N>=0$, we get $tV_N =^(PP^*) 0$, and 
   so#footnote[the equivalence $PP ~ PP^*$ means that "$PP$-almost surely" is equivalent to "$PP^*$-almost surely"]
-  $tV_N=0$, $PP$-almost surely.
-
-  TODO why $tV_N=0$ implies $V_N=0$?
-
+  $tV_N=^(PP)0$. Then $V_N = 1/beta_n tV_n =^(PP) 0$ as well.
 ]
 
-#proof($(arrow.r.double$)[
+#proof($(arrow.r.double)$)[
   We are looking for a $PP^*$ equivalent to $PP$. Assuming that $calF=cal(P)(Omega)$ and
   $PP(omega)>0$ for all outcomes $omega in Omega$, we want $forall omega: PP^*(omega) > 0$ as well.
   So we're looking for a positive map $ PP^*: Omega -> RR_+,$ an element of the cone $ {f in RR^Omega: f > 0}. $
