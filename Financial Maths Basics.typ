@@ -669,15 +669,15 @@ We will talk about strategies of zero initial capital, so it is useful to have
   Like above, denote the set of zero initial capital admissible strategies by $Adm_0$.
 ]
 
-Thus we get the following chain 
+Thus we get the following chain of strategy classes (here $N$ is either a finite number or equals $NN$, and $<=$ means $subset$ but for subspaces):
 
 #align(
   center,
   diagram(spacing: (.5em, 0pt),
   {
-    let dedge(to, sym: $subset$) = edge(to, stroke: none, label: sym, label-angle: auto, label-side: center)
+    let dedge(to, sym: $<=$) = edge(to, stroke: none, label: sym, label-angle: auto, label-side: center)
 
-    node((0,1), $RR^Omega_(>=0)$)
+    node((0,1), $RR^(N times Omega)_(>=0)$)
     dedge("ur", sym: $supset$) 
     dedge("dr", sym: $supset$) 
 
@@ -688,15 +688,48 @@ Thus we get the following chain
     node((3, 0), Strat)
     dedge("dr")
 
-    node((4,1), $RR^Omega$)
+    node((4,1), $RR^(N times Omega) ,$)
 
     node((1, 2), $Adm_0$)
     dedge("r")
-    dedge("uu")
+    dedge("uu", sym: $subset$)
     node((2, 2), $SelfF_0$)
     dedge("r")
     dedge("uu")
     node((3, 2), $Strat_0$)
+    dedge("uu")
+    dedge("ur")
+  })
+)
+
+and for each $n <= N$, the corresponding chain of images under $V_n : RR^(N times Omega) -> RR^Omega$:
+
+#align(
+  center,
+  diagram(spacing: (.5em, 0pt),
+  {
+    let dedge(to, sym: $<=$) = edge(to, stroke: none, label: sym, label-angle: auto, label-side: center)
+
+    node((0,1), $RR^Omega_(>=0)$)
+    dedge("ur", sym: $supset$) 
+    dedge("dr", sym: $supset$) 
+
+    node((1, 0), $V_n (Adm)$)
+    dedge("r")
+    node((2, 0), $V_n (SelfF)$)
+    dedge("r")
+    node((3, 0), $V_n (Strat)$)
+    dedge("dr")
+
+    node((4,1), $RR^Omega .$)
+
+    node((1, 2), $V_n (Adm_0)$)
+    dedge("r")
+    dedge("uu", sym: $subset$)
+    node((2, 2), $V_n (SelfF_0)$)
+    dedge("r")
+    dedge("uu")
+    node((3, 2), $V_n (Strat_0)$)
     dedge("uu")
     dedge("ur")
   })
