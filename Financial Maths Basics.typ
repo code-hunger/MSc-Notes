@@ -621,12 +621,86 @@ In other words, the self-financing strategies restricting to a given $(phi.alt_n
   we can also consider this parameter to be $V_0$.
 ]
 
+== Linear algebra
+#let Strat = $sans("Strategy")$
+#let SelfF = $sans("SelfFinancing")$
+#let Adm = $sans("Admissible")$
+#remark[
+  The set of strategies on $Omega$ clearly forms a vector space under pointwise addition and scalar-multiplication, denote it #Strat.\
+  With a finite time horizon $N$, $#Strat = RR^(N times Omega)$, and with an infinite horizon $#Strat = RR^(NN times Omega)$.
+
+  Self-financing strategies are filtered from it by the linear condition $phii_(n+1) S_n = phii_n S_n$, so they form a subspace $SelfF subset Strat$.
+]
+
+Real random variables on $Omega$ form a vector space too, denote it by $RR^Omega$.
+
+For each $n$ and each strategy $phii$, $V_n (phii)$ is a random variable, so a vector $V_n (phii) in
+RR^Omega$. Now we can consider how the dependence on $phii$ looks like:
+
+#remark[
+  For any $n$, the operator $V_n (phii) = phii_n dot S_n$ is linear in $phii$. Its signature is
+  $ V_n : Strat -> RR^Omega $
+
+  Then the images of $Strat$and $SelfF$ are linear subspaces of $RR^Omega$:
+  $ V_n (SelfF) subset V_n (Strat) subset RR^Omega. $
+  #text(size:8pt)[(the last inclusion might actually be an equality, TODO check)]
+]
+
+We will talk about strategies of zero initial capital, so it is useful to have
+#notation[
+  For the above defined sets of strategies, denote the subset of those strategies that satisfy $V_0
+  (phii)=0$ by a subscript 0: $SelfF_0, Strat_0$.\
+  Clearly they form subspaces of the respective spaces.
+]
+
 == Arbitrage
 
 #definition("Admissible strategy")[
   A _self-financing_ strategy is called *admissible* if $V_n (phi.alt) >= 0$ for all $n$ (and all
   $omega in Omega$).
 ]
+
+#remark[
+  The set of admissible strategies is closed under addition and non-negative scalar
+  multiplication, so it forms a cone $#Adm subset SelfF$.
+
+  Its image under $V_n$ is then a cone $V_n (Adm) subset V_n (SelfF) inter RR_+^Omega$.
+
+  Like above, denote the set of zero initial capital admissible strategies by $Adm_0$.
+]
+
+Thus we get the following chain 
+
+#align(
+  center,
+  diagram(spacing: (.5em, 0pt),
+  {
+    let dedge(to, sym: $subset$) = edge(to, stroke: none, label: sym, label-angle: auto, label-side: center)
+
+    node((0,1), $RR^Omega_(>=0)$)
+    dedge("ur", sym: $supset$) 
+    dedge("dr", sym: $supset$) 
+
+    node((1, 0), Adm)
+    dedge("r")
+    node((2, 0), SelfF)
+    dedge("r")
+    node((3, 0), Strat)
+    dedge("dr")
+
+    node((4,1), $RR^Omega$)
+
+    node((1, 2), $Adm_0$)
+    dedge("r")
+    dedge("uu")
+    node((2, 2), $SelfF_0$)
+    dedge("r")
+    dedge("uu")
+    node((3, 2), $Strat_0$)
+    dedge("uu")
+    dedge("ur")
+  })
+)
 
 We fix an $N in NN$, called the _horizon_. All indices $n,i,j,k$ below vary between 0 and $N$.
 
@@ -711,7 +785,7 @@ This phrasing renders one direction of the proof nearly trivial (or rather, a co
 #proof($(arrow.r.double)$)[
   We are looking for a $PP^*$ equivalent to $PP$. Assuming that $calF=cal(P)(Omega)$ and
   $PP(omega)>0$ for all outcomes $omega in Omega$, we want $forall omega: PP^*(omega) > 0$ as well.
-  So we're looking for a positive map $ PP^*: Omega -> RR_+,$ an element of the cone $ {f in RR^Omega: f > 0}. $
+  So we're looking for a positive map $ PP^*: Omega -> RR_+,$ an element $ PP^* in RR^Omega_(>=0).$
 
   Notice that the terminal portfolio values $V_N (phii)$ induced by the self-financing strategies $phii$ from the
   theorem's assumption live in the same ambient space: the value of a portfolio for a strategy is a
