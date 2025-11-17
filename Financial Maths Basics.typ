@@ -813,21 +813,24 @@ This phrasing renders one direction of the proof nearly trivial (or rather, a co
 @martingale-characterization):
 
 #proof($(arrow.l.double)$)[
-  We assume a $PP^*$ equivalent to $PP$, take a self-financing $phi.alt$ such that $V_0 (phi.alt)=0$
-  and $V_n (phi.alt)>=0$ for all n, and now we have to show it gives no profit at the end.
-  But as discussed in @value-is-mart-transform, for a self-financing $phii$ with zero initial value,
-  the discounted portfolio value is a martingale transform of the market prices, and that was
-  assumed to vanish ($phii$ is surely predictable):
-  $ tV_N (phii)=sum_(j=0)^d (phii^j martra tS^j)_N, $
-  so under $PP^*$ the total gain expectation vanishes:
-  $ EE^*[tV_N] 
-    = EE^*[sum_j (phii^j martra tS^j)_N] 
-    = sum_j underbrace(EE^*[(phii^j martra tS^j)_N],0) = 0. $
+  We assume a $PP^*$ equivalent to $PP$, take an $phi.alt in Adm_0$ and now we have to show it gives
+  no profit at the end.
 
-  But since $tV_N>=0$, we get $tV_N =^(PP^*) 0$, and 
-  so#footnote[the equivalence $PP ~ PP^*$ means that "$PP$-almost surely" is equivalent to "$PP^*$-almost surely"]
-  $tV_N=^(PP)0$. Then $V_N = 1/beta_n tV_n =^(PP) 0$ as well.
-]
+  $phii in Adm_0$ means two things: $phii in SelfF_0$ and $forall n: V_n (phii) >= 0$.
+
+  1. As discussed in @value-is-mart-transform, for a $phii in SelfF_0$, the discounted portfolio
+     value is a martingale transform of the market prices, and that was assumed to vanish ($phii$ is
+     surely predictable):
+
+      $ tV_N (phii)=sum_(j=0)^d (phii^j martra tS^j)_N, $
+      so under $PP^*$ the total gain expectation vanishes:
+      $ EE^*[tV_N] 
+      = EE^*[sum_j (phii^j martra tS^j)_N] 
+      = sum_j underbrace(EE^*[(phii^j martra tS^j)_N],0) = 0. $
+  2. The admissibility criteria $V_N (phii)>=0$, or#footnote[$V_N$ and $tV_N$ are related by a
+     positive constant.] $tV_N (phii)>=0$, now implies $tV_N =^(PP^*) 0$, and so#footnote[the
+     equivalence $PP ~ PP^*$ means that "$PP$-almost surely" is equivalent to "$PP^*$-almost
+     surely"] $tV_N=^(PP)0$. Then $V_N =^(PP) 0$ as well. ]
 
 #proof($(arrow.r.double)$)[
   We are looking for a $PP^*$ equivalent to $PP$. Assuming that $calF=cal(P)(Omega)$ and
