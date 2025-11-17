@@ -757,6 +757,14 @@ A market without arbitrage opportunities is called viable.
 #definition("Viable market")[
   The market is called *viable* if every admissible strategy with $V_0 (phi.alt) = 0$ satisfies
   $V_N (phi.alt) = 0$.
+
+  In terms of the notation above, a market is viable if $V_N (Adm_0) = 0$.
+
+  Spelled out fully, the market is viable if for all self-financing $phii$,\
+  #align(center)[
+    if #h(4pt) #box(baseline: 40%)[$forall n: V_n (phi.alt)>=0$\ and $V_0 (phi.alt)=0$],
+    then $V_N (phi.alt)=0$.
+  ]
 ]
 
 As a silly (counter)example, if 
@@ -778,15 +786,13 @@ S^0_n + S^1_n = S_n^0>0$. Thus the market defined by those $S_bullet^bullet$ is 
 Writing out the definition of a viable market, and applying the characterization of martingales in @martingale-characterization, the proposition reads
 #iff(stroke: (x,y)=> if(x != 1) {.5pt}, yinset: .5em,
   [
-    For any self-financing $phi.alt$,\
-    if #h(4pt) #box(baseline: 40%)[$forall n: V_n (phi.alt)>=0$\ and $V_0 (phi.alt)=0$],
-    then $V_N (phi.alt)=0$
+    For any $phii in Adm_0$, $ V_N (phii) = 0 $
   ],
   [
     #set par(justify: false)
     there exists $PP^*$ equivalent to $PP$,
     such that for any predictable $H_bullet$,
-    $ EE^*[(H^j martra tS^j)_N]=0 quad "for all" j. $
+    $ EE^*[(H martra tS^j)_N]=0 quad "for all" j. $
   ]
 )
 
