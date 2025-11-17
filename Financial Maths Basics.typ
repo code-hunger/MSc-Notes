@@ -790,10 +790,18 @@ Writing out the definition of a viable market, and applying the characterization
   ]
 )
 
+#remark[
 I find this phrasing illuminating, because by @value-is-mart-transform we know that self-financing
 strategies of zero initial value, when applied on martingale prices, act like martingale transforms.
 And here on the left side we have exactly such strategies, and on the right side - the mean of martingale
 transforms.
+]
+
+Also notice that $tS^0$ is constant, so trivially $H martra tS^j = 0$ and the condition on the right
+side matters only for $j>0$. This is why in the proof in the book, instead of self-financing
+strategies, they consider predictable processes in $RR^d$ (and not $RR^(d+1)$). But I find this
+unnecessarily confusing, as we can reuse terms already established ($Adm_0$) and just point out that
+the $j$ on the right hand side can vary from 1 onwards.
 
 This phrasing renders one direction of the proof nearly trivial (or rather, a corollary of
 @martingale-characterization):
