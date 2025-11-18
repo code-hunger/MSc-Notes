@@ -811,6 +811,26 @@ _admissible_ strategies, but it is equivalent to require it from all self-financ
   )
 ]
 
+Before we present the proof, this theorem deserves a bit of discussion.
+
+#remark[
+  Now the L&L book proceeds to prove this directly. I find the presentation of the proof there far
+  from pedagogical, because they combined 4 distinct concepts in the same proof without clear
+  indication which one is used where and how they are connected:
+  + Interpreting viability in terms of only at-the-end lack of risk;
+  + Treating martingales as processes having all their increments-transforms of zero-mean;
+  + Relationship between value of self-financing strategies and martingale transforms;
+  + Separation of a convex set from a linear subspace;
+  They use all (1),(2),(4) only in the $(arrow.r.double)$ direction, and (3) only for $(arrow.l.double)$, and
+  to me that makes the easy direction's (the one that does not use convex separation) proof look mysterious.
+  But if we notice that (1) and (2) concern exclusively the left and right side of the equivalence,
+  respectively, and (3) applies to each side individually, we can apply them upfront and make the
+  proof conceptually shorter.
+
+  (1) and (2) were already discussed as propositions above, so we can readily install them in the two
+  sides of the theorem statement.
+]
+
 Applying the equivalence from @viable-by-self-financing and the characterization of martingales in @martingale-characterization, the proposition reads
 #iff(stroke: (x,y)=> if(x != 1) {.5pt}, yinset: .5em,
   [
@@ -830,11 +850,11 @@ Applying the equivalence from @viable-by-self-financing and the characterization
 #remark[
 I find this phrasing illuminating, because by @value-is-mart-transform we know that self-financing
 strategies of zero initial value, when applied on martingale prices, act like martingale transforms.
-And here on the left side we have exactly such strategies, and on the right side - the mean of martingale
-transforms.
+And here on the left side we have exactly such strategies, and on the right side - martingale
+transforms of the prices.
 ]
 
-In fact, can we rewrite the RHS in terms of portfolio value then?
+In fact, can we rewrite the right side in terms of portfolio values then?
 
 Also notice that $tS^0$ is constant, so trivially $H martra tS^j = 0$ and the condition on the right
 side matters only for $j>0$. This is why in the proof in the book, instead of self-financing
