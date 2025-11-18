@@ -626,7 +626,7 @@ In other words, the self-financing strategies restricting to a given $(phi.alt_n
 
 == Perfect hedging (attainable claims)
 
-#show sym.emptyset: set text(font: "") // makes emptyset appear the proper way, and not squished
+#show sym.emptyset: set text(font: ()) // makes emptyset appear the proper way, and not squished
 
 A *contingent claim* is a promise to pay some amount $h$ at a _maturity time_ $T$, the amount depending on the market state.
 We model it by a non-negative real random variable $h$ that is only $calF_T$-measurable, so the
