@@ -785,7 +785,8 @@ _admissible_ strategies, but it is equivalent to require it from all self-financ
   [A market is viable],
   [no strategy $phii in SelfF_0$ can provide $V_N (phii) in RR_(>=0)^Omega \\ { 0 }$.]
   )
-]
+]<viable-by-self-financing>
+
 #proof[
   The $(arrow.l.double)$ direction is trivial, just because $Adm_0 subset SelfF_0$.
 
@@ -810,10 +811,13 @@ _admissible_ strategies, but it is equivalent to require it from all self-financ
   )
 ]
 
-Writing out the definition of a viable market, and applying the characterization of martingales in @martingale-characterization, the proposition reads
+Applying the equivalence from @viable-by-self-financing and the characterization of martingales in @martingale-characterization, the proposition reads
 #iff(stroke: (x,y)=> if(x != 1) {.5pt}, yinset: .5em,
   [
-    For any $phii in Adm_0$, $ V_N (phii) = 0 $
+    #set par(justify: false)
+    For any $phii in SelfF_0$,
+
+    if $V_N (phii) >=0$, then $V_N (phii)= 0$.
   ],
   [
     #set par(justify: false)
@@ -830,6 +834,8 @@ And here on the left side we have exactly such strategies, and on the right side
 transforms.
 ]
 
+In fact, can we rewrite the RHS in terms of portfolio value then?
+
 Also notice that $tS^0$ is constant, so trivially $H martra tS^j = 0$ and the condition on the right
 side matters only for $j>0$. This is why in the proof in the book, instead of self-financing
 strategies, they consider predictable processes in $RR^d$ (and not $RR^(d+1)$). But I find this
@@ -840,40 +846,39 @@ This phrasing renders one direction of the proof nearly trivial (or rather, a co
 @martingale-characterization):
 
 #proof($(arrow.l.double)$)[
-  We assume a $PP^*$ equivalent to $PP$, take an $phi.alt in Adm_0$ and now we have to show it gives
-  no profit at the end.
+  We assume a $PP^*$ equivalent to $PP$, take an $phi.alt in SelfF_0$ and now we have to show it gives
+  no profit at the end, i.e. that $V_N>=0$ implies $V_N =0$.
 
-  $phii in Adm_0$ means two things: $phii in SelfF_0$ and $forall n: V_n (phii) >= 0$.
+  // $phii in Adm_0$ means two things: $phii in SelfF_0$ and $forall n: V_n (phii) >= 0$.
 
   1. As discussed in @value-is-mart-transform, for a $phii in SelfF_0$, the discounted portfolio
-     value is a martingale transform of the market prices, and that was assumed to vanish ($phii$ is
-     surely predictable):
-
+     value is a martingale transform of the market prices,
       $ tV_N (phii)=sum_(j=0)^d (phii^j martra tS^j)_N, $
-      so under $PP^*$ the total gain expectation vanishes:
+     and that was assumed to have zero mean ($phii$ is surely predictable), so under $PP^*$ the
+     total gain expectation vanishes:
       $ EE^*[tV_N] 
       = EE^*[sum_j (phii^j martra tS^j)_N] 
       = sum_j underbrace(EE^*[(phii^j martra tS^j)_N],0) = 0. $
-  2. The admissibility criteria $V_N (phii)>=0$, or#footnote[$V_N$ and $tV_N$ are related by a
+  2. The lack of risk at the end criteria $V_N (phii)>=0$, or#footnote[$V_N$ and $tV_N$ are related by a
      positive constant.] $tV_N (phii)>=0$, now implies $tV_N =^(PP^*) 0$, and so#footnote[the
      equivalence $PP ~ PP^*$ means that "$PP$-almost surely" is equivalent to "$PP^*$-almost
      surely"] $tV_N=^(PP)0$. Then $V_N =^(PP) 0$ as well. ]
+
+#let RRp = $RR_(>=0)$
 
 #proof($(arrow.r.double)$)[
   We are looking for a $PP^*$ equivalent to $PP$. Assuming that $calF=cal(P)(Omega)$ and
   $PP(omega)>0$ for all outcomes $omega in Omega$, we want $forall omega: PP^*(omega) > 0$ as well.
   So we're looking for a positive map $ PP^*: Omega -> RR_+,$ an element $ PP^* in RR^Omega_(>=0).$
 
-  Notice that the terminal portfolio values $V_N (phii)$ induced by the self-financing strategies $phii$ from the
-  theorem's assumption live in the same ambient space: the value of a portfolio for a strategy is a
-  map $V_N (phii): Omega -> RR$. 
+  But remember that the terminal portfolio values $V_N (phii)$ induced by the self-financing strategies from the
+  theorem's assumption#footnote[The assumption is about admissible strategies, but we showed that
+  this is equivalent to self-financing strategies.] live in the same ambient space $RR^Omega$ as $PP^*$:
+  $ V_N (SelfF_0) subset RR^Omega supset RRp^Omega in.rev PP^*, $
+  and by that, they form a subspace that, apart from 0, is disjoint#footnote[This is the assumption in the left side of the proposition] from the cone $RR_(>=0)^Omega$
+   in which the $PP^*$ we're looking for lies in.
 
-  WIP still TODO, but the rest goes something like this:
-  The set of terminal values
-  $ { V_N (phii) : phii "is self-financing", V_0 (phii)<=0 } subset RR^Omega $
-  is clearly a vector subspace of $RR^Omega$. [[it has to use $tV$ instead of $V$ but I still have to see why. I am also not yet sure if the filter $V_0 (phii)<=$ is necessary or sufficient.]]
-  It does not intersect the open convex cone above, so there exist a separating functional, and then
-a vector, that when rescaled gives the wanted probability measure.
+  WIP
 ]
 
 == Perfect hedging (attainable claims)
