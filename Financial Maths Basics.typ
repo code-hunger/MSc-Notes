@@ -945,11 +945,13 @@ This phrasing renders one direction of the proof nearly trivial:
   and by that, they form a subspace that, apart from 0, is disjoint#footnote[This is the assumption in the left side of the proposition] from the cone $RR_(>=0)^Omega$
    in which the $PP^*$ we're looking for lies in.
 
-  Now by standard separation theorem there exists a linear functional on $RR^Omega$ vanishing on
-  $V_N (SelfF_0)$ and positive on $RRp^Omega$, or --- a unit (by $||dot||_1$) vector $PP^* in RRp^Omega$ orthogonal to $V_N (SelfF_0)$.
+  Considering the wanted $PP^*$ as a vector, for any $phii$ the mean $EE^* [V_N (phii)]$ is just the
+  dot product $PP^* dot phii$. Then the required condition $EE^* [V_N (phii)] = 0$ for all $phii in
+  SelfF_0$ means just that $PP^*$ must be orthogonal to $SelfF_0$. // $PP^* perp SelfF_0$.
 
-  Thus we chose an equivalent measure $PP^*$, it remains to see if under it all $phii in SelfF_0$ satisfy $EE^* [V_N (phii)] = 0$. 
-  But the orthogonality $PP^* perp SelfF_0$ means $PP^* dot V_N (phii) = 0$, which is exactly that. 
+  Now by standard separation theorem there exists a linear functional on $RR^Omega$ vanishing on
+  $V_N (SelfF_0)$ and positive on $RRp^Omega$, or --- a unit (by $||dot||_1$) vector 
+  $PP^* in RRp^Omega$ orthogonal to $V_N (SelfF_0)$.
 ]
 
 == Perfect hedging (attainable claims)
