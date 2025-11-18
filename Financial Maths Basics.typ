@@ -368,8 +368,8 @@ Using this notion, a martingale can be characterized not only by having its _ind
 increments-means vanish, but by having (only) the final expectation of all of its predictable
 increments-transforms vanishes:
 
-#let iff(xinset: 1em, yinset: 0pt, stroke: none, left, right) = grid(
-  columns: 3, inset: (x: xinset, y: yinset), align: horizon, stroke: stroke,
+#let iff(columns: 3, xinset: 1em, yinset: 0pt, stroke: none, left, right) = grid(
+  columns: columns, inset: (x: xinset, y: yinset), align: horizon, stroke: stroke,
   left,
   [if an only if], 
   right
@@ -903,19 +903,22 @@ Before showing the other direction, a short comment:
 ]
 
 Now we can rephrase the right side of the fundamental theorem of asset pricing again:
-#iff(stroke: (x,y)=> if(x != 1) {.5pt}, yinset: .5em,
-  [
-    #set par(justify: false)
-    For any $phii in SelfF_0$,
-    if $V_N (phii) >=0$, then $V_N (phii)= 0$.
-  ],
-  [
-    #set par(justify: false)
-    there exists $PP^*$ equivalent to $PP$, s.t. for any $phii in SelfF_0$,
-    $ EE^*[V_N (phii)]=0. $
-  ]
-)
+#prop("Fundamental theorem of asset pricing, again")[
+  #iff(
+    yinset: .5em,
+    [
+      #set par(justify: false)
+      For any $phii in SelfF_0$,
 
+      if $V_N (phii) >=0$, then $V_N (phii)= 0$.
+    ],
+    [
+      #set par(justify: false)
+      there exists $PP^*$ equivalent to $PP$, s.t. for any $phii in SelfF_0$,
+      $ EE^*[tV_N (phii)]=0. $
+    ]
+  )
+]
 
 This phrasing renders one direction of the proof nearly trivial:
 
@@ -923,7 +926,7 @@ This phrasing renders one direction of the proof nearly trivial:
   We assume a $PP^*$ equivalent to $PP$, take an $phi.alt in SelfF_0$ and now we have to show it gives
   no profit at the end, i.e. that $V_N>=0$ implies $V_N =0$.
 
-  But under $PP^*$, $EE^*[V_N (phii)]=0$, and the lack of risk at the end criteria $V_N (phii)>=0$,
+  But under $PP^*$, we've assumed $EE^*[tV_N (phii)]=0$, and the lack of risk at the end criteria $V_N (phii)>=0$,
   or#footnote[$V_N$ and $tV_N$ are related by a positive constant.] $tV_N (phii)>=0$, now implies
   $tV_N =^(PP^*) 0$, and so#footnote[the equivalence $PP ~ PP^*$ means that "$PP$-almost surely" is
   equivalent to "$PP^*$-almost surely"] $tV_N=^(PP)0$. Then $V_N =^(PP) 0$ as well. 
@@ -938,20 +941,21 @@ This phrasing renders one direction of the proof nearly trivial:
   So the equivalent measures lie in $RRp^Omega$ and we're looking for a positive map $ PP^*: Omega
   -> RR_+,$ an element $PP^* in RR^Omega_(>=0).$
 
-  But remember that the terminal portfolio values $V_N (phii)$ induced by the self-financing strategies from the
+  But remember that the terminal portfolio values $tV_N (phii)$ induced by the self-financing strategies from the
   theorem's assumption#footnote[The assumption is about admissible strategies, but we showed that
   this is equivalent to self-financing strategies.] live in the same ambient space $RR^Omega$ as $PP^*$:
-  $ V_N (SelfF_0) subset RR^Omega supset RRp^Omega in.rev PP^*, $
+  $ tV_N (SelfF_0) subset RR^Omega supset RRp^Omega in.rev PP^*, $
   and by that, they form a subspace that, apart from 0, is disjoint#footnote[This is the assumption in the left side of the proposition] from the cone $RR_(>=0)^Omega$
    in which the $PP^*$ we're looking for lies in.
 
-  Considering the wanted $PP^*$ as a vector, for any $phii$ the mean $EE^* [V_N (phii)]$ is just the
-  dot product $PP^* dot phii$. Then the required condition $EE^* [V_N (phii)] = 0$ for all $phii in
-  SelfF_0$ means just that $PP^*$ must be orthogonal to $SelfF_0$. // $PP^* perp SelfF_0$.
+  Considering the wanted $PP^*$ as a vector, for any $phii$ the mean $EE^* [tV_N (phii)]$ is just the
+  dot product $PP^* dot tV_N (phii)$. Then the required condition $EE^* [tV_N (phii)] = 0$ for all $phii in
+  SelfF_0$ means just that $PP^*$ must be orthogonal to $tV_N (SelfF_0)$. // $PP^* perp SelfF_0$.
 
   Now by standard separation theorem there exists a linear functional on $RR^Omega$ vanishing on
-  $V_N (SelfF_0)$ and positive on $RRp^Omega$, or --- a unit (by $||dot||_1$) vector 
-  $PP^* in RRp^Omega$ orthogonal to $V_N (SelfF_0)$.
+  $tV_N (SelfF_0)$ and positive on $RRp^Omega$, or --- a unit (by $||dot||_1$) vector 
+  $PP^* in RRp^Omega$ orthogonal to $tV_N (SelfF_0)$. That it, there exists an equivalent to $PP$
+  probability measure under which $tV_N (phii)$ has zero mean for all $phii in SelfF_0$.
 ]
 
 == Perfect hedging (attainable claims)
