@@ -746,7 +746,7 @@ That is, an arbitrage opportunity is a
 grid(columns: 3, row-gutter: .5em, column-gutter: 1em,
   [*zero-investment*],
   [*risk-free*],
-  [*profit*.],
+  [*chance of profit*.],
   small[($V_0=0$)],
   small[($V_n >= 0$\ for _every_ $omega$ and $n$)],
   small[($V_N gt.nequiv 0$\ on a non-null set)],
@@ -754,8 +754,8 @@ grid(columns: 3, row-gutter: .5em, column-gutter: 1em,
 
 A market without arbitrage opportunities is called viable.
 
-#definition("Viable market")[
-  The market is called *viable* if every admissible strategy with $V_0 (phi.alt) = 0$ satisfies
+#definition("Viable/arbitrage-free market")[
+  The market is called *arbitrage-free* or *viable* if every admissible strategy with $V_0 (phi.alt) = 0$ satisfies
   $V_N (phi.alt) = 0$.
 
   In terms of the notation above, a market is viable if $V_N (Adm_0) = 0$.
@@ -776,9 +776,36 @@ i.e. the price of risky asset 1 equals the riskless at first but then becomes tw
 riskless one, then the constant strategy $phi.alt_n = (-1,1)$ has zero initial value and $V_n = -
 S^0_n + S^1_n = S_n^0>0$. Thus the market defined by those $S_bullet^bullet$ is not viable.
 
+A viable market was defined by a condition on the terminal portfolio value $V_N (phii) = 0$ for all
+_admissible_ strategies, but it is equivalent to require it from all self-financing strategies:
+
+#prop[
+  The risk-freeness condition ($V_n (phii) >= 0$) for arbitrage-free markets can also be required only for horizon time $N$:
+  #iff(
+  [A market is viable],
+  [no strategy $phii in SelfF_0$ can provide $V_N (phii) in RR_(>=0)^Omega \\ { 0 }$.]
+  )
+]
+#proof[
+  The $(arrow.l.double)$ direction is trivial, just because $Adm_0 subset SelfF_0$.
+
+  For $(arrow.r.double)$, assume that no $phii in Adm_0$ gives $V_N (phii) in RR_(>=0)^Omega \\ {0}$
+  and take a $phii in SelfF_0$ to show $V_N (phii) in.not RR_(>=0)^Omega \\ {0}$.
+
+  If $phii in Adm_0$, we're done; now assume $phii$ is not admissible, i.e. gives a negative portfolio
+  value $V_n (phii) < 0$ with positive probability at some time $n$.
+
+  If $n = N$, we're done; now take $n$ to be the last such one. Then the strategy $phii$ with
+  positive probability has negative value at $n<N$ and at all later times gives $V_bullet (phii) in
+  RR_(>=0)^Omega$.
+  
+  TODO 
+  // That is, $V_n (phii) = phii_n dot S_n < 0$ with positive probability but $V_(n+1) (phii) = phii_(n+1) dot S_(n+1) >= 0$ almost surely.
+]
+
 #prop("Fundamental theorem of asset pricing")[
   #iff(
-    [A market is viable],
+    [A market is arbitrage-free],
     [under some equivalent measure, the discounted price processes $tS_bullet^k, k=0,1,...$ are martingales.]
   )
 ]
