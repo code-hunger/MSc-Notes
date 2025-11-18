@@ -854,35 +854,80 @@ And here on the left side we have exactly such strategies, and on the right side
 transforms of the prices.
 ]
 
-In fact, can we rewrite the right side in terms of portfolio values then?
+In fact, can we rewrite the right side in terms of portfolio values of zero-investment
+self-financing strategies then? That is, can we say that
 
-Also notice that $tS^0$ is constant, so trivially $H martra tS^j = 0$ and the condition on the right
-side matters only for $j>0$. This is why in the proof in the book, instead of self-financing
-strategies, they consider predictable processes in $RR^d$ (and not $RR^(d+1)$). But I find this
-unnecessarily confusing, as we can reuse terms already established ($Adm_0$) and just point out that
-the $j$ on the right hand side can vary from 1 onwards.
+#prop[
+  #set par(justify: false)
+  #iff(
+    [For all predictable $H$ and each asset $j$, $ EE[(H martra tS^j)_N]=0 $],
+    [for all $phii in SelfF_0$, $ EE[tV_N (phii)]=0 $]
+  )
+]
 
-This phrasing renders one direction of the proof nearly trivial (or rather, a corollary of
-@martingale-characterization):
+#proof($(arrow.r.double)$)[
+  Assume the left side and take a $phii in SelfF_0$.
+  As discussed in @value-is-mart-transform, for a self-financing strategy, the discounted portfolio
+  value is a martingale transform of the market prices,
+  $ tV_N (phii)=sum_(j=0)^d (phii^j martra tS^j)_N, $
+  and each $(phii^j martra tS^j)_N$ was assumed to have zero mean (all $phii^j$ are surely
+  predictable), so the total gain expectation vanishes:
+  $ EE^*[tV_N] 
+  = EE^*[sum_j (phii^j martra tS^j)_N] 
+  = sum_j underbrace(EE^*[(phii^j martra tS^j)_N],0) = 0. $
+]
+
+Before showing the other direction, a short comment:
+#remark[
+  Notice that $tS^0$ is constant, so trivially $H martra tS^0 = 0$ and the condition on the left
+  side here matters only for $j>0$. This is why in the proof in the book, instead of self-financing
+  strategies, they consider predictable processes in $RR^d$ (and not $RR^(d+1)$). But I find this
+  unnecessarily confusing, as we can reuse terms already established ($Adm_0$) and just point out that
+  the $j$ on the right hand side can vary from 1 onwards.
+]
+
+#proof($(arrow.l.double)$)[
+  Take a predictable $H$ and an asset $j$,
+  we have to prove that $EE^*[(H martra tS^j)_N]=0$.
+
+  If $j=0$, we are done by the preceding remark, so now $H$ can be regarded as a strategy operating
+  only on a risky asset $j>0$.\
+  By @risky-restriction-induces-selffin we can extend $H$ to a (unique) self-financing strategy
+  $phii$ with $V_0 (phii) = 0$.
+
+  But for $phii in SelfF_0$, the portfolio value is a martingale transform of the prices, so 
+  $ tV_N (phii) = sum_i (phii^i martra tS^i)_N $
+  All sum terms except $i=j$ vanish because for $i=0$, $tS^i$ is constant; while for $i>0$ and
+  $i!=j$, $phii^j$ is zero. And $phii^j$ is just $H$, so $tV_N (phii) = (H martra S^j)_N$, but by
+  the right side that was assumed to have zero mean.
+]
+
+Now we can rephrase the right side of the fundamental theorem of asset pricing again:
+#iff(stroke: (x,y)=> if(x != 1) {.5pt}, yinset: .5em,
+  [
+    #set par(justify: false)
+    For any $phii in SelfF_0$,
+    if $V_N (phii) >=0$, then $V_N (phii)= 0$.
+  ],
+  [
+    #set par(justify: false)
+    there exists $PP^*$ equivalent to $PP$, s.t. for any $phii in SelfF_0$,
+    $ EE^*[V_N (phii)]=0. $
+  ]
+)
+
+
+This phrasing renders one direction of the proof nearly trivial:
 
 #proof($(arrow.l.double)$)[
   We assume a $PP^*$ equivalent to $PP$, take an $phi.alt in SelfF_0$ and now we have to show it gives
   no profit at the end, i.e. that $V_N>=0$ implies $V_N =0$.
 
-  // $phii in Adm_0$ means two things: $phii in SelfF_0$ and $forall n: V_n (phii) >= 0$.
-
-  1. As discussed in @value-is-mart-transform, for a $phii in SelfF_0$, the discounted portfolio
-     value is a martingale transform of the market prices,
-      $ tV_N (phii)=sum_(j=0)^d (phii^j martra tS^j)_N, $
-     and that was assumed to have zero mean ($phii$ is surely predictable), so under $PP^*$ the
-     total gain expectation vanishes:
-      $ EE^*[tV_N] 
-      = EE^*[sum_j (phii^j martra tS^j)_N] 
-      = sum_j underbrace(EE^*[(phii^j martra tS^j)_N],0) = 0. $
-  2. The lack of risk at the end criteria $V_N (phii)>=0$, or#footnote[$V_N$ and $tV_N$ are related by a
-     positive constant.] $tV_N (phii)>=0$, now implies $tV_N =^(PP^*) 0$, and so#footnote[the
-     equivalence $PP ~ PP^*$ means that "$PP$-almost surely" is equivalent to "$PP^*$-almost
-     surely"] $tV_N=^(PP)0$. Then $V_N =^(PP) 0$ as well. ]
+  But under $PP^*$, $EE^*[V_N (phii)]=0$, and the lack of risk at the end criteria $V_N (phii)>=0$,
+  or#footnote[$V_N$ and $tV_N$ are related by a positive constant.] $tV_N (phii)>=0$, now implies
+  $tV_N =^(PP^*) 0$, and so#footnote[the equivalence $PP ~ PP^*$ means that "$PP$-almost surely" is
+  equivalent to "$PP^*$-almost surely"] $tV_N=^(PP)0$. Then $V_N =^(PP) 0$ as well. 
+]
 
 #let RRp = $RR_(>=0)$
 
@@ -903,27 +948,8 @@ This phrasing renders one direction of the proof nearly trivial (or rather, a co
   Now by standard separation theorem there exists a linear functional on $RR^Omega$ vanishing on
   $V_N (SelfF_0)$ and positive on $RRp^Omega$, or --- a unit (by $||dot||_1$) vector $PP^* in RRp^Omega$ orthogonal to $V_N (SelfF_0)$.
 
-  Thus we chose an equivalent measure $PP^*$, it remains to see if under it the prices satisfy the
-  martingale condition.
-
-  Take a predictable $H$ and a risky//
-  #footnote[We already argued that the $j=0$ case is trivial.]
-  asset $j>=1$,
-  we have to prove that $EE^*[(H martra tS^j)_N]=0$.
-
-  $H$ can be regarded as a strategy operating only on the risky asset $j$.
-  But by @risky-restriction-induces-selffin we can extend it to a (unique) self-financing strategy
-  $phii$ with $V_0 (phii) = 0$. Then $phii in SelfF_0$ so the orthogonality (to $PP^*$) condition
-  applies.
-
-  Orthogonality means $PP^* dot V_N (phii) = 0$, or $EE^* [V_N (phii)] = 0$. But for self-financing
-  strategies the portfolio value is a martingale transform of the prices, so 
-  $ EE[sum_i (phii^i martra tS^i)_N] = 0. $
-
-  But the left side here is precisely $EE[ (phii^j martra tS)_N ]$, because 
-  - for $i=0$, $tS^i$ is constant;
-  - for $i>0$ and $i!=j$, $phi^j$ is zero.
-
+  Thus we chose an equivalent measure $PP^*$, it remains to see if under it all $phii in SelfF_0$ satisfy $EE^* [V_N (phii)] = 0$. 
+  But the orthogonality $PP^* perp SelfF_0$ means $PP^* dot V_N (phii) = 0$, which is exactly that. 
 ]
 
 == Perfect hedging (attainable claims)
