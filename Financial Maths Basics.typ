@@ -860,10 +860,13 @@ self-financing strategies then? That is, can we say that
 #prop[
   #set par(justify: false)
   #iff(
-    [For all predictable $H$ and each asset $j$, $ EE[(H martra tS^j)_N]=0 $],
+    [For all predictable $mark(H, tag: #<H>) #annot(<H>, [(real-valued)], pos: top)$ and each asset $j$,
+
+    $ EE[(H martra tS^j)_N]=0 $],
     [for all $phii in SelfF_0$, $ EE[tV_N (phii)]=0 $]
   )
-]
+]<value-mean-zero-when-mart-transform-mean-zero>
+(notice the similarity between the first lines on each side as well as between the second lines)
 
 #proof($(arrow.r.double)$)[
   Assume the left side and take a $phii in SelfF_0$.
@@ -957,6 +960,44 @@ This phrasing renders one direction of the proof nearly trivial:
   $PP^* in RRp^Omega$ orthogonal to $tV_N (SelfF_0)$. That it, there exists an equivalent to $PP$
   probability measure under which $tV_N (phii)$ has zero mean for all $phii in SelfF_0$.
 ]
+
+=== Summary
+We summarize the proof and the preceding rewrites of the Fundamental theorem of asset pricing (FTAP) in the
+following diagram:
+
+#align(
+  center,
+  diagram(
+    spacing: (2cm, 2em),
+    {
+      let eqqGeneric(label, label-side) = edge("d", "<->", stroke: .7pt, extrude: (-2.5,2.5), label: label, label-side: label-side)
+      let eqq(label) = eqqGeneric(label, right)
+
+      node((0,0), [The market is\ arbitrage-free])
+      eqq("By definition")
+      edge("r", extrude: (-2.5,2.5), "<->", label: "FTAP", stroke: 1pt)
+      node((0,4/3), $ forall phii in Adm_0\ V_N (phii) = 0 $)
+      eqq([@viable-by-self-financing])
+      node((0,8/3), $ forall phii in SelfF_0\ V_N (phii) >= 0 => V_N = 0 $)
+      eqq("Syntactical")
+      node((0,4), $V_N (SelfF_0) inter RRp^Omega\ ={0} $)
+      edge("r", "=>", label: "Hahn-Banach")
+
+      let eqq(label) = eqqGeneric(label, left)
+      let uu = [Under some $PP^*$ equivalent to $PP$,];
+
+      node((1,0), uu + [\ all $S^j_bullet$ are martingales.])
+      eqq([@martingale-characterization])
+      node((1,1), $ exists PP^*~PP: med forall H "predictable" forall j\ EE^*[(H martra tS^j)_N]=0 $)
+      eqq([@value-mean-zero-when-mart-transform-mean-zero])
+      node((1,2), $ exists PP^*~PP: med forall phii in SelfF_0 \ EE^*[V_N (phii)]=0 $)
+      eqq("Syntactical")
+      edge((1,2), (0,8/3), "=>", label: [Measure-theoretic], label-sep: 7pt, label-angle: 0deg, bend: -13deg)
+      node((1,3), $ exists PP^*~PP: med forall phii in SelfF_0\ PP^* dot V_N (phii) = 0 $)
+      eqq("Syntactical")
+      node((1,4), $ exists PP^*~PP:\ med PP^* perp V_N (SelfF_0) $)
+    })
+)
 
 == Perfect hedging (attainable claims)
 
