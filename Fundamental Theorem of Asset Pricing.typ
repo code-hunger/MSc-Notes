@@ -76,15 +76,15 @@ RR^Omega$. Now we can consider how the dependence on $phii$ looks like:
   For any $n$, the operator $V_n (phii) = phii_n dot S_n$ is linear in $phii$. Its signature is
   $ V_n : Strat -> RR^Omega $
 
-  Then the images of $Strat$and $SelfF$ are linear subspaces of $RR^Omega$:
+  Then the images of $Strat$ and $SelfF$ are linear subspaces of $RR^Omega$:
   $ V_n (SelfF) subset V_n (Strat) subset RR^Omega. $
   #text(size:8pt)[(the last inclusion might actually be an equality, TODO check)]
 ]
 
 We will talk about strategies of zero initial capital, so it is useful to have
 #notation[
-  For the above defined sets of strategies, denote the subset of those strategies that satisfy $V_0
-  (phii)=0$ by a subscript 0: $SelfF_0, Strat_0$.\
+  Denote the subsets of the above strategy spaces of those strategies that satisfy $V_0 (phii)=0$ by
+  a superscript 0: $SelfF^0, Strat^0$.\
   Clearly they form subspaces of the respective spaces.
 ]
 
@@ -101,7 +101,7 @@ We will talk about strategies of zero initial capital, so it is useful to have
 
   Its image under $V_n$ is then a cone $V_n (Adm) subset V_n (SelfF) inter RR_+^Omega$.
 
-  Like above, denote the set of zero initial capital admissible strategies by $Adm_0$.
+  Like above, denote the set of zero initial capital admissible strategies by $Adm^0$.
 ]
 
 Thus we get the following chain of strategy classes (here $N$ is either a finite number or equals $NN$, and $<=$ means $subset$ but for subspaces):
@@ -125,13 +125,13 @@ Thus we get the following chain of strategy classes (here $N$ is either a finite
 
     node((4,1), $RR^(N times Omega) ,$)
 
-    node((1, 2), $Adm_0$)
+    node((1, 2), $Adm^0$)
     dedge("r")
     dedge("uu", sym: $subset$)
-    node((2, 2), $SelfF_0$)
+    node((2, 2), $SelfF^0$)
     dedge("r")
     dedge("uu")
-    node((3, 2), $Strat_0$)
+    node((3, 2), $Strat^0$)
     dedge("uu")
     dedge("ur")
   })
@@ -158,13 +158,13 @@ and for each $n <= N$, the corresponding chain of images under $V_n : RR^(N time
 
     node((4,1), $RR^Omega .$)
 
-    node((1, 2), $V_n (Adm_0)$)
+    node((1, 2), $V_n (Adm^0)$)
     dedge("r")
     dedge("uu", sym: $subset$)
-    node((2, 2), $V_n (SelfF_0)$)
+    node((2, 2), $V_n (SelfF^0)$)
     dedge("r")
     dedge("uu")
-    node((3, 2), $V_n (Strat_0)$)
+    node((3, 2), $V_n (Strat^0)$)
     dedge("uu")
     dedge("ur")
   })
@@ -193,7 +193,7 @@ A market without arbitrage opportunities is called viable.
   The market is called *arbitrage-free* or *viable* if every admissible strategy with $V_0 (phi.alt) = 0$ satisfies
   $V_N (phi.alt) = 0$.
 
-  In terms of the notation above, a market is viable if $V_N (Adm_0) = 0$.
+  In terms of the notation above, a market is viable if $V_N (Adm^0) = 0$.
 
   Spelled out fully, the market is viable if for all self-financing $phii$,\
   #align(center)[
@@ -218,17 +218,17 @@ _admissible_ strategies, but it is equivalent to require it from all self-financ
   The risk-freeness condition ($V_n (phii) >= 0$) for arbitrage-free markets can also be required only for horizon time $N$:
   #iff(
   [A market is viable],
-  [no strategy $phii in SelfF_0$ can provide $V_N (phii) in RR_(>=0)^Omega \\ { 0 }$.]
+  [no strategy $phii in SelfF^0$ can provide $V_N (phii) in RR_(>=0)^Omega \\ { 0 }$.]
   )
 ]<viable-by-self-financing>
 
 #proof[
-  The $(arrow.l.double)$ direction is trivial, just because $Adm_0 subset SelfF_0$.
+  The $(arrow.l.double)$ direction is trivial, just because $Adm^0 subset SelfF^0$.
 
-  For $(arrow.r.double)$, assume that no $phii in Adm_0$ gives $V_N (phii) in RR_(>=0)^Omega \\ {0}$
-  and take a $phii in SelfF_0$ to show $V_N (phii) in.not RR_(>=0)^Omega \\ {0}$.
+  For $(arrow.r.double)$, assume that no $phii in Adm^0$ gives $V_N (phii) in RR_(>=0)^Omega \\ {0}$
+  and take a $phii in SelfF^0$ to show $V_N (phii) in.not RR_(>=0)^Omega \\ {0}$.
 
-  If $phii in Adm_0$, we're done; now assume $phii$ is not admissible, i.e. gives a negative portfolio
+  If $phii in Adm^0$, we're done; now assume $phii$ is not admissible, i.e. gives a negative portfolio
   value $V_n (phii) < 0$ with positive probability at some time $n$.
 
   If $n = N$, we're done; now take $n$ to be the last such one. Then the strategy $phii$ with
@@ -239,6 +239,7 @@ _admissible_ strategies, but it is equivalent to require it from all self-financ
   // That is, $V_n (phii) = phii_n dot S_n < 0$ with positive probability but $V_(n+1) (phii) = phii_(n+1) dot S_(n+1) >= 0$ almost surely.
 ]
 
+=== Fundamental theorem of asset pricing
 #prop("Fundamental theorem of asset pricing")[
   #iff(
     [A market is arbitrage-free],
@@ -270,7 +271,7 @@ Applying the equivalence from @viable-by-self-financing and the characterization
 #iff(stroke: (x,y)=> if(x != 1) {.5pt}, yinset: .5em,
   [
     #set par(justify: false)
-    For any $phii in SelfF_0$,
+    For any $phii in SelfF^0$,
 
     if $V_N (phii) >=0$, then $V_N (phii)= 0$.
   ],
@@ -297,16 +298,17 @@ self-financing strategies then? That is, can we say that
   #iff(
     [
       #import "@preview/mannot:0.3.0": mark, annot
-      For all predictable $mark(H, tag: #<H>) #annot(<H>, [(real-valued)], pos: top)$ and each asset $j$,
-
-    $ EE[(H martra tS^j)_N]=0 $],
-    [for all $phii in SelfF_0$, $ EE[tV_N (phii)]=0 $]
+      For all predictable $mark(H, tag: #<H>) #annot(<H>, [($RR$-valued)], pos: top)$ and each
+      $mark(j, tag:#<j>) #annot(<j>, "(asset)", pos: top)$,
+      $ EE[(H martra tS^j)_N]=0 $
+    ],
+    [for all $phii in SelfF^0$, $ EE[tV_N (phii)]=0 $]
   )
 ]<value-mean-zero-when-mart-transform-mean-zero>
 (notice the similarity between the first lines on each side as well as between the second lines)
 
 #proof($(arrow.r.double)$)[
-  Assume the left side and take a $phii in SelfF_0$.
+  Assume the left side and take a $phii in SelfF^0$.
   As discussed in @value-is-mart-transform, for a self-financing strategy, the discounted portfolio
   value is a martingale transform of the market prices,
   $ tV_N (phii)=sum_(j=0)^d (phii^j martra tS^j)_N, $
@@ -322,7 +324,7 @@ Before showing the other direction, a short comment:
   Notice that $tS^0$ is constant, so trivially $H martra tS^0 = 0$ and the condition on the left
   side here matters only for $j>0$. This is why in the proof in the book, instead of self-financing
   strategies, they consider predictable processes in $RR^d$ (and not $RR^(d+1)$). But I find this
-  unnecessarily confusing, as we can reuse terms already established ($Adm_0$) and just point out that
+  unnecessarily confusing, as we can reuse terms already established ($Adm^0$) and just point out that
   the $j$ on the right hand side can vary from 1 onwards.
 ]
 
@@ -335,7 +337,7 @@ Before showing the other direction, a short comment:
   By @risky-restriction-induces-selffin we can extend $H$ to a (unique) self-financing strategy
   $phii$ with $V_0 (phii) = 0$.
 
-  But for $phii in SelfF_0$, the portfolio value is a martingale transform of the prices, so 
+  But for $phii in SelfF^0$, the portfolio value is a martingale transform of the prices, so 
   $ tV_N (phii) = sum_i (phii^i martra tS^i)_N $
   All sum terms except $i=j$ vanish because for $i=0$, $tS^i$ is constant; while for $i>0$ and
   $i!=j$, $phii^j$ is zero. And $phii^j$ is just $H$, so $tV_N (phii) = (H martra S^j)_N$, but by
@@ -348,13 +350,13 @@ Now we can rephrase the right side of the fundamental theorem of asset pricing a
     yinset: .5em,
     [
       #set par(justify: false)
-      For any $phii in SelfF_0$,
+      For any $phii in SelfF^0$,
 
       if $V_N (phii) >=0$, then $V_N (phii)= 0$.
     ],
     [
       #set par(justify: false)
-      there exists $PP^*$ equivalent to $PP$, s.t. for any $phii in SelfF_0$,
+      there exists $PP^*$ equivalent to $PP$, s.t. for any $phii in SelfF^0$,
       $ EE^*[tV_N (phii)]=0. $
     ]
   )
@@ -363,7 +365,7 @@ Now we can rephrase the right side of the fundamental theorem of asset pricing a
 This phrasing renders one direction of the proof nearly trivial:
 
 #proof($(arrow.l.double)$)[
-  We assume a $PP^*$ equivalent to $PP$, take an $phi.alt in SelfF_0$ and now we have to show it gives
+  We assume a $PP^*$ equivalent to $PP$, take an $phi.alt in SelfF^0$ and now we have to show it gives
   no profit at the end, i.e. that $V_N>=0$ implies $V_N =0$.
 
   But under $PP^*$, we've assumed $EE^*[tV_N (phii)]=0$, and the lack of risk at the end criteria $V_N (phii)>=0$,
@@ -384,18 +386,18 @@ This phrasing renders one direction of the proof nearly trivial:
   But remember that the terminal portfolio values $tV_N (phii)$ induced by the self-financing strategies from the
   theorem's assumption#footnote[The assumption is about admissible strategies, but we showed that
   this is equivalent to self-financing strategies.] live in the same ambient space $RR^Omega$ as $PP^*$:
-  $ tV_N (SelfF_0) subset RR^Omega supset RRp^Omega in.rev PP^*, $
+  $ tV_N (SelfF^0) subset RR^Omega supset RRp^Omega in.rev PP^*, $
   and by that, they form a subspace that, apart from 0, is disjoint#footnote[This is the assumption in the left side of the proposition] from the cone $RR_(>=0)^Omega$
    in which the $PP^*$ we're looking for lies in.
 
   Considering the wanted $PP^*$ as a vector, for any $phii$ the mean $EE^* [tV_N (phii)]$ is just the
   dot product $PP^* dot tV_N (phii)$. Then the required condition $EE^* [tV_N (phii)] = 0$ for all $phii in
-  SelfF_0$ means just that $PP^*$ must be orthogonal to $tV_N (SelfF_0)$. // $PP^* perp SelfF_0$.
+  SelfF^0$ means just that $PP^*$ must be orthogonal to $tV_N (SelfF^0)$. // $PP^* perp SelfF^0$.
 
   Now by standard separation theorem there exists a linear functional on $RR^Omega$ vanishing on
-  $tV_N (SelfF_0)$ and positive on $RRp^Omega$, or --- a unit (by $||dot||_1$) vector 
-  $PP^* in RRp^Omega$ orthogonal to $tV_N (SelfF_0)$. That it, there exists an equivalent to $PP$
-  probability measure under which $tV_N (phii)$ has zero mean for all $phii in SelfF_0$.
+  $tV_N (SelfF^0)$ and positive on $RRp^Omega$, or --- a unit (by $||dot||_1$) vector 
+  $PP^* in RRp^Omega$ orthogonal to $tV_N (SelfF^0)$. That it, there exists an equivalent to $PP$
+  probability measure under which $tV_N (phii)$ has zero mean for all $phii in SelfF^0$.
 ]
 
 === Summary
@@ -413,11 +415,11 @@ following diagram:
       node((0,0), [The market is\ arbitrage-free])
       eqq("By definition")
       edge("r", extrude: (-2.5,2.5), "<->", label: "FTAP", stroke: 1pt)
-      node((0,4/3), $ forall phii in Adm_0\ V_N (phii) = 0 $)
+      node((0,4/3), $ forall phii in Adm^0\ V_N (phii) = 0 $)
       eqq([@viable-by-self-financing])
-      node((0,8/3), $ forall phii in SelfF_0\ V_N (phii) >= 0 => V_N = 0 $)
+      node((0,8/3), $ forall phii in SelfF^0\ V_N (phii) >= 0 => V_N = 0 $)
       eqq("Syntactical")
-      node((0,4), $V_N (SelfF_0) inter RRp^Omega\ ={0} $)
+      node((0,4), $V_N (SelfF^0) inter RRp^Omega\ ={0} $)
       edge("r", "=>", label: "Hahn-Banach")
 
       let eqq(label) = eqqGeneric(label, left)
@@ -427,11 +429,11 @@ following diagram:
       eqq([@martingale-characterization])
       node((1,1), $ exists PP^*~PP: med forall H "predictable" forall j\ EE^*[(H martra tS^j)_N]=0 $)
       eqq([@value-mean-zero-when-mart-transform-mean-zero])
-      node((1,2), $ exists PP^*~PP: med forall phii in SelfF_0 \ EE^*[V_N (phii)]=0 $)
+      node((1,2), $ exists PP^*~PP: med forall phii in SelfF^0 \ EE^*[V_N (phii)]=0 $)
       eqq("Syntactical")
       edge((1,2), (0,8/3), "=>", label: [Measure-theoretic], label-sep: 7pt, label-angle: 0deg, bend: -13deg)
-      node((1,3), $ exists PP^*~PP: med forall phii in SelfF_0\ PP^* dot V_N (phii) = 0 $)
+      node((1,3), $ exists PP^*~PP: med forall phii in SelfF^0\ PP^* dot V_N (phii) = 0 $)
       eqq("Syntactical")
-      node((1,4), $ exists PP^*~PP:\ med PP^* perp V_N (SelfF_0) $)
+      node((1,4), $ exists PP^*~PP:\ med PP^* perp V_N (SelfF^0) $)
     })
 )
