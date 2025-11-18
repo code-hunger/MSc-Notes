@@ -26,17 +26,7 @@
   right
 )
 
-#let passes = state("passes", false)
-#let standalone = state("standalone", none)
-
-#context if not passes.get() {
-  passes.update(true)
-  standalone.update(query(<value-is-mart-transform>).len() < 2)
-}
-
-#context if standalone.get() == none [
-  First pass.
-] else if standalone.get() [
+#context if query(selector(<value-is-mart-transform>).before(here())) == () [
   Let us recall a few propositions from the main _Financial Maths Basics.pdf_ notes:
 
   #remark[
