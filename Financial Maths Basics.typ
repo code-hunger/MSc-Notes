@@ -598,7 +598,7 @@ into $phi.alt_n^0$, i.e. if we invest (borrow) the surplus (shortage) of sells-m
   $ (bold(phi.alt_n^0), phi.alt_n^1, ..., phi.alt_n^d) wide "for " n=0,1,... $
   for any choice of an initial value $V_0(phi.alt) in RR$ (or a choice of any of $phi.alt_n^0$ for
   $n>=0$).
-]
+]<risky-restriction-induces-selffin>
 
 In other words, the self-financing strategies restricting to a given $(phi.alt_n^1, ..., phi.alt_n^d)_n$ are a one-parameter family indexed by $V_0$.
 
@@ -868,8 +868,10 @@ This phrasing renders one direction of the proof nearly trivial (or rather, a co
 
 #proof($(arrow.r.double)$)[
   We are looking for a $PP^*$ equivalent to $PP$. Assuming that $calF=cal(P)(Omega)$ and
-  $PP(omega)>0$ for all outcomes $omega in Omega$, we want $forall omega: PP^*(omega) > 0$ as well.
-  So we're looking for a positive map $ PP^*: Omega -> RR_+,$ an element $ PP^* in RR^Omega_(>=0).$
+  $PP(omega)>0$ for all outcomes $omega in Omega$, equivalence with $PP$ means $forall omega: PP^*(omega) > 0$ as well.
+
+  So the equivalent measures lie in $RRp^Omega$ and we're looking for a positive map $ PP^*: Omega
+  -> RR_+,$ an element $PP^* in RR^Omega_(>=0).$
 
   But remember that the terminal portfolio values $V_N (phii)$ induced by the self-financing strategies from the
   theorem's assumption#footnote[The assumption is about admissible strategies, but we showed that
@@ -878,7 +880,30 @@ This phrasing renders one direction of the proof nearly trivial (or rather, a co
   and by that, they form a subspace that, apart from 0, is disjoint#footnote[This is the assumption in the left side of the proposition] from the cone $RR_(>=0)^Omega$
    in which the $PP^*$ we're looking for lies in.
 
-  WIP
+  Now by standard separation theorem there exists a linear functional on $RR^Omega$ vanishing on
+  $V_N (SelfF_0)$ and positive on $RRp^Omega$, or --- a unit (by $||dot||_1$) vector $PP^* in RRp^Omega$ orthogonal to $V_N (SelfF_0)$.
+
+  Thus we chose an equivalent measure $PP^*$, it remains to see if under it the prices satisfy the
+  martingale condition.
+
+  Take a predictable $H$ and a risky//
+  #footnote[We already argued that the $j=0$ case is trivial.]
+  asset $j>=1$,
+  we have to prove that $EE^*[(H martra tS^j)_N]=0$.
+
+  $H$ can be regarded as a strategy operating only on the risky asset $j$.
+  But by @risky-restriction-induces-selffin we can extend it to a (unique) self-financing strategy
+  $phii$ with $V_0 (phii) = 0$. Then $phii in SelfF_0$ so the orthogonality (to $PP^*$) condition
+  applies.
+
+  Orthogonality means $PP^* dot V_N (phii) = 0$, or $EE^* [V_N (phii)] = 0$. But for self-financing
+  strategies the portfolio value is a martingale transform of the prices, so 
+  $ EE[sum_i (phii^i martra tS^i)_N] = 0. $
+
+  But the left side here is precisely $EE[ (phii^j martra tS)_N ]$, because 
+  - for $i=0$, $tS^i$ is constant;
+  - for $i>0$ and $i!=j$, $phi^j$ is zero.
+
 ]
 
 == Perfect hedging (attainable claims)
