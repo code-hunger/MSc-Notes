@@ -47,9 +47,9 @@ Such a set of runs $A$, that we can know if $omega$ lies in, is called _an event
     content((0.4,2), $X(omega)$)
     circle(xo, radius: 1pt, fill: black)
 
-    content((5.3, 1.5), [
-      When we observe $e=X(omega) in E$,\
-      we know that $A=X^(-1)(e)$ happened,\
+    content((4, 1.5), [
+      When we observe\ $e=X(omega) in E$,\
+      we know that\ $A=X^(-1)(e)$ happened,\
       but not which $omega$ exactly.
     ])
     bezier-through((.8,.5), (1,1), xo, stroke: .5pt, mark: (end: (symbol: "stealth")))
