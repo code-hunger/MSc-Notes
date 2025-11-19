@@ -466,3 +466,21 @@ following diagram:
       edge((1,5), "l", "=>", label: [Measure-theoretic], label-sep: 7pt, label-angle: 0deg, shift: 3pt, label-side: left)
     })
 )
+
+=== Example for $|Omega|=2$
+
+The Fundamental theorem of asset pricing is essentially a statement about the space $RR^Omega$, in
+which portfolio terminal values lie. $RR^Omega$ is the space of all possible random choices for a random real number.
+
+That space is $|Omega|$-dimensional, so we can visualise graphically it when the probability space
+is as simple as $Omega = {omega_1, omega_2}$, i.e. there are only two possible outcomes. 
+
+// Then each strategy's portfolio value at time 1, $V_1 (phii)$, can take at most two values.
+An arbitrage strategy will have its portfolio value lie in the first quadrant of $RR^{omega_1,
+omega_2}$ (that is, ${(x,y): x>=0, y>=0}$), so that in no case of the two outcomes it induces a loss.
+
+Equivalently, a no-arbitrage self-financing strategy of zero-investment will have its final
+portfolio value _outside_ of that quadrant, so for a viable market all terminal values of $SelfF^0$
+form a line through the origin that does not enter the first quadrant. Then that line induces a
+unit normal lying in that quadrant so gives positive probabilities to both outcomes (i.e. is
+an equivalent probability measure).
