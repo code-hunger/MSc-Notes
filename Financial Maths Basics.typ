@@ -608,10 +608,16 @@ In other words, the self-financing strategies restricting to a given $(phi.alt_n
   Any strategy $phi.alt_bullet$ that (on the risky assets) restricts to this process is determined
   by the choices of bank account amounts $phi_bullet^0$.
 
-  The self-financing condition $Delta phi.alt_n dot S_n = 0$ imposes a restriction on
+  The self-financing condition $phi.alt_n dot S_n = phii_(n+1) dot S_n$ imposes a restriction on
   $phi_bullet^0$, though, and reads 
   $
-  underbrace((phi.alt_(n+1)^0 - phi.alt_n^0)) dot S_n^0 + sum_(i=1)^d (phi.alt_1^i - phi.alt_n^i) dot S_n^i = 0 wide "for all" n=0,1,... .
+  underbrace((phi.alt_(n+1)^0 - phi.alt_n^0)) dot S_n^0 + sum_(i=1)^d (phi.alt_(n+1)^i - phi.alt_n^i) dot S_n^i = 0 wide "for all" n=0,1,... ,
+  $
+  or 
+  $ 
+    phii_(n+1)^0 
+  = 1 / S_n^0 (phii_n^0     dot S_n^0 - sum_(i=1)^d ( phii_(n+1)^i - phii_n^i )     dot S_n^i )
+      wide "for all" n=0,1,... .
   $
 
   Here a choice of any element of the sequence $phi.alt_bullet^0$ determines the rest, so the self-financing
@@ -622,7 +628,27 @@ In other words, the self-financing strategies restricting to a given $(phi.alt_n
   we can also consider this parameter to be $V_0$.
 ]
 
+#let Strat = $sans("Strategy")$
+#let SelfF = $sans("SelfFinancing")$
+
+#remark("Own thoughts, must verify!")[
+  The above proposition establishes something like an affine isomorphism
+  $ Strat_d times RR tilde.equiv SelfF_(1+d) $
+  where the $d$ and $d+1$ subscripts denote the number of assets the space considers.
+
+  #let codim=$op("codim")$
+  This allows us to compute $dim(SelfF_d)=dim(RR^(d times N times Omega) times RR) = 1 + d times N times Omega $
+  and so 
+  $ codim(SelfF_(1+d)) &= dim(Strat_d)                &&- dim(SelfF_(1+d))\
+                       &= ( 1+d ) times N times Omega &&- ( d times N times Omega +1)\
+                       &= N times Omega - 1. $
+  But that sounds too untrustworthy. Must double check.
+]
+#pagebreak()
+
 #include "Fundamental Theorem of Asset Pricing.typ"
+
+#pagebreak()
 
 == Perfect hedging (attainable claims)
 
