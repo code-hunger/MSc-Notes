@@ -429,43 +429,46 @@ Now _that_ phrasing should be geometrically quite clear.
 ]
 
 === Summary
-We summarize the proof and the preceding rewrites of the Fundamental theorem of asset pricing (FTAP) in the
-following diagram:
+We summarize the proof and the preceding rewrites of the Fundamental theorem of asset pricing (FTAP).
 
-#align(
-  center,
-  diagram(
-    spacing: (2cm, 2em),
-    {
-      let eqq(to, label) = edge((0,to/3), "<->", stroke: .7pt, extrude: (-2.5,2.5), label: label, label-side: right)
+#prop("Fundamental theorem of asset pricing")[
+  For a market defined by the $RR^(1+d)$-valued process $S_bullet$, the following equivalences hold:
 
-      node((0,0), [The market is\ arbitrage-free])
-      eqq(5, "By definition")
-      edge("r", extrude: (-2.5,2.5), "<->", label: "FTAP", stroke: 1pt)
-      node((0,5/3), $ forall phii in Adm^0\ V_N (phii) = 0 $)
-      eqq(10, [@viable-by-self-financing])
-      node((0,10/3), $ forall phii in SelfF^0\ V_N (phii) >= 0 => V_N = 0 $)
-      eqq(15, "Syntactical")
-      node((0,5), $V_N (SelfF^0) inter RRp^Omega\ ={0} $)
-      edge("r", "=>",shift: 3pt, label: "Hahn-Banach")
+  #align(
+    center,
+    diagram(
+      spacing: (2cm, 2em),
+      {
+        let eqq(to, label) = edge((0,to/3), "<->", stroke: .7pt, extrude: (-2.5,2.5), label: label, label-side: right)
 
-      let eqq(label) = edge("d", "<->", stroke: .7pt, extrude: (-2.5,2.5), label: label, label-side: left)
-      let uu = [Under some $PP^*$ equivalent to $PP$,];
+        node((0,0), [The market is\ arbitrage-free])
+        eqq(5, "By definition")
+        edge("r", extrude: (-2.5,2.5), "<->", label: "FTAP", stroke: 1pt)
+        node((0,5/3), $ forall phii in Adm^0\ V_N (phii) = 0 $)
+        eqq(10, [@viable-by-self-financing])
+        node((0,10/3), $ forall phii in SelfF^0\ V_N (phii) >= 0 => V_N = 0 $)
+        eqq(15, "Syntactical")
+        node((0,5), $V_N (SelfF^0) inter RRp^Omega\ ={0} $)
+        edge("r", "=>",shift: 3pt, label: "Hahn-Banach")
 
-      node((1,0), uu + [\ all $S^j_bullet$ are martingales.])
-      eqq([@martingale-characterization])
-      node((1,1), $ exists PP^*~PP: med forall H "predictable" forall j\ EE^*[(H martra tS^j)_N]=0 $)
-      eqq([@value-mean-zero-when-mart-transform-mean-zero])
-      node((1,2), $ exists PP^*~PP: forall phii in SelfF^0:\ sum_j EE^*[phii^j martra tS^j]=0 $)
-      eqq([@predict-mean-zero-when-selff-mean-zero])
-      node((1,3), $ exists PP^*~PP: med forall phii in SelfF^0 \ EE^*[V_N (phii)]=0 $)
-      eqq([@geometric-remark])
-      node((1,4), $ exists PP^*~PP: med forall phii in SelfF^0\ PP^* dot V_N (phii) = 0 $)
-      eqq("Syntactical")
-      node((1,5), $ exists PP^*~PP:\ med PP^* perp V_N (SelfF^0) $)
-      edge((1,5), "l", "=>", label: [Measure-theoretic], label-sep: 7pt, label-angle: 0deg, shift: 3pt, label-side: left)
-    })
-)
+        let eqq(label) = edge("d", "<->", stroke: .7pt, extrude: (-2.5,2.5), label: label, label-side: left)
+        let uu = [Under some $PP^*$ equivalent to $PP$,];
+
+        node((1,0), uu + [\ all $tS^j_bullet$ are martingales.])
+        eqq([@martingale-characterization])
+        node((1,1), $ exists PP^*~PP: med forall H "predictable" forall j\ EE^*[(H martra tS^j)_N]=0 $)
+        eqq([@value-mean-zero-when-mart-transform-mean-zero])
+        node((1,2), $ exists PP^*~PP: forall phii in SelfF^0:\ sum_j EE^*[phii^j martra tS^j]=0 $)
+        eqq([@predict-mean-zero-when-selff-mean-zero])
+        node((1,3), $ exists PP^*~PP: med forall phii in SelfF^0 \ EE^*[V_N (phii)]=0 $)
+        eqq([@geometric-remark])
+        node((1,4), $ exists PP^*~PP: med forall phii in SelfF^0\ PP^* dot V_N (phii) = 0 $)
+        eqq("Syntactical")
+        node((1,5), $ exists PP^*~PP:\ med PP^* perp V_N (SelfF^0) $)
+        edge((1,5), "l", "=>", label: [Measure-theoretic], label-sep: 7pt, label-angle: 0deg, shift: 3pt, label-side: left)
+      })
+    )
+  ]
 
 === Example for $|Omega|=2$
 
