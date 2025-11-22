@@ -358,7 +358,7 @@ Here again $Delta X_i$ denotes the "backwards" increment, $Delta X_(i+1)=X_(i+1)
 Now it is natural to ask, what happens if we scale the increments of a martingale, i.e. multiply
 each term in the above sum by some factor.
 
-#let martra = $dot.circle$
+#let martra = $triangle.filled.small.r$
 
 #definition("Martingale transform")[
   For an $calF_bullet$-adapted $X_bullet$ and a predictable $H_bullet$, the martingale
