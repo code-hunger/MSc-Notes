@@ -419,7 +419,7 @@ the equivalence $PP^*~PP$ means $forall omega: PP^*(omega) > 0$ as well. A mere 
 observation should now make the statement almost obvious:
 
 #remark[
-  Considering the object $PP^*$ as a vector in $RR^Omega$, for any $phii$ the mean $EE^* [tV_N
+  Considering the object $PP^*$ as a vector in $RR^Omega$ (only works when $calF=cal(P)(Omega)$), for any $phii$ the mean $EE^* [tV_N
   (phii)]$ is just the dot product $PP^* dot tV_N (phii)$. 
   Then the condition $EE^* [tV_N (phii)] = 0$ for all $phii in SelfF^0$ means just that
   $PP^*$ must be orthogonal to $tV_N (SelfF^0)$. // $PP^* perp SelfF^0$.
