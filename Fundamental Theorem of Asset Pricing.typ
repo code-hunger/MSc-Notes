@@ -195,7 +195,17 @@ and for each $n <= N$, the corresponding chain of images under $V_n : RR^(N time
   })
 )
 
-We fix an $N in NN$, called the _horizon_. All indices $n,i,j,k$ below vary between 0 and $N$.
+#line(length: 100%)
+
+#block(stroke: 1pt + teal, inset: 1em, width: 100%, align(center)[
+  *Horizon:* From here on, we fix an $N in NN$, called the (time) _horizon_.
+])
+
+#remark[
+All indices $n,i$ below are reserved for time and vary between 0 and $N$.
+
+$j$ is reserved for assets and varies between 0 and $1+d$.
+]
 
 #let cbox(c) = box(align(center, c))
 #let small(c) = text(size: 9pt, c)
