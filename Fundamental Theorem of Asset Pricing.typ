@@ -91,19 +91,20 @@ We will talk about strategies of zero initial capital, so it is useful to have
   Clearly they form subspaces of the respective spaces.
 ]
 
-These terms allow us to reformulate @risky-restriction-induces-selffin in a clearer way:
+These terms allow us to reformulate @risky-restriction-induces-selffin in a clearer way.
+For any $phii = (phii^0,phii^1,...,phii^d) in Strat$, denote by $underline(phii)$ the risky part of $phii$, $underline(phii) := (phii^1,...,phii^d)$.
+Then the projection $ Strat_(1+d) &-> Strat_d \ phii &mapsto underline(phii) $ is a linear map, where the $d$ and $d+1$ subscripts denote the number of assets the space considers.
 
 #remark[
-  For any $phii = (phii^0,phii^1,...,phii^d) in Strat$, denote by $underline(phii)$ the risky part of $phii$, $underline(phii) := (phii^1,...,phii^d)$.
-  Then the projection $ Strat_(1+d) &-> Strat_d \ phii &mapsto underline(phii) $ is a linear map, where the $d$ and $d+1$ subscripts denote the number of assets the space considers.
-
   @risky-restriction-induces-selffin establishes that the linear map
   $
   SelfF_(1+d) &tilde.equiv Strat_d times RR \
   phii &mapsto (underline(phii), V_0 (phii))
   $
   is in fact an isomorphism.
+]
 
+#remark[
   #let codim=$op("codim")$
   This allows us to compute $dim(SelfF_d)=dim(RR^(d times (1+N) times Omega) times RR) = 1 + d times (1+N) times Omega $
   and so
