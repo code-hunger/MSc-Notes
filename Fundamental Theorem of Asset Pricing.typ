@@ -60,6 +60,7 @@
 #let Strat = $sans("Strategy")$
 #let SelfF = $sans("SelfFinancing")$
 #let Adm = $sans("Admissible")$
+
 #remark[
   The set of strategies on $Omega$ clearly forms a vector space under pointwise addition and scalar-multiplication, denote it #Strat.\
 
@@ -88,6 +89,27 @@ We will talk about strategies of zero initial capital, so it is useful to have
   Denote the subsets of the above strategy spaces of those strategies that satisfy $V_0 (phii)=0$ by
   a superscript 0: $SelfF^0, Strat^0$.\
   Clearly they form subspaces of the respective spaces.
+]
+
+These terms allow us to reformulate @risky-restriction-induces-selffin in a clearer way:
+
+#remark[
+  For any $phii = (phii^0,phii^1,...,phii^d) in Strat$, denote by $underline(phii)$ the risky part of $phii$, $underline(phii) := (phii^1,...,phii^d)$.
+  Then the projection $ Strat_(1+d) &-> Strat_d \ phii &mapsto underline(phii) $ is a linear map, where the $d$ and $d+1$ subscripts denote the number of assets the space considers.
+
+  @risky-restriction-induces-selffin establishes that the linear map
+  $
+  SelfF_(1+d) &tilde.equiv Strat_d times RR \
+  phii &mapsto (underline(phii), V_0 (phii))
+  $
+  is in fact an isomorphism.
+
+  #let codim=$op("codim")$
+  This allows us to compute $dim(SelfF_d)=dim(RR^(d times (1+N) times Omega) times RR) = 1 + d times (1+N) times Omega $
+  and so
+  $ codim(SelfF_(1+d)) &= dim(Strat_d)                &&- dim(SelfF_(1+d))\
+                       &= ( 1+d ) times (1+N) times Omega &&- ( d times (1+N) times Omega +1)\
+                       &= (1+N) times Omega - 1. $
 ]
 
 == Arbitrage

@@ -630,24 +630,6 @@ In other words, the self-financing strategies restricting to a given $(phi.alt_n
   we can also consider this parameter to be $V_0$.
 ]
 
-#let Strat = $sans("Strategy")$
-#let SelfF = $sans("SelfFinancing")$
-
-#remark("Own thoughts, must verify!")[
-  The above proposition establishes something like an affine isomorphism
-  $ Strat_d times RR tilde.equiv SelfF_(1+d) $
-  where the $d$ and $d+1$ subscripts denote the number of assets the space considers.
-
-  #let codim=$op("codim")$
-  This allows us to compute $dim(SelfF_d)=dim(RR^(d times N times Omega) times RR) = 1 + d times N times Omega $
-  and so 
-  $ codim(SelfF_(1+d)) &= dim(Strat_d)                &&- dim(SelfF_(1+d))\
-                       &= ( 1+d ) times N times Omega &&- ( d times N times Omega +1)\
-                       &= N times Omega - 1. $
-  But that sounds too untrustworthy. Must double check.
-]
-#pagebreak()
-
 #include "Fundamental Theorem of Asset Pricing.typ"
 
 #pagebreak()
