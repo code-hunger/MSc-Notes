@@ -1,6 +1,4 @@
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
-// #import "@preview/layout-ltd:0.1.0": layout-limiter
-// #show: layout-limiter.with(max-iterations: 4)
 
 #set page("a4")
 #set text( font: "New Computer Modern")
