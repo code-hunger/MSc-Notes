@@ -2,6 +2,7 @@
 // #import "@preview/layout-ltd:0.1.0": layout-limiter
 // #show: layout-limiter.with(max-iterations: 4)
 
+#set page("a4")
 #set text( font: "New Computer Modern")
 #set par(justify: true)
 #set heading(numbering: "1.1.")
@@ -31,38 +32,46 @@ Such a set of runs $A$, that we can know if $omega$ lies in, is called _an event
 
 === Random variables
 #import "@preview/cetz:0.4.2"
-#grid(
-  columns: 2, 
+#let auto-cols = (min-col) => {
+  let w = measure(box(width: 100%)).width
+  if w >= min-col { 2 } else { 1 }
+}
+#layout(size => grid(
+  columns: if size.width > 15cm { 2 } else { 1 },
   column-gutter: 1em,
   [
     If we observe a particular value $e = X(omega)$ through a projection $X:Omega -> E$, then we know that the run that happened lies in $X^(-1)({e}) subset Omega.$
     But we're only allowed to know if $omega$ is in $calF$-sets, so the only (sets of) values $A subset E$ (including the case $A={e}$) we are allowed to observe from $X$ must have measurable preimages $X^(-1)(A) in calF$.
   ],
 
-  cetz.canvas({
-    import cetz.draw: *
-    circle((0,2), radius: (1,.5))
-    content((-.5,2), $E$)
-    let xo = (0.3,1.75)
-    content((0.4,2), $X(omega)$)
-    circle(xo, radius: 1pt, fill: black)
+  stack(
+    dir: ltr, //if size.width > 10cm { ltr } else { ttb },
+    spacing: 1em,
+    align(center, cetz.canvas({
+      import cetz.draw: *
+      circle((0,2), radius: (1,.5))
+      content((-.5,2), $E$)
+      let xo = (0.3,1.75)
+      content((0.4,2), $X(omega)$)
+      circle(xo, radius: 1pt, fill: black)
 
-    content((4, 1.5), [
-      When we observe\ $e=X(omega) in E$,\
-      we know that\ $A=X^(-1)(e)$ happened,\
-      but not which $omega$ exactly.
-    ])
-    bezier-through((.8,.5), (1,1), xo, stroke: .5pt, mark: (end: (symbol: "stealth")))
-    content((1.3,1.2), $X$)
+      bezier-through((.8,.5), (1,1), xo, stroke: .5pt, mark: (end: (symbol: "stealth")))
+      content((1.3,1.2), $X$)
 
-    circle((0,0), radius: (1.7,1))
-    content((-1.2,0), $Omega$)
-    circle((.5,0), radius: (.7,.6), stroke: .5pt)
-    content((.7,-.2), $omega$)
-    circle((.4,-.2), radius: 1pt, fill: black)
-    content((.6,0.2), $A$)
-  })
-)
+      circle((0,0), radius: (1.7,1))
+      content((-1.2,0), $Omega$)
+      circle((.5,0), radius: (.7,.6), stroke: .5pt)
+      content((.7,-.2), $omega$)
+      circle((.4,-.2), radius: 1pt, fill: black)
+      content((.6,0.2), $A$)
+    })),
+    [
+      When we observe\ $e=X(omega) in E, $\
+      we know that\ $A=X^(-1)(e) $\ happened,
+      but not\ which $omega$ exactly.
+    ]
+  )
+))
 Thus to model observables we use _measurable_ functions $X: Omega -> E$ into measure spaces $E$, and we call $X$ a _random variable_.
 
 In this sense, $calF$ is a restriction on the nature of all random variables, containing the information _that is allowed to be known_ and revealed by any observables.
@@ -332,7 +341,7 @@ TODO
 
 Recall that an $calF_bullet$-*martingale* is an $calF_bullet$-adapted process $X_bullet$ in $L_1$
 with zero-$calF_n$-expectation increments $Delta X_(n+1) = X_(n+1) - X_n$. By _integrable_ we mean
-that $EE[|X_n|]$ exists for all $n$.
+that $EE[ |X_n| ]$ exists for all $n$.
 
 #definition("Martingale")[
   An $calF_bullet$-adapted process $X_bullet$ in $L_1(Omega, calF, PP)$ is a called a *martingale* if  

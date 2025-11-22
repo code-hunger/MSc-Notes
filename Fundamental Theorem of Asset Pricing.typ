@@ -167,7 +167,7 @@ and for each $n <= N$, the corresponding chain of images under $V_n : RR^(N time
   center,
   diagram(spacing: (.5em, 0pt),
   {
-    let dedge(to, sym: $<=$) = edge(to, stroke: none, label: sym, label-angle: auto, label-side: center)
+    let dedge(to, sym: $<=$, ..args) = edge(to, stroke: none, label: sym, label-angle: auto, ..args, label-side: center)
 
     node((0,1), $RR^Omega_(>=0)$)
     dedge("ur", sym: $supset$) 
@@ -187,7 +187,7 @@ and for each $n <= N$, the corresponding chain of images under $V_n : RR^(N time
     dedge("uu", sym: $subset$)
     node((2, 2), $V_n (SelfF^0)$)
     dedge("r")
-    dedge("uu")
+    dedge("uu", label-angle: -90deg)
     node((3, 2), $V_n (Strat^0)$)
     dedge("uu")
     dedge("ur")
