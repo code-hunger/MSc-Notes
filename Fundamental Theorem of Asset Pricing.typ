@@ -241,9 +241,10 @@ _admissible_ strategies, but it is equivalent to require it from all self-financ
 
 #prop[
   The risk-freeness condition ($V_n (phii) >= 0$) for arbitrage-free markets can also be required only for horizon time $N$:
+  #set par(justify: false)
   #iff(
   [A market is viable],
-  [no strategy $phii in SelfF^0$ can provide $V_N (phii) in RR_(>=0)^Omega \\ { 0 }$.]
+  [no strategy $phii in SelfF^0$ can provide $ V_N (phii) in RR_(>=0)^Omega \\ { 0 }. $]
   )
 ]<viable-by-self-financing>
 
@@ -268,13 +269,14 @@ _admissible_ strategies, but it is equivalent to require it from all self-financ
 #prop("Fundamental theorem of asset pricing")[
   #iff(
     [A market is arbitrage-free],
-    [under some equivalent measure, the discounted price processes $tS_bullet^k, k=0,1,...$ are martingales.]
+    [under some equivalent measure, the discounted price processes $tS_bullet^k$ are martingales, $ k=0,1,...$.]
   )
 ]
 
 Before we present the proof, this theorem deserves a bit of discussion.
 
-#remark[
+#box(stroke: .5pt + teal, inset: 1em)[
+  #set text(size: 8pt)
   Now the L&L book proceeds to prove this directly. I find the presentation of the proof there far
   from pedagogical, because they combined 4 distinct concepts in the same proof without clear
   indication which one is used where and how they are connected:
@@ -489,9 +491,12 @@ We summarize the proof and the preceding rewrites of the Fundamental theorem of 
         eqq("Syntactical")
         node((1,5), $ exists PP^*~PP:\ med PP^* perp V_N (SelfF^0) $)
         edge((1,5), "l", "=>", label: [Measure-theoretic], label-sep: 7pt, label-angle: 0deg, shift: 3pt, label-side: left)
-      })
+      }
     )
-  ]
+  )
+]
+The proof of the bottom equivalence was given last, the proofs of the rest of the equivalences are
+in the cited propositions.
 
 === Example for $|Omega|=2$
 
