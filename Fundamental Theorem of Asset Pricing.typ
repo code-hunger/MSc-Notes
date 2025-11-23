@@ -91,15 +91,16 @@ We will talk about strategies of zero initial capital, so it is useful to have
   Clearly they form subspaces of the respective spaces.
 ]
 
+#let bemol(what) = $what_flat$
 These terms allow us to reformulate @risky-restriction-induces-selffin in a clearer way.
-For any $phii = (phii^0,phii^1,...,phii^d) in Strat$, denote by $underline(phii)$ the risky part of $phii$, $underline(phii) := (phii^1,...,phii^d)$.
-Then the projection $ Strat_(1+d) &-> Strat_d \ phii &mapsto underline(phii) $ is a linear map, where the $d$ and $d+1$ subscripts denote the number of assets the space considers.
+For any $phii = (phii^0,phii^1,...,phii^d) in Strat$, denote by $bemol(phii)$ the risky part of $phii$, $bemol(phii) := (phii^1,...,phii^d)$.
+Then the projection $ Strat_(1+d) &-> Strat_d \ phii &mapsto bemol(phii) $ is a linear map, where the $d$ and $d+1$ subscripts denote the number of assets the space considers.
 
 #remark[
   @risky-restriction-induces-selffin establishes that the linear map
   $
   SelfF_(1+d) &tilde.equiv Strat_d times RR \
-  phii &mapsto (underline(phii), V_0 (phii))
+  phii &mapsto (bemol(phii), V_0 (phii))
   $
   is in fact an isomorphism.
 ]
@@ -286,7 +287,7 @@ _admissible_ strategies, but it is equivalent to require it from all self-financ
 Before we present the proof, this theorem deserves a bit of discussion.
 
 #box(stroke: .5pt + teal, inset: 1em)[
-  #set text(size: 8pt)
+  #set text(size: 9pt)
   Now the L&L book proceeds to prove this directly. I find the presentation of the proof there far
   from pedagogical, because they combined 4 distinct concepts in the same proof without clear
   indication which one is used where and how they are connected:
