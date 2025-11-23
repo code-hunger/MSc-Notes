@@ -380,7 +380,7 @@ increments-transforms vanishes:
 #let iff(columns: 3, xinset: 1em, yinset: 0pt, stroke: none, left, right) = grid(
   columns: columns, inset: (x: xinset, y: yinset), align: horizon, stroke: stroke,
   left,
-  [if an only if], 
+  [if and only if], 
   right
 )
 
@@ -637,13 +637,94 @@ In other words, the self-financing strategies restricting to a given $(phi.alt_n
   we can also consider this parameter to be $V_0$.
 ]
 
+#let Strat = $sans("Strategy")$
+#let SelfF = $sans("SF")$
+#let SelfF0 = $SelfF^0$
+#let RRp = $RR_(>=0)$
+
 #include "Fundamental Theorem of Asset Pricing.typ"
 
 #pagebreak()
 
 == Perfect hedging (attainable claims)
+For short now we'll refer to the space of self-financing strategies by $SelfF$, and those of no initial value --- by $SelfF0$.
 
 #show sym.emptyset: set text(font: ()) // makes emptyset appear the proper way, and not squished
+
+A market was characterized as viable by its discounted asset prices being martingales under a
+suitable measure, a condition on the configuration of the subspace $tV_N (SelfF0)$ in $RR^Omega$.
+
+Now we look at the question of uniqueness of $PP^*$. $PP^*$ was defined as a unit normal vector to
+$tV_N (SelfF0)$ lying in $RRp^Omega$. A unit normal vector is unique if the orthogonal complement of $tV_N (SelfF0)$ is one-dimensional, i.e. if $tV_N (SelfF0)$ is of codimension 1 in $RR^Omega$. Geometrically it might be clear that the converse is also true, and we will show this equivalence in a bit.
+
+#let codim=$op("codim")$
+As we can expect, $SelfF0$ is already of codimension 1 in $SelfF$ (if we imagine that we let the
+superscript 0 run through all possible initial values), so $tV_N (SelfF0)$ is of
+codimension at most one in $tV_N ( SelfF )$, and we can see that it is in fact _exactly_ 1:
+$
+SelfF0 subset_(codim=1) SelfF \
+tV_N ( SelfF0 ) subset_(codim=1) tV_N ( SelfF )
+$
+
+#prop[
+  $
+         dim(SelfF) &= dim(SelfF0)+1 \
+  dim(tV_N (SelfF)) &= dim(tV_N (SelfF0))+1. 
+  $
+]
+#proof[
+  Any $phii in SelfF$ decomposes it into $ phii = (phii - phii_b) + phii_b, $
+  where the strategy $phii_b$ is the pure-bond strategy defined by the time-constants $phii_n^0 = V_0 (phii)$ and $phii_n^j = 0$ for all other $j>0$. 
+  Thus $SelfF$ decomposes into $SelfF0 plus.circle B$ where $B$ is the space of
+  self-financing strategies not operating on the risky assets, $ B = {phii in SelfF : phii^j_0 = 0 "for all" j>0} $ and is one-dimensional because each $phii in B$ is uniquely determined by its initial value $phii^0_0$.
+
+  Moreover, for $phii in B$ we get $tV_N (phii) = phii_N dot tS_N = phii^0_N tS^0_N = phii_0^0 tS^0_N, $ so
+  $ tV_N (B) equiv {tV_N (phii): phii in B} =^! {phii_0^0 tS^0_N : phii in B}= {alpha tS^0_N : alpha
+in RR}, $
+i.e. $dim(tV_N (B))= 1$ and $ dim(tV_N (SelfF)) = dim(tV_N (SelfF0)) + 1$ follows.
+]
+
+#remark[
+  Above we noted that if $codim(tV_N (SelfF0)\;RR^Omega) = 1$, then $PP^*$ is unique (if exists).
+  Now we showed that $codim(tV_N (SelfF0)\;tV_N (SelfF)) = 1$, thus the uniqueness condition can be
+  restated as: if $tV_N (SelfF) = RR^Omega$, then $PP^*$ is unique (if exists). 
+
+  It turns out, the converse is true as well, which should also be kinda geometrically clear.
+]
+
+// So above we showed the $(arrow.l.double)$ direction of the following statement, it remains to prove $(arrow.r.double)$:
+
+#prop[
+  Assume the market is viable and $PP^*$ is a probability under which discounted asset prices are martingales. Then,
+
+  #align(center, iff(
+    [$PP^*$ is unique],
+    [$tV_N (SelfF)= RR^Omega$.]
+  ))
+]
+
+#remark[
+  #set text(size: 9pt)
+  Now _that_ is a solid motivation for the definition of a _complete_ market that follows.
+
+  In the L&L book market completeness is defined and the statement above is proved directly, but
+  little insight is given about these concepts. I believe the geometrical discussion above does a
+  much better job at motivating them and also shows how it is natural to expect that statement to be
+  true and thus to define a complete market in that precise way.
+]
+
+Geometrically we can say even more, and actually _quantify_ the (non-)uniqueness of $PP^*$.
+
+#remark[
+  Assume the market is viable and $PP^*$ is a probability under which discounted asset prices are martingales. Then, the set 
+  $ E = {mu in RR^Omega : "under" mu, tS^j_bullet "is a martingale for all" j} $
+  of (not necessarily normalized/equivalent) measures under which asset prices are martingales, has
+  a dimension of
+  $ dim E = codim (tV_N (SelfF^0), RR^Omega). $
+
+  Or, after normalizing, the degrees of freedom of $PP^*$ equal
+  $ codim (tV_N (SelfF^0), RR^Omega) - 1. $
+]
 
 A *contingent claim* is a promise to pay some amount $h$ at a _maturity time_ $T$, the amount depending on the market state.
 We model it by a non-negative real random variable $h$ that is only $calF_T$-measurable, so the
@@ -684,4 +765,11 @@ amount might not be known in advance.
 
 #definition[
   The market is called _complete_ if every non-negative $h$ is attainable.
+]
+
+#prop[
+  Assume the market is viable. Then,
+
+  #align(center, iff([the market is complete], [under a *unique* $PP^*$ equivalent to $PP$,\ $tS^j_bullet$ is a
+  martingale for all $j$.]))
 ]
