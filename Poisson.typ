@@ -29,11 +29,27 @@ $k,t,h$. Differentiate w.r.t. $h$:
 $ p'_k (t+h) = sum_n p'_n (h) p_(k-n) (t) $ 
 and evaluate at $h=0$:
 $ p'_k (t) = sum_n p'_n (0) p_(k-n) (t) $ 
-But $p'_n (0)$ was postulated to vanish for $n>1$, so the sum is just
-$ p'_k (t) &= p'_0 (0) p_k (t) + p'_1 (0) p_(k-1) (t) \
-           &= lambda (-p_k (t) + p_(k-1) (t)),
-$
-or, in point-free style, $ p'_k = lambda ( p_(k-1) - p_k ). $
+
+This means:
+#box(grid(
+  columns: (1fr, 1fr),
+  stroke: (x,y)=> (left: if x > 0 {.5pt}, top: if y>0{.5pt}),
+  inset: 1em,
+  [for $k=0$],
+  [for $k>0$],
+  [
+    in this case, the sum has a single term only, $ p'_0 (t) = p'_0 (0) p_0 (t), $ and with $p'_0
+    (0)=-lambda$ this means $ p'_0 = lambda p_0. $
+  ],
+  [
+    $p'_n (0)$ was postulated to vanish for $n>1$, so the sum is just
+    $ p'_k (t) &= p'_0 (0) p_k (t) + p'_1 (0) p_(k-1) (t) \
+    &= lambda (-p_k (t) + p_(k-1) (t)),
+    $
+  ]
+))
+
+or, in point-free style, $ p'_0 &= lambda p_0\ wide p'_k &= lambda ( p_(k-1) - p_k ) thick "for" k>0. $
 
 = Computing $p_k$
 
