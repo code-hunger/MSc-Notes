@@ -763,6 +763,37 @@ amount might not be known in advance.
   the way $n=0,...,N$.
 ]
 
+Recall @value-is-mart-transform where we noted that the discounted portfolio value is a martingale transform of the discounted asset prices, $tV_bullet = sum_j phii martra tS_bullet^j$, so if $tS_bullet^j$ is a martingale, so is $tV_bullet (phii)$ for any self-financing $phii$. But the martingale property means that $tV_n (phii) = EE^*[tV_N (phii)|calF_n]$, so 
+
+#remark[
+  If $h$ is an attainable contingent claim in a viable market, its value _now_ ("now" being any time
+  up to the horizon, $n<=N$) is the corresponding value of a replicating strategy,
+  $     tV_n (phii) &= EE^*[ &tV_N (phii)|calF_n] \
+  beta_n V_n (phii) &= EE^*\[beta_N &underbrace(V_N (phii), h)|calF_n], $
+  or   $ V_n (phii) &= beta_N/beta_n EE^*[h|calF_n]. $
+]
+
+#definition[
+  The _fair price_ at time $n<=N$ of a contingent claim $h$ in a no-arbitrage market is the value of any
+  replicating strategy at that time, and is denoted by $pi_n^h$.
+]
+
+The remark above proves
+
+#prop[
+  Under no arbitrage, for any attainable claim $h>=0$, $ pi_n^h = beta_N/beta_n EE^*[h|calF_n]. $
+]
+
+In particular, if the no-arbitrage market is deterministic at time zero ($calF_0 = {emptyset, Omega}$),
+#remark[
+   The value of $h$ at time zero is its $PP^*$-weighted mean, $ pi_0^h=EE^*[h] equiv PP^* dot h. $
+
+   I find this quite #emph[remark]able: in the first example of options I saw in "A course on
+   Financial calculus", the authors showed how pricing the option by the average of the gains gives
+   an unfair price; but here we see that the fair price is found by properly averaging it (via
+   $PP^*$).
+]
+
 #definition[
   The market is called _complete_ if every non-negative $h$ is attainable.
 ]
