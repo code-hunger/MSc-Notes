@@ -773,3 +773,120 @@ amount might not be known in advance.
   #align(center, iff([the market is complete], [under a *unique* $PP^*$ equivalent to $PP$,\ $tS^j_bullet$ is a
   martingale for all $j$.]))
 ]
+
+= Cox-Rox-Rubinstein model
+
+In this model, the market consists of a single stock and a single bond, and the stock price evolution is described
+by two multiplicative constants $u,d$, _up_ and _down_: $ S_(n+1) = cases(u S_n \, "or", d S_n) quad "for all" n. $
+
+The main object here is the ratio $ T_n := S_(n+1) / S_n. $
+
+#prop[
+  The market in this model is viable if and only if
+  $ EE^*[T_n | calF_n] = 1+r quad "for all" n. $
+]
+
+#proof[
+  The market is viable if and only if $tS_n$ is a martingale, i.e.
+  $
+  "The market is viable" 
+  &arrow.l.r.double EE^*[tS_(n+1)|calF_n]        &&= tS_n        &&"for all" n\
+  &arrow.l.r.double EE^*[tS_(n+1)/tS_n | calF_n] &&= 1           &&"for all" n\
+  &arrow.l.r.double EE^*[S_(n+1)/S_n | calF_n]   &&= 1 + r quad  &&"for all" n.\
+  $
+]
+
+By "conditional probability" $PP(A | calF_n)$ of an event $A$ we mean the random variable
+$EE[bb(1)_A | calF_n]$.
+
+We can also evaluate the left-hand side above
+$
+EE^*[S_(n+1)/S_n | calF_n]
+&= EE^*[u bb(1_(T_n=u)) + d bb(1_(T_n=d)) | calF_n] \
+&= u dot EE^*[bb(1_(T_n=u)) | calF_n]+ d dot EE^*[bb(1_(T_n=d)) | calF_n] \
+&= u dot PP^*(T_n = u | calF_n) + d dot PP^*(T_n = d | calF_n)
+$
+Putting $p_n = PP^*(T_n = u | calF_n)$, this becomes $ EE^*[T_n|calF_n] = u p_n + d (1-p_n). $
+
+We know the value of this for a viable market, so we can solve for $p_n$ in that case:
+
+#prop[
+  The market in this model is viable if and only if
+  $ PP^*(S_(n+1)=u S_n | calF_n) = (1+r-d)/(u-d) "for all" n. $
+]
+
+#proof[
+  By the previous proposition, the market is viable if and only if 
+  $ 
+                  &EE^*[ T_n | calF_n ] = 1+r \
+  "i.e. iff" quad &u p_n + d (1-p_n) = 1 + r \
+  "i.e. iff" quad &p_n = (1+r -d) / (u-d) \
+  $
+  for all $n$, i.e.
+  $ "The market is viable" arrow.l.r.double.long PP^*(S_(n+1) = u S_n|calF_n) = (1+r -d) / (u-d). $
+]
+
+Put $ p:= (1+r-d)/(u-d). $
+
+#remark[
+  The market is viable if and only if the conditional probability $p_n$ is the particular constant
+  $p$. That is, the probability does not change whatever knowledge we have from $calF_n$. In
+  particular, all consecutive $T_n$ are independent and $PP(T_n = u|calF_n) = PP(T_n=u)$.
+]
+
+It turns out that the converse is also true:
+
+#prop[
+  #iff(
+    $ forall n: PP(T_n=u | calF_n)= (1+r-d)/(u-d) $,
+    $ forall n: T_n perp T_(n+1) \ "and" forall n: PP(T_n = u) = (1+r-d)/(u-d) $
+  )
+]
+
+#proof[
+  We write $ PP(T_(n+1)=u | T_n=u) = EE[bb(1)_(T_(n+1)=u) | T_n = u] $
+  and by $sigma(T_n) subset calF_(n+1)$ we can condition on $calF_(n+1)$ either before or after the $T_n=u$ condition:
+  #align(
+    center,
+    grid(
+      columns: 2,
+      inset: 1em,
+      // align: left,
+      stroke: (x,y) => (left: if x>0 {1pt}, top: if y>0 {1pt}),
+      [Assuming $PP(T_(n+1) | calF_n) = PP(T_(n+1))$ for all $n$,] +
+      $
+      &EE[bb(1)_(T_(n+1)=u) | T_n = u] \
+      = &EE[bb(1)_(T_(n+1)=u) | calF_n | T_n = u] \
+      = &EE[bb(1)_(T_(n+1)=u) | calF_n ] \
+      = &PP(T_(n+1)=u | calF_n ) \
+      = &PP(T_(n+1)=u)
+      $ ,
+      [Assuming $T_(n+1) perp T_n$ for all $n$,] +
+      $
+      &EE[bb(1)_(T_(n+1)=u) | T_n = u] \
+      = &EE[bb(1)_(T_(n+1)=u) | T_n = u | calF_n] \
+      = &EE[bb(1)_(T_(n+1)=u) | calF_n] \
+      = &PP(T_(n+1)=u | calF_n),
+      $ ,
+      [so $PP(T_(n+1) | calF_n) = PP(T_(n+1))$ implies $ T_(n+1) perp T_n. $],
+      [
+        so $T_(n+1) perp T_n$ implies
+        $ PP(T_(n+1)=u) //&= PP(T_(n+1) | T_n=u)\
+        &= PP(T_(n+1)=u | calF_n) $
+      ]
+    )
+  )
+
+  That is, $ T_(n+1) perp T_n quad "if and only if" quad PP(T_(n+1) = u) = PP(T_(n+1) | calF_n). $
+
+  The statement follows.
+]
+
+Joining the equivalences from the last two propositions we get
+#prop[
+  The following are equivalent:
+
+  + The market is viable;
+  + The following conditional probability is the constant $p$, $ PP(T_(n+1)|calF_n) = (1+r-d)/(u-d) "for all" n; $
+  + The multiplicative increments $T_n$ are pairwise independent and equal _up_ with probability $p$, i.e. $ T_(n+1) perp T_n quad  "and" quad PP(T_n=u) = (1+r-d)/(u-d) quad "for all" n. $
+]
