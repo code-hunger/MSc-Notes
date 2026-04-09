@@ -124,6 +124,21 @@ natural
 \end_inset
 
  as possible rather than forced.
+\begin_inset FormulaMacro
+\newcommand{\Var}{\operatorname{Var}}
+{\text{Var}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -138,7 +153,7 @@ Brownian motion
 Brownian motion is defined either
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 as a stochastic process 
 \begin_inset Formula $\left(W_{t}\right)_{t\ge0}$
 \end_inset
@@ -207,9 +222,9 @@ For
 \end_layout
 
 \end_deeper
-\begin_layout Itemize
-as a limiting distribution on the space of continuous functions 
-\begin_inset Formula $C(\Omega,\mathbb{R}^{n})$
+\begin_layout Enumerate
+via a limiting distribution on the space of continuous functions 
+\begin_inset Formula $C([0,1],\mathbb{R}^{n})$
 \end_inset
 
  of the distributions of random walks on uniform grid 
@@ -220,24 +235,600 @@ as a limiting distribution on the space of continuous functions
 \begin_inset Formula $1/\sqrt{n}$
 \end_inset
 
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+For each 
+\begin_inset Formula $n>0$
+\end_inset
+
+,
+ let 
+\begin_inset Formula $\left(\xi_{i}\right)_{i=0}^{n}$
+\end_inset
+
+ be a standard random walk where the jump 
+\begin_inset Formula $\Delta\xi_{i}=\xi_{i+1}-\xi_{i}$
+\end_inset
+
+ is either 
+\begin_inset Formula $1/\sqrt{n}$
+\end_inset
+
+ or 
+\begin_inset Formula $-1/\sqrt{n}$
+\end_inset
+
+ with equal probability 
+\begin_inset Formula $0.5$
+\end_inset
+
+.
+ We think of time here as flowing discretely in 
+\begin_inset Formula $\{t_{i}\coloneqq i/n\}_{i=0}^{n}$
+\end_inset
+
 .
 \end_layout
 
 \begin_layout Standard
-The first view explains how 
-\begin_inset Formula $W_{t}$
+Now conceptually
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+In N.V.
+ Krylov's book 
+\begin_inset Quotes eld
 \end_inset
 
- is moving in space,
- the second —
- why the variance is 
-\begin_inset Formula $1/t$
+Introduction to the theory of random processes
+\begin_inset Quotes erd
+\end_inset
+
+ this is stated and proven rigorously (
+\begin_inset Formula $\xi$
+\end_inset
+
+ is first extended from the discrete points 
+\begin_inset Formula $\{t_{i}\}_{i}$
+\end_inset
+
+ continuously to the whole interval 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+).
+\end_layout
+
 \end_inset
 
 ,
- i.e.
- why deviation is 
-\begin_inset Formula $1/\sqrt{t}$
+ the distribution of the random vector 
+\begin_inset Formula $\left(\xi_{1}\ldots\xi_{n}\right)$
+\end_inset
+
+ converges to a distribution on the space of continuous functions 
+\begin_inset Formula $C([0,1],\mathbb{R})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+It is trivial
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Krylov's book here also proves that this definition makes sense.
+ That is not as trivial.
+\end_layout
+
+\end_inset
+
+ now to define Brownian motion on the probability space 
+\begin_inset Formula $\Omega\coloneqq C([0,1],\mathbb{R})$
+\end_inset
+
+ with that limit distribution as a measure by just projecting each sample (trajectory,
+ function 
+\begin_inset Formula $[0,1]\to\Omega$
+\end_inset
+
+)
+\begin_inset Formula 
+\[
+\text{for }\omega\in\Omega:\quad W_{t}(\omega)\coloneqq\omega_{t}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+The former is the definition useful for applications/proving properties of the brownian motion,
+ while the latter gives an idea how it came to be.
+ As long as we believe in those two definitions and trust that they're equivalent,
+ we're good to proceed.
+\end_layout
+
+\begin_layout Standard
+There are two free-hanging postulates in these definitions that are important to understand first,
+ though:
+\end_layout
+
+\begin_layout Enumerate
+If we believe that 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ is a process of stationary and independent increments,
+ what is left to motivate is
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100line%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "foreground"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+why should the variance of its increments 
+\begin_inset Formula $\Delta W_{t}$
+\end_inset
+
+ be chosen to be 
+\begin_inset Formula $t$
+\end_inset
+
+?
+\begin_inset Newline newline
+\end_inset
+
+(or the standard variation —
+ 
+\begin_inset Formula $\sqrt{t}$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(one could also ask why the increments' distribution should be Gaussian,
+ buuut no time to ponder on that now).
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+On the other hand,
+ if we believe that 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ is a limit of distributions of random walks,
+ what is unclear is 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100line%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "foreground"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+why should the jumps at epoch 
+\begin_inset Formula $(n)$
+\end_inset
+
+,
+ be 
+\begin_inset Formula $1\sqrt{n}$
+\end_inset
+
+?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Why jump with 
+\begin_inset Formula $\pm\frac{1}{\sqrt{n}}$
+\end_inset
+
+ and why 
+\begin_inset Formula $\Var\Delta W_{t}=t$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Why variance is 
+\begin_inset Formula $t$
+\end_inset
+
+ (and not any other function of 
+\begin_inset Formula $t$
+\end_inset
+
+) is explained by the 
+\begin_inset Formula $\pm\frac{1}{\sqrt{n}}$
+\end_inset
+
+ jump in the approaching distributions,
+ but without motivating that jump,
+ the explanation is free-hanging.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\eta_{k}^{(n)}$
+\end_inset
+
+ be independent identically distributed with values 
+\begin_inset Formula $-1$
+\end_inset
+
+ and 
+\begin_inset Formula $1$
+\end_inset
+
+ with probability 
+\begin_inset Formula $0.5$
+\end_inset
+
+ each.
+ Set a random walk with jump 
+\begin_inset Formula $\alpha_{n}>0$
+\end_inset
+
+:
+ 
+\begin_inset Formula 
+\[
+\xi_{0}^{(n)}\coloneqq0,\quad\xi_{k+1}^{(n)}\coloneqq\xi_{k}^{(n)}+\alpha_{n}\eta_{k}^{(n)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Put a grid 
+\begin_inset Formula $\{t_{0}^{(n)},\ldots,t_{n}^{(n)}\}$
+\end_inset
+
+ with 
+\begin_inset Formula $t_{k}=k/n$
+\end_inset
+
+.
+ Brownian motion will be the 
+\begin_inset Quotes eld
+\end_inset
+
+limit random walk
+\begin_inset Quotes erd
+\end_inset
+
+ as 
+\begin_inset Formula $n$
+\end_inset
+
+ tends to infinity and the grid refines to the full interval 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For a continuous variable 
+\begin_inset Formula $t\in[0,1]$
+\end_inset
+
+,
+ the nearest grid point to the left of 
+\begin_inset Formula $t$
+\end_inset
+
+ at epoch 
+\begin_inset Formula $n$
+\end_inset
+
+ is 
+\begin_inset Formula $p^{(n)}(t)\coloneqq\left\lfloor nt\right\rfloor /n,$
+\end_inset
+
+ so the 
+\begin_inset Formula $k$
+\end_inset
+
+ at which 
+\begin_inset Formula $\xi_{k}^{(n)}$
+\end_inset
+
+ can be evaluated is 
+\begin_inset Formula $\left\lfloor nt\right\rfloor $
+\end_inset
+
+.
+ Hence put 
+\begin_inset Formula 
+\begin{align*}
+\xi_{t}^{(n)} & \coloneqq\xi_{\left\lfloor nt\right\rfloor }^{(n)}
+\end{align*}
+
+\end_inset
+
+Now 
+\begin_inset Formula 
+\[
+\Var\xi_{k}^{(n)}=\Var\sum_{i=1}^{k}\alpha_{n}\eta_{i}^{n}\overset{\perp}{=}\sum_{i=1}^{k}\Var\alpha_{n}\eta_{k}^{n}=\alpha_{n}^{2}k
+\]
+
+\end_inset
+
+so 
+\begin_inset Formula 
+\begin{align*}
+\Var\xi_{t}^{(n)} & =\Var\xi_{\left\lfloor nt\right\rfloor }^{(n)}=\alpha_{n}^{2}\left\lfloor nt\right\rfloor \\
+ & =p^{(n)}(t)\cdot n\alpha_{n}^{2}\\
+ & =p^{(n)}(t)\cdot\left(\alpha_{n}\sqrt{n}\right)^{2}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $p^{(n)}(t)$
+\end_inset
+
+ is the closest grid point to the left of 
+\begin_inset Formula $t$
+\end_inset
+
+ as before,
+ and is clearly stable around a value in 
+\begin_inset Formula $(0,1)$
+\end_inset
+
+ for large 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ The problematic part is the other multiple,
+ 
+\begin_inset Formula $\left(\alpha_{n}\sqrt{n}\right)^{2}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+If we want that for high 
+\begin_inset Formula $n$
+\end_inset
+
+\SpecialChar ldots
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\SpecialChar ldots
+then 
+\begin_inset Formula $\alpha_{n}$
+\end_inset
+
+ has to tend to zero 
+\begin_inset Formula $\alpha_{n}\searrow0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Var\xi_{n}^{(n)}$
+\end_inset
+
+ stays bounded
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+at least as fast than 
+\begin_inset Formula $1/\sqrt{n}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Var\xi_{n}^{(n)}$
+\end_inset
+
+ does not vanish
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+so that the limiting distribution is not a point mass at 0
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+no faster than 
+\begin_inset Formula $1/\sqrt{n}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Hence to construct a brownian motion with finite but non-vanishing variation,
+ the random walks it is built from must use a jump 
+\begin_inset Formula $\eta_{k}^{(n)}=\pm\alpha_{n}$
+\end_inset
+
+ of order 
+\begin_inset Formula $1/\sqrt{n}$
+\end_inset
+
+.
+ We simply pick
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+We could pick any constant and would get the limit of the variation scaled accordingly;
+ a madman might choose 
+\begin_inset Formula $\alpha_{n}=\frac{\sin n}{\sqrt{n}}$
+\end_inset
+
+ but then their 
+\begin_inset Formula $\Var\xi_{t}^{(n)}$
+\end_inset
+
+ would not converge to a single value.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\alpha_{n}=1/\sqrt{n}$
+\end_inset
+
+,
+ which gives 
+\begin_inset Formula 
+\[
+\Var\xi_{t}^{(n)}=p^{(n)}(t)\cdot\cancel{\left(\alpha_{n}\sqrt{n}\right)^{2}}\xrightarrow[n\to\infty]{}t.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is how we choose 
+\begin_inset Formula $1/\sqrt{n}$
+\end_inset
+
+ for the random walk jumps 
+\begin_inset Formula $\eta^{(n)}$
+\end_inset
+
+,
+ and variance 
+\begin_inset Formula $t$
+\end_inset
+
+ (deviation 
+\begin_inset Formula $\sqrt{t}$
+\end_inset
+
+) for the Gaussian increments 
+\begin_inset Formula $\Delta W_{t}$
 \end_inset
 
 .
