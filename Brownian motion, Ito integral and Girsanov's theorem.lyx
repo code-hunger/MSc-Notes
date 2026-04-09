@@ -1,0 +1,630 @@
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\DeclareMathOperator*{\E}{\mathbb{E}}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children no
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Brownian motion and stochastic integrals,
+\begin_inset Newline newline
+\end_inset
+
+viewed from
+\begin_inset Newline newline
+\end_inset
+
+Ito's isometry and Girsanov's theorem
+\begin_inset Newline newline
+\end_inset
+
+[DRAFT.
+ Thoughts only]
+\end_layout
+
+\begin_layout Standard
+There are two dual approaches to this that I've observed.
+ One concerns Stochastic processes,
+ the other —
+ distributions.
+ In this article I try to carry out a pedagogical presentation of material studied at uni,
+ i.e.
+ in a way that feels as 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+ as possible rather than forced.
+\end_layout
+
+\begin_layout Section
+Ultra Basics
+\end_layout
+
+\begin_layout Subsection
+Brownian motion
+\end_layout
+
+\begin_layout Standard
+Brownian motion is defined either
+\end_layout
+
+\begin_layout Itemize
+as a stochastic process 
+\begin_inset Formula $\left(W_{t}\right)_{t\ge0}$
+\end_inset
+
+ satisfying three properties:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $W_{0}=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ is normally distributed with variance 
+\begin_inset Formula $t$
+\end_inset
+
+;
+ and all increments (of the same length) 
+\begin_inset Formula $\Delta W_{s,t}$
+\end_inset
+
+ share that same distribution;
+\begin_inset Newline newline
+\end_inset
+
+Later I will write 
+\begin_inset Formula $\Delta W_{t}$
+\end_inset
+
+ to mean 
+\begin_inset Formula $\Delta W_{0,t}$
+\end_inset
+
+,
+ so just 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+,
+ but written in the increment style to stress that we are interested in increments of a particular length.
+ By stationarity,
+ expected values then are the same for increments not started at zero,
+ too.
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $s<t$
+\end_inset
+
+,
+ 
+\begin_inset Formula $W_{s}\perp\Delta W_{s,t}$
+\end_inset
+
+,
+ i.e.
+ independent increments
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+as a limiting distribution on the space of continuous functions 
+\begin_inset Formula $C(\Omega,\mathbb{R}^{n})$
+\end_inset
+
+ of the distributions of random walks on uniform grid 
+\begin_inset Formula $\{t_{i}\coloneqq i/n\}_{i=0}^{n}$
+\end_inset
+
+ with jump 
+\begin_inset Formula $1/\sqrt{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The first view explains how 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ is moving in space,
+ the second —
+ why the variance is 
+\begin_inset Formula $1/t$
+\end_inset
+
+,
+ i.e.
+ why deviation is 
+\begin_inset Formula $1/\sqrt{t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Stochastic integral for simple functions
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\dP}{\text{d}\mathbb{P}}
+{\text{d}\mathbb{P}}
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\dW}{\text{d}W}
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\d}{\mathrm{d}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In a Lebesgue-Stieltjes integral style we can integrate simple predictable functions against the brownian motion.
+\end_layout
+
+\begin_layout Standard
+Remember that the Lebesgue-Stieltjes integral against a function (of bounded variation) 
+\begin_inset Formula $g$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\int_{X}f\d g
+\]
+
+\end_inset
+
+works similarly to the standard Lebesgue integral but instead of using a 
+\emph on
+measure 
+\emph default
+for the floor increments (
+\begin_inset Formula $\mu(x-y)$
+\end_inset
+
+) when infinitesimally multiplying the integrated function,
+ it uses the provided function 
+\begin_inset Formula $g$
+\end_inset
+
+'s increment,
+ 
+\begin_inset Formula $\Delta g=g(x)-g(y)$
+\end_inset
+
+,
+ to 
+\begin_inset Quotes eld
+\end_inset
+
+measure
+\begin_inset Quotes erd
+\end_inset
+
+ it.
+\end_layout
+
+\begin_layout Standard
+A simple process is a process taking finitely many values that we denote 
+\begin_inset Formula $f_{1},\ldots,f_{k}$
+\end_inset
+
+,
+ i.e.
+ it is expressible as a finite sum
+\begin_inset Formula 
+\[
+f^{\omega}(t)=\sum_{n}f_{n}^{\omega}\textbf{1}_{\left[t_{n},t_{n+1}\right]}(t)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So we define the stochastic integral against the brownian motion 
+\begin_inset Formula $\dW_{s}$
+\end_inset
+
+ of simple predictable functions as 
+\begin_inset Formula 
+\[
+\int_{0}^{t}f(s)\dW_{s}\coloneqq\sum_{n}f_{n}\Delta W_{n}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Square of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+output is expected to be the 
+\begin_inset Formula $\Delta$
+\end_inset
+
+input
+\end_layout
+
+\begin_layout Standard
+There are a range of facts that I summarize under this section's title.
+ The chaos of the material is vastly reduced by viewing many results as an instance of this pattern.
+\end_layout
+
+\begin_layout Subsection
+Of 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ itself
+\end_layout
+
+\begin_layout Subsubsection
+Discretely
+\end_layout
+
+\begin_layout Standard
+The second view of Brownian motion above also tells us that considering one jump of the random walk,
+ say 
+\begin_inset Formula 
+\begin{align*}
+\text{time: } & t_{i}\to t_{i+1}\\
+\text{space: } & \xi_{i}\to\xi_{i+1}.
+\end{align*}
+
+\end_inset
+
+With the choice 
+\begin_inset Formula $\Delta t_{i}=1/n$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\Delta\xi_{i}$
+\end_inset
+
+ is either 
+\begin_inset Formula $\frac{1}{\sqrt{n}}$
+\end_inset
+
+ or 
+\begin_inset Formula $-\frac{1}{\sqrt{n}}$
+\end_inset
+
+.
+ Thus the square 
+\begin_inset Formula $\Delta\xi_{i}^{2}$
+\end_inset
+
+ is most definitely 
+\begin_inset Formula $\frac{1}{n}$
+\end_inset
+
+.
+ That is,
+ 
+\begin_inset Formula 
+\[
+\Delta\xi_{i}^{2}=\Delta t_{t}
+\]
+
+\end_inset
+
+ —
+ the square of the output's increment equals the input increment.
+\end_layout
+
+\begin_layout Subsubsection
+Continuously
+\end_layout
+
+\begin_layout Standard
+In the limiting distribution 
+\begin_inset Formula $\Delta W_{s,t}$
+\end_inset
+
+ is definitely does not square to just 
+\begin_inset Formula $\left(t-s\right)$
+\end_inset
+
+,
+ but it is interesting that its mean 
+\emph on
+does
+\emph default
+:
+\begin_inset Formula 
+\[
+\mathbb{E}\left(\Delta W_{t}^{2}\right)=t.
+\]
+
+\end_inset
+
+ We see this from the property charaterising the distribution of the (non-squared) increment 
+\begin_inset Formula $\Delta W_{t}$
+\end_inset
+
+:
+ 
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}\left(\Delta W_{t}^{2}\right) & \equiv\int_{\Omega}\Delta W_{t}^{2}\dP=\int_{\mathbb{R}}y^{2}\dP_{Z}\\
+ & =\int_{\mathbb{R}}y^{2}\Phi(y)\d y\overset{!}{=}\sigma^{2}\int_{\mathbb{R}}\Phi(y)\d y=t
+\end{align*}
+
+\end_inset
+
+where in 
+\begin_inset Formula $\overset{!}{=}$
+\end_inset
+
+ we used (
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ denoting the variance of the normal variable,
+ i.e.
+ here just 
+\begin_inset Formula $t$
+\end_inset
+
+;
+ also omitting integral signs)
+\begin_inset Formula 
+\begin{align*}
+y^{2}e^{-y^{2}/2\sigma^{2}}\d y & ={\color{blue}-2\sigma^{2}y}e^{-y^{2}/2\sigma^{2}}\d y^{{\color{blue}2}}/{\color{blue}-2\sigma^{2}}\\
+ & =-y\d e^{-y^{2}/2\sigma^{2}}\\
+ & =-ye^{-y^{2}/2\sigma^{2}}+e^{-y^{2}/2\sigma^{2}}\d y.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Thoughts
+\end_layout
+
+\begin_layout Standard
+Note:::::
+ I can't quite explain yet why in the discrete case randomness goes away (
+\begin_inset Formula $\Delta\xi_{i}^{2}$
+\end_inset
+
+ is not random),
+ while in the continuous – not (
+\begin_inset Formula $\Delta W_{t}^{2}$
+\end_inset
+
+ is still random).
+\end_layout
+
+\begin_layout Subsection
+Of the Ito integral for simple functions
+\end_layout
+
+\begin_layout Standard
+Above we computed the expected square of the raw increments 
+\begin_inset Formula $\Delta W_{t}$
+\end_inset
+
+.
+ In a martingale-transformation fashion we can consider the 
+\begin_inset Quotes eld
+\end_inset
+
+transformed
+\begin_inset Quotes erd
+\end_inset
+
+ increments 
+\begin_inset Formula $f\Delta W$
+\end_inset
+
+ and their integral's expected square:
+ 
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}\left[\left(\int_{0}^{t}f(s)\dW_{s}\right)^{2}\right] & \equiv\mathbb{E}\left[\left(\sum\nolimits_{n}f_{n}\Delta W_{n}\right)^{2}\right]\\
+ & \overset{\text{lin}}{=}\mathbb{E}\left[\sum_{n}f_{n}^{2}\Delta W_{n}^{2}\right]+\mathbb{E}\left[\sum_{n\neq m}f_{n}f_{m}\Delta W_{n}\Delta W_{m}\right]\\
+ & \overset{\perp}{=}\sum_{n}\mathbb{E}\left[f_{n}^{2}\right]\underbrace{\mathbb{E}\left[\Delta W_{n}^{2}\right]}_{\Delta t}+\cancel{2\sum_{n<m}\mathbb{E}\left[f_{n}f_{m}\Delta W_{n}\right]\underbrace{\mathbb{E}\left[\Delta W_{m}\right]}_{0}}\\
+ & =\mathbb{E}\left[\sum_{n}f_{n}^{2}\Delta t\right]\\
+ & \equiv\mathop{\mathbb{E}}_{\omega}\left[\int_{0}^{t}f_{\omega}^{2}(s)\d s\right]
+\end{align*}
+
+\end_inset
+
+which I roughly interpret as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "10pt"
+shadowsize "4pt"
+framecolor "foreground"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+The expected 
+\series bold
+square
+\series default
+ of the modified (by 
+\begin_inset Formula $f_{t}$
+\end_inset
+
+) output (of 
+\begin_inset Formula $\Delta W_{t}$
+\end_inset
+
+) equals the 
+\series bold
+linear
+\series default
+ integral of the output's modification's square.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In a way,
+ the 
+\begin_inset Formula $\Delta W_{t}^{2}$
+\end_inset
+
+ collapses inside the integral to 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+,
+ while the 
+\begin_inset Formula $f^{2}$
+\end_inset
+
+ multiple remains as a squre.
+\end_layout
+
+\begin_layout Standard
+This peculiar fact carries the name 
+\begin_inset Quotes eld
+\end_inset
+
+Ito's Isometry
+\begin_inset Quotes erd
+\end_inset
+
+ (for the very special case of simple functions).
+\end_layout
+
+\end_body
+\end_document
