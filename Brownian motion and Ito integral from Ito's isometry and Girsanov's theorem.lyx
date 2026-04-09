@@ -1217,5 +1217,42 @@ Ito's Isometry
  (for the very special case of simple functions).
 \end_layout
 
+\begin_layout Subsection
+Ito's formula
+\end_layout
+
+\begin_layout Standard
+Ito's formula is just the next situation in which an output's square is set to equal to the input:
+\begin_inset Formula 
+\[
+df(t,X)=f_{t}'(t,x)\d t+f_{x}'(t,x)\d X+\frac{1}{2}f_{xx}''(t,X)\d X\d X
+\]
+
+\end_inset
+
+where in expanding 
+\begin_inset Formula $\d X\d X$
+\end_inset
+
+ we use the rule
+\begin_inset Formula 
+\[
+\d W\d W=\d t,
+\]
+
+\end_inset
+
+so again —
+ the square of the increment 
+\begin_inset Formula $dW$
+\end_inset
+
+ is just the time increment 
+\begin_inset Formula $\d t$
+\end_inset
+
+.
+\end_layout
+
 \end_body
 \end_document
