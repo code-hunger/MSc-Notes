@@ -1,0 +1,677 @@
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children no
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\index Index
+\shortcut idx
+\color #008080
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\end_header
+
+\begin_body
+
+\begin_layout Title
+An Itô process that is not a martingale
+\begin_inset Newline newline
+\end_inset
+
+[Thoughts dump]
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\dP}{\text{d}\mathbb{P}}
+{\text{d}\mathbb{P}}
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\dW}{\text{d}W}
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\d}{\mathrm{d}}
+\end_inset
+
+Fix a process 
+\begin_inset Formula $\left(f_{t}\right)_{t}$
+\end_inset
+
+ that is almost surely square-integrable.
+ We know that the Itô integral 
+\begin_inset Formula $M_{t}\coloneqq\int_{0}^{t}f_{s}\dW_{s}$
+\end_inset
+
+ is a local martingale.
+ The question is,
+ how can it be that 
+\begin_inset Formula $M_{t}$
+\end_inset
+
+ is not a true martingale?
+ It is a martingale if 
+\begin_inset Formula $\int_{0}^{t}f_{s}^{2}\d s$
+\end_inset
+
+ has a finite expectation,
+ on top of being almost surely finite.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $dR=\frac{1}{R}\d t+\dW$
+\end_inset
+
+ with 
+\begin_inset Formula $R(0)=1$
+\end_inset
+
+ and consider the process 
+\begin_inset Formula $1/R$
+\end_inset
+
+.
+ By Itô formula,
+ 
+\begin_inset Formula 
+\[
+1/R_{t}=1+\int_{0}^{t}-\frac{1}{R_{s}^{2}}\d W_{s}
+\]
+
+\end_inset
+
+When 
+\begin_inset Formula $R$
+\end_inset
+
+ gets close to zero,
+ 
+\begin_inset Formula $1/R$
+\end_inset
+
+ explodes.
+ 
+\begin_inset Formula $1/R$
+\end_inset
+
+ is a local martingale as an Itô integral,
+ but is it a martingale?
+ Stop 
+\begin_inset Formula $1/R$
+\end_inset
+
+ when it hits the level 
+\begin_inset Formula $n$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\tau_{n}\coloneqq\inf_{R_{t}\le1/n}t.
+\]
+
+\end_inset
+
+ The stopped process 
+\begin_inset Formula $\left(1/R\right)_{t\wedge\tau_{n}}=1-\int_{0}^{t\wedge\tau_{n}}\frac{1}{R_{s}^{2}}\d W_{s}$
+\end_inset
+
+ is then a martingale because the integrand 
+\begin_inset Formula $\frac{1}{R_{s}^{2}}$
+\end_inset
+
+ is bounded and so 
+\begin_inset Formula $\int_{0}^{t}\left(R_{s}^{-2}\right)^{2}\d s$
+\end_inset
+
+ has a finite expectation.
+\end_layout
+
+\begin_layout Standard
+What breaks with the non-stopped process 
+\begin_inset Formula $1/R_{t}$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Subsection*
+Slow stopping times
+\end_layout
+
+\begin_layout Standard
+It has always seemed to me that if a process is a martingale 
+\begin_inset Quotes eld
+\end_inset
+
+up to a point
+\begin_inset Quotes erd
+\end_inset
+
+,
+ and that 
+\begin_inset Quotes eld
+\end_inset
+
+point
+\begin_inset Quotes erd
+\end_inset
+
+ can be arbitrary far into the future,
+ then surely the process is a martingale as a whole towards infinity?
+ It turns out,
+ though,
+ the problem is 
+\emph on
+the speed 
+\emph default
+at which this is happening.
+ The domain 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is not compact,
+ so we can get arbitrary slow convergence to infinity.
+ 
+\end_layout
+
+\begin_layout Standard
+Consider for example the noncompact probability space 
+\begin_inset Formula $\Omega=(0,1)$
+\end_inset
+
+ with Borel sigma algebra with stopping times 
+\begin_inset Formula $\tau_{n}(\omega)=n\omega$
+\end_inset
+
+.
+ We can picture this on the infinite strip 
+\begin_inset Formula $\Omega\times[0,\infty)$
+\end_inset
+
+,
+ each stopping time is a line through the point 
+\begin_inset Formula $(0,0)$
+\end_inset
+
+ (which is not part of the 
+\begin_inset Quotes eld
+\end_inset
+
+phase space
+\begin_inset Quotes erd
+\end_inset
+
+ because 
+\begin_inset Formula $0\not\in\Omega$
+\end_inset
+
+) and that line becomes steeper and steeper as 
+\begin_inset Formula $n$
+\end_inset
+
+ goes to 
+\begin_inset Formula $\infty$
+\end_inset
+
+.
+ Clearly,
+ at each fixed 
+\begin_inset Formula $\omega\in\Omega$
+\end_inset
+
+,
+ the stopping times leak 
+\begin_inset Formula $\tau_{n}(\omega)=n\omega\xrightarrow[n\to\infty]{}\infty$
+\end_inset
+
+.
+ The speed at which that happens is the number 
+\begin_inset Formula $\omega$
+\end_inset
+
+.
+ So around 
+\begin_inset Formula $0$
+\end_inset
+
+,
+ the stopping times are incredibly slow at reaching infinity compared to how they do it away from 0.
+\end_layout
+
+\begin_layout Standard
+This is how it can happen that even if a process is a martingale 
+\begin_inset Quotes eld
+\end_inset
+
+up to a moment
+\begin_inset Quotes erd
+\end_inset
+
+ for a sequence of moments tending to 
+\begin_inset Formula $\infty$
+\end_inset
+
+,
+ still the process as a whole might not be a martingale at any chosen 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ How?
+ For any 
+\begin_inset Formula $t$
+\end_inset
+
+ and any 
+\begin_inset Quotes eld
+\end_inset
+
+far
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $n$
+\end_inset
+
+,
+ there is still a non-null event on which the process is still frozen before 
+\begin_inset Formula $\tau_{n}$
+\end_inset
+
+ (by which I mean that 
+\begin_inset Formula $\tau_{n}<t$
+\end_inset
+
+ is an event of positive probability),
+ and defrosting it over all 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ at once might reveal explosive behaviour which distorts the expectation (which was unseen by the stopped processes).
+\end_layout
+
+\begin_layout Standard
+An important prerequisite for this realization is to treat 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ and time 
+\begin_inset Formula $\mathbb{R}_{+}$
+\end_inset
+
+ as separate dimensions,
+ and to see that 
+\begin_inset Formula $\tau_{n}$
+\end_inset
+
+ move through 
+\begin_inset Formula $\mathbb{R}_{+}$
+\end_inset
+
+ and not through 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Mismatch in convergence
+\end_layout
+
+\begin_layout Standard
+The stopped processes obviously converge to the unstopped one almost surely for each 
+\begin_inset Formula $t\ge0$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\left(1/R\right)_{t\wedge\tau_{n}}\xrightarrow[n\to\infty]{}\left(1/R\right)_{t},
+\]
+
+\end_inset
+
+as a consequence of the stopping times diverging to infinity almost surely 
+\begin_inset Formula $\tau_{n}\to\infty$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Now we would like to take 
+\begin_inset Formula $\mathbb{E}$
+\end_inset
+
+ on both sides.
+ Because each stopped process is a martingale,
+ its mean is 
+\begin_inset Formula 
+\[
+\mathbb{E}\left(1/R_{t\wedge\tau_{n}}\right)=1,\quad\text{for all }n.
+\]
+
+\end_inset
+
+But if we let 
+\begin_inset Formula $n$
+\end_inset
+
+ tend to infinity and so 
+\begin_inset Formula $1/R_{t\wedge\tau_{n}}$
+\end_inset
+
+ reaches 
+\begin_inset Formula $1/R_{t}$
+\end_inset
+
+ almost surely,
+ we have no guarantee that the expectation preserves that limit.
+\end_layout
+
+\begin_layout Standard
+A great counterexample is the function sequence 
+\begin_inset Formula $X_{n}(\omega)=n\boldsymbol{1}_{(0,1/n)}$
+\end_inset
+
+ on 
+\begin_inset Formula $\Omega=[0,1]$
+\end_inset
+
+.
+ On each 
+\begin_inset Formula $\omega$
+\end_inset
+
+,
+ 
+\begin_inset Formula $X_{n}(\omega)$
+\end_inset
+
+ tends to zero,
+ so 
+\begin_inset Formula $X_{n}\to0$
+\end_inset
+
+ almost surely.
+ But while all the functions have a unit mean 
+\begin_inset Formula $\mathbb{E}X_{n}=1$
+\end_inset
+
+,
+ the limit is the absolute zero.
+ Almost sure convergence is not strong enough to carry the 
+\begin_inset Formula $\mathbb{E}$
+\end_inset
+
+ in the limit,
+ as the functions 
+\begin_inset Formula $X_{n}$
+\end_inset
+
+ are explodingly tall on small but non-neglectible sets 
+\begin_inset Formula $(0,1/n)$
+\end_inset
+
+.
+ Instead,
+ in a distribution sense 
+\begin_inset Formula $X_{n}$
+\end_inset
+
+ converges to the Dirak-delta 
+\begin_inset Formula $\delta_{0}$
+\end_inset
+
+,
+ which has a unit expectation just like every 
+\begin_inset Formula $X_{n}$
+\end_inset
+
+.
+ The difference between 
+\begin_inset Formula $\delta_{0}$
+\end_inset
+
+ and the pointwise limit 
+\begin_inset Formula $0$
+\end_inset
+
+ is only at the origin where 
+\begin_inset Formula $\delta_{0}$
+\end_inset
+
+ is conceptually 
+\begin_inset Formula $\infty$
+\end_inset
+
+,
+ and where the mass of all 
+\begin_inset Formula $X_{n}$
+\end_inset
+
+ leaks in the limit.
+ Depending on the choice of topology,
+ we get two different limits.
+ 
+\end_layout
+
+\begin_layout Standard
+In our local martingale situation,
+ 
+\begin_inset Formula $1/R_{t}$
+\end_inset
+
+ is just the 
+\begin_inset Quotes eld
+\end_inset
+
+wrong
+\begin_inset Quotes erd
+\end_inset
+
+ limit of the two.
+ Let us decompose the stopped processes into their explosive and nice parts:
+\begin_inset Formula 
+\begin{align*}
+1/R_{t\wedge\tau_{n}} & =1/R_{t}\cdot\boldsymbol{1}_{t\le\tau_{n}}+1/R_{\tau_{n}}\cdot\boldsymbol{1}_{t>\tau_{n}}\\
+ & =1/R_{t}\cdot\boldsymbol{1}_{t\le\tau_{n}}+n\boldsymbol{1}_{t>\tau_{n}}
+\end{align*}
+
+\end_inset
+
+ and take expectations 
+\begin_inset Formula 
+\[
+1=\mathbb{E}\left(1/R_{t}\cdot\boldsymbol{1}_{t\le\tau_{n}}\right)+n\mathbb{P}(t>\tau_{n}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If we let 
+\begin_inset Formula $n$
+\end_inset
+
+ to infinity in that decomposition,
+ the truncated 
+\begin_inset Formula $1/R_{t}\cdot\boldsymbol{1}_{t\le\tau_{n}}$
+\end_inset
+
+ converges almost surely to 
+\begin_inset Formula $1/R_{t}$
+\end_inset
+
+ 
+\emph on
+monotonically,
+
+\emph default
+ and so we can take the limit inside the expectation:
+ 
+\begin_inset Formula $\mathbb{E}\left(1/R_{t}\cdot\boldsymbol{1}_{t\le\tau_{n}}\right)\to\mathbb{E}(1/R_{t})$
+\end_inset
+
+.
+ So we get a tangible expression for the limit expectation 
+\begin_inset Formula 
+\[
+\mathbb{E}(1/R_{t})=1-\lim_{n}n\cdot\mathbb{P}(t>\tau_{n}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here Chatgpt says that 
+\begin_inset Formula $\mathbb{P}(t>\tau_{n})$
+\end_inset
+
+ does not die out faster than 
+\begin_inset Formula $n$
+\end_inset
+
+,
+ so the limit is nonzero.
+\end_layout
+
+\begin_layout Standard
+So our stopped processes are like the 
+\begin_inset Formula $n\boldsymbol{1}_{(0,1/n)}$
+\end_inset
+
+ functions – 
+\begin_inset Formula $1/R_{t\wedge\tau_{n}}$
+\end_inset
+
+ converge to their unstopped parent 
+\begin_inset Formula $1/R_{t}$
+\end_inset
+
+,
+ but only 
+\begin_inset Formula $\omega$
+\end_inset
+
+-pointwise,
+ with small parts of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ on which 
+\begin_inset Formula $1/R_{t}$
+\end_inset
+
+ explode exactly so that their average over the whole of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is 1.
+\end_layout
+
+\begin_layout Standard
+The event 
+\begin_inset Formula $t>\tau_{n}$
+\end_inset
+
+ shrinks to the empty event in the limit,
+ but we can imagine that an outcome of positive probability sits there in some larger space,
+ and the extra bit of expectation leaks there so that the total expectation is still 
+\begin_inset Formula $1$
+\end_inset
+
+ and the expectation over the rest (the original 
+\begin_inset Formula $\Omega$
+\end_inset
+
+) has to be strictly less.
+\end_layout
+
+\end_body
+\end_document
