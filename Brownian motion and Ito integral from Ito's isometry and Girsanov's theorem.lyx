@@ -583,7 +583,7 @@ For a continuous variable
 \end_inset
 
  is 
-\begin_inset Formula $p^{(n)}(t)\coloneqq\left\lfloor nt\right\rfloor /n,$
+\begin_inset Formula $t^{(n)}\coloneqq\left\lfloor nt\right\rfloor /n,$
 \end_inset
 
  so the 
@@ -619,21 +619,25 @@ so
 \begin_inset Formula 
 \begin{align*}
 \Var\xi_{t}^{(n)} & =\Var\xi_{\left\lfloor nt\right\rfloor }^{(n)}=\alpha_{n}^{2}\left\lfloor nt\right\rfloor \\
- & =p^{(n)}(t)\cdot n\alpha_{n}^{2}\\
- & =p^{(n)}(t)\cdot\left(\alpha_{n}\sqrt{n}\right)^{2}
+ & =t^{(n)}\cdot n\alpha_{n}^{2}\\
+ & =t^{(n)}\cdot\left(\alpha_{n}\sqrt{n}\right)^{2}
 \end{align*}
 
 \end_inset
 
 where 
-\begin_inset Formula $p^{(n)}(t)$
+\begin_inset Formula $t^{(n)}$
 \end_inset
 
  is the closest grid point to the left of 
 \begin_inset Formula $t$
 \end_inset
 
- as before,
+ as before at epoch 
+\begin_inset Formula $n$
+\end_inset
+
+,
  and is clearly stable around a value in 
 \begin_inset Formula $(0,1)$
 \end_inset
@@ -801,7 +805,7 @@ We could pick any constant and would get the limit of the variation scaled accor
  which gives 
 \begin_inset Formula 
 \[
-\Var\xi_{t}^{(n)}=p^{(n)}(t)\cdot\cancel{\left(\alpha_{n}\sqrt{n}\right)^{2}}\xrightarrow[n\to\infty]{}t.
+\Var\xi_{t}^{(n)}=t^{(n)}\cdot\cancel{\left(\alpha_{n}\sqrt{n}\right)^{2}}\xrightarrow[n\to\infty]{}t.
 \]
 
 \end_inset
@@ -1054,7 +1058,7 @@ does
 \begin_inset Formula 
 \begin{align*}
 \mathbb{E}\left(\Delta W_{t}^{2}\right) & \equiv\int_{\Omega}\Delta W_{t}^{2}\dP=\int_{\mathbb{R}}y^{2}\dP_{Z}\\
- & =\int_{\mathbb{R}}y^{2}\Phi(y)\d y\overset{!}{=}\sigma^{2}\int_{\mathbb{R}}\Phi(y)\d y=t
+ & =\int_{\mathbb{R}}y^{2}\Phi(y)\d y\overset{!}{=}t\int_{\mathbb{R}}\Phi(y)\d y=t
 \end{align*}
 
 \end_inset
@@ -1063,7 +1067,11 @@ where in
 \begin_inset Formula $\overset{!}{=}$
 \end_inset
 
- we used (
+ we used 
+\begin_inset Formula $\Phi(y)=$
+\end_inset
+
+(
 \begin_inset Formula $\sigma^{2}$
 \end_inset
 
@@ -1087,26 +1095,8 @@ y^{2}e^{-y^{2}/2\sigma^{2}}\d y & ={\color{blue}-2\sigma^{2}y}e^{-y^{2}/2\sigma^
 
 \end_layout
 
-\begin_layout Subsection*
-Thoughts
-\end_layout
-
-\begin_layout Standard
-Note:::::
- I can't quite explain yet why in the discrete case randomness goes away (
-\begin_inset Formula $\Delta\xi_{i}^{2}$
-\end_inset
-
- is not random),
- while in the continuous – not (
-\begin_inset Formula $\Delta W_{t}^{2}$
-\end_inset
-
- is still random).
-\end_layout
-
 \begin_layout Subsection
-Of the Ito integral for simple functions
+Of the Itô integral for simple functions
 \end_layout
 
 \begin_layout Standard
@@ -1206,7 +1196,7 @@ In a way,
 \end_layout
 
 \begin_layout Standard
-This peculiar fact carries the name 
+This peculiar fact gives the Ito integral the name 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1218,40 +1208,161 @@ Ito's Isometry
 \end_layout
 
 \begin_layout Subsection
-Ito's formula
+Itô of a deterministic process
 \end_layout
 
 \begin_layout Standard
-Ito's formula is just the next situation in which an output's square is set to equal to the input:
-\begin_inset Formula 
-\[
-df(t,X)=f_{t}'(t,x)\d t+f_{x}'(t,x)\d X+\frac{1}{2}f_{xx}''(t,X)\d X\d X
-\]
+It is a bit of a stretch,
+ but for a deterministic processes the stochastic integral can also be seen to exhibit this output-is-square-of-input pattern.
+\end_layout
 
+\begin_layout Standard
+If 
+\begin_inset Formula $\theta_{s}$
 \end_inset
 
-where in expanding 
-\begin_inset Formula $\d X\d X$
+ is deterministic,
+ i.e.
+ 
+\begin_inset Formula $\theta$
 \end_inset
 
- we use the rule
-\begin_inset Formula 
-\[
-\d W\d W=\d t,
-\]
-
+ is just a function 
+\begin_inset Formula $\theta:\left[0,T\right]\to\mathbb{R}$
 \end_inset
 
-so again —
- the square of the increment 
-\begin_inset Formula $dW$
+,
+ then 
+\begin_inset Formula $\int\theta_{s}\dW_{s}$
 \end_inset
 
- is just the time increment 
-\begin_inset Formula $\d t$
+ is normal with variance 
+\begin_inset Formula $\int\theta_{s}^{2}\d s$
 \end_inset
 
 .
+ That is near-obvious for 
+\emph on
+simple
+\emph default
+ 
+\begin_inset Formula $\theta$
+\end_inset
+
+,
+ i.e.
+ when 
+\begin_inset Formula $\theta(t)=\theta_{i}$
+\end_inset
+
+ over intervals 
+\begin_inset Formula $t\in[t_{i},t_{i+1}]$
+\end_inset
+
+,
+ because then the Itô integral 
+\begin_inset Formula 
+\[
+\int_{0}^{t}\theta_{s}\dW_{s}=\sum_{i}\theta_{i}\Delta W_{i}
+\]
+
+\end_inset
+
+is a weighted sum of the independent normal variables 
+\begin_inset Formula $\Delta W_{i}$
+\end_inset
+
+,
+ and that is again normal.
+ The variance is 
+\begin_inset Formula 
+\begin{align*}
+\Var\int_{0}^{t}\theta_{s}\dW_{s} & =\sum_{i}\Var\theta_{i}\Delta W_{i}\\
+ & \overset{\perp}{=}\sum_{i}\theta_{i}^{2}\Var\Delta W_{i}\overset{W}{=}\sum_{i}\theta_{i}^{2}\Delta t_{i}\\
+ & =\int_{0}^{t}\theta_{s}^{\boldsymbol{2}}\d s
+\end{align*}
+
+\end_inset
+
+the 
+\begin_inset Quotes eld
+\end_inset
+
+square-weighted
+\begin_inset Quotes erd
+\end_inset
+
+ input.
+ For 
+\begin_inset Formula $\theta=1$
+\end_inset
+
+,
+ this recovers 
+\begin_inset Formula $\Var W_{t}=t$
+\end_inset
+
+,
+ while for other non-uniform weights,
+ that 
+\begin_inset Formula $t$
+\end_inset
+
+ is re-weighted with the square of the integrand to 
+\begin_inset Formula $\int_{0}^{t}\theta_{s}^{2}\d s$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Itô's formula
+\end_layout
+
+\begin_layout Standard
+Ito's formula is just an application of Tailor's formula for a stochastic version of the Fundamental theorem of calculus.
+\end_layout
+
+\begin_layout Standard
+Tailor's formula
+\begin_inset Formula 
+\[
+\Delta f(x)\equiv f(x+\Delta x)-f(x)=f'(x)\Delta x+\frac{1}{2}f''(x)\Delta x^{2}+\text{rest}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $x=W_{t}$
+\end_inset
+
+ and the principle 
+\begin_inset Formula $\left(\Delta W\right)^{2}\sim\Delta t$
+\end_inset
+
+ applied to the second order term reads
+\begin_inset Formula 
+\begin{align*}
+\Delta f(W_{t}) & =f'(W_{t})\Delta W+\frac{1}{2}f''(W_{t})\Delta W^{2}+\text{rest}\\
+ & \sim\frac{1}{2}f''(W_{t})\Delta t+f'(W_{t})\Delta W+\text{rest}
+\end{align*}
+
+\end_inset
+
+Summing that at the points of a partition 
+\begin_inset Formula $t_{0},\ldots,t_{n}$
+\end_inset
+
+ and taking a limit this turns out to be,
+\begin_inset Formula 
+\[
+df(W)=\frac{1}{2}f''(W)dt+f'(W)dW.
+\]
+
+\end_inset
+
+One day I want to write this down rigorously,
+ but no time today for it.
 \end_layout
 
 \end_body
